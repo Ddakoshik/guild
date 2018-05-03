@@ -1,0 +1,34 @@
+
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Shadow Rainbow</span>
+
+    <span class="example-spacer"></span>
+    
+    <button mat-button>Главная</button>
+    <button mat-button>Правила</button>
+    <button mat-button>Состав</button>
+    <button mat-button>Расписание</button>
+    <button mat-button>Свалка новостей</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>account_circle</mat-icon>
+    <span>Профиль</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>attach_money</mat-icon>
+    <span>Получить 100$</span>
+  </button>
+  <button mat-menu-item (click)="authService.logout()">
+    <mat-icon>whatshot</mat-icon>
+    <span>Выйти</span>
+  </button>
+</mat-menu>
