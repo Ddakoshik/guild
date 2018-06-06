@@ -26,6 +26,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
+import { MainComponent } from './dashboard/main/main.component';
+import { RulesComponent } from './dashboard/rules/rules.component';
+import { CompositionComponent } from './dashboard/composition/composition.component';
+import { TimetableComponent } from './dashboard/timetable/timetable.component';
+import { BlogComponent } from './dashboard/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { FooterComponent } from './core/footer/footer.component';
     DashboardComponent,
     AuthComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MainComponent,
+    RulesComponent,
+    CompositionComponent,
+    TimetableComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
