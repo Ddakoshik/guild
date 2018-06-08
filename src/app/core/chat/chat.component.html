@@ -1,0 +1,22 @@
+<div class="row columns">
+
+  <!-- <input type="text" id="message" *ngIf="name" placeholder="Chat here..." (keyup.enter)="chatSend($event.target.value)" [(ngModel)]="msgVal" />
+
+    <div class="chat-container" *ngFor="let item of items | async">
+      <a href="#">{{item.name}}</a>
+      
+      <p>{{item.message}}</p>
+    </div> -->
+
+
+    <ul>
+        <li *ngFor="let item of items | async">
+          <input type="text" #updatetext [value]="item.text" />
+          <button (click)="updateItem(item.key, updatetext.value)">Update</button>
+          <button (click)="deleteItem(item.key)">Delete</button>
+        </li>
+      </ul>
+      <input type="text" #newitem />
+      <button (click)="addItem(newitem.value)">Add</button>
+      <button (click)="deleteEverything()">Delete All</button>
+</div>

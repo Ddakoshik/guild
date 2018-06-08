@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 
 // carusel slider
 import { NguCarouselModule } from '@ngu/carousel';
@@ -31,6 +33,7 @@ import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
 import { TimetableComponent } from './dashboard/timetable/timetable.component';
 import { BlogComponent } from './dashboard/blog/blog.component';
+import { ChatComponent } from './core/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { BlogComponent } from './dashboard/blog/blog.component';
     RulesComponent,
     CompositionComponent,
     TimetableComponent,
-    BlogComponent
+    BlogComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,7 @@ import { BlogComponent } from './dashboard/blog/blog.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     FormsModule,
     NguCarouselModule
 
