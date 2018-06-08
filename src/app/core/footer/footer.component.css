@@ -1,0 +1,3 @@
+footer{margin: 0 auto; background: #3b3b3b; position: fixed; bottom: 0; width: 100%; height: 50px;  }
+.footer-box{flex-direction: row; display: flex; align-items: center; justify-content: center;}
+.footer-title{color: honeydew;}

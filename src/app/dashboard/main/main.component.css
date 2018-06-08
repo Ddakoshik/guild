@@ -1,0 +1,13 @@
+.main-tems-box{padding: 10px; margin-top: 10px; }
+.img-box{width: 100%; height: 200px;
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    
+}
+.example-header-image {
+    background-image: url('../../../assets/img/wow-vanilla-priest.png');
+    background-size: cover;
+  }
+mat-card-header{padding-top: 20px;}
+.main-tems-box{padding: 10px;}
