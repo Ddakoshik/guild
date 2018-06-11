@@ -6,7 +6,7 @@
     
 }
 .example-header-image {
-    background-image: url('../../../assets/img/wow-vanilla-priest.png');
+    
     background-size: cover;
   }
 mat-card-header{padding-top: 20px;}

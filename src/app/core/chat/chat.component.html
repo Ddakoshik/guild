@@ -10,6 +10,15 @@
 
 
     <ul>
+        <div class="chat-container" *ngFor="let item of items | async">
+          {{item | json}}
+            <mat-card-header>
+                <div mat-card-avatar class="user-icon" [style.backgroundImage]="'url('+ items.userIcon +')'" ></div>
+                <mat-card-title>{{item.user}}+{{item.data}}</mat-card-title>
+                <mat-card-subtitle>Holy prist</mat-card-subtitle>
+            </mat-card-header>
+            <p>{{item.text}}</p>
+          </div>
         <li *ngFor="let item of items | async">
           <input type="text" #updatetext [value]="item.text" />
           <button (click)="updateItem(item.key, updatetext.value)">Update</button>
@@ -19,4 +28,9 @@
       <input type="text" #newitem />
       <button (click)="addItem(newitem.value)">Add</button>
       <button (click)="deleteEverything()">Delete All</button>
+
+
+      <input type="text" id="message" *ngIf="name" placeholder="Chat here..." (keyup.enter)="chatSend($event.target.value)" [(ngModel)]="msgVal" />
+
+    
 </div>

@@ -12,6 +12,7 @@ export class ChatComponent implements OnInit {
 
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
+  nowData = new Date;
 
 
   constructor(db: AngularFireDatabase) {
@@ -25,11 +26,18 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 
   addItem(newName: string) {
-    this.itemsRef.push({ text: newName });
+    this.itemsRef.push({
+      text: newName,
+      user: 'tester1',
+      data: new Date,
+      userIcon: 'https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240'
+
+     });
   }
   updateItem(key: string, newText: string) {
     this.itemsRef.update(key, { text: newText });
@@ -39,6 +47,10 @@ export class ChatComponent implements OnInit {
   }
   deleteEverything() {
     this.itemsRef.remove();
+  }
+
+  testInfo() {
+    console.log(this.itemsRef.snapshotChanges());
   }
 
 
