@@ -1,36 +1,26 @@
-<div class="row columns">
-
-  <!-- <input type="text" id="message" *ngIf="name" placeholder="Chat here..." (keyup.enter)="chatSend($event.target.value)" [(ngModel)]="msgVal" />
-
-    <div class="chat-container" *ngFor="let item of items | async">
-      <a href="#">{{item.name}}</a>
-      
-      <p>{{item.message}}</p>
-    </div> -->
-
-
-    <ul>
-        <div class="chat-container" *ngFor="let item of items | async">
-          {{item | json}}
-            <mat-card-header>
-                <div mat-card-avatar class="user-icon" [style.backgroundImage]="'url('+ items.userIcon +')'" ></div>
-                <mat-card-title>{{item.user}}+{{item.data}}</mat-card-title>
-                <mat-card-subtitle>Holy prist</mat-card-subtitle>
-            </mat-card-header>
-            <p>{{item.text}}</p>
-          </div>
-        <li *ngFor="let item of items | async">
-          <input type="text" #updatetext [value]="item.text" />
-          <button (click)="updateItem(item.key, updatetext.value)">Update</button>
-          <button (click)="deleteItem(item.key)">Delete</button>
-        </li>
-      </ul>
-      <input type="text" #newitem />
+<div class="chat-container">
+  <ul>
+    <div class="msg-container" *ngFor="let item of items | async">
+        <mat-card-header>
+            <div mat-card-avatar class="user-icon"></div>
+            <mat-card-title>{{item.user}} Holy prist</mat-card-title>
+            <mat-card-subtitle>{{item.date | date: 'short'}}</mat-card-subtitle>
+        </mat-card-header>
+        <p>{{item.text}}</p>
+      </div>
+    <li *ngFor="let item of items | async">
+      <input type="text" #updatetext [value]="item.text" />
+      <button (click)="updateItem(item.key, updatetext.value)">Update</button>
+      <button (click)="deleteItem(item.key)">Delete</button>
+    </li>
+  </ul>
+  <div class="add-msg-container">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" #newitem />
+      </mat-form-field>
       <button (click)="addItem(newitem.value)">Add</button>
       <button (click)="deleteEverything()">Delete All</button>
-
-
-      <input type="text" id="message" *ngIf="name" placeholder="Chat here..." (keyup.enter)="chatSend($event.target.value)" [(ngModel)]="msgVal" />
-
-    
+    </form>   
+  </div>
 </div>

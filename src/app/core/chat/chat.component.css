@@ -1,3 +1,6 @@
 .user-icon{
     background-size: cover;
+    background-image: url(https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240)
 }
+.msg-container{display: flex; flex-direction: row; justify-content: flex-start; align-items: center; }
+.chat-container{}

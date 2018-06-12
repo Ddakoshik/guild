@@ -1,3 +1,3 @@
-footer{margin: 0 auto; background: #3b3b3b; position: fixed; bottom: 0; width: 100%;  }
-.footer-box{flex-direction: row; display: flex; align-items: center; justify-content: center;}
+footer{margin: 0 auto;  position: fixed; bottom: 0; width: 100%; background: #fff; }
+.footer-box{flex-direction: row; display: flex; align-items: center; justify-content: center; background: #3b3b3b;}
 .footer-title{color: honeydew;}

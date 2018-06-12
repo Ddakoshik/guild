@@ -33,9 +33,10 @@ export class ChatComponent implements OnInit {
   addItem(newName: string) {
     this.itemsRef.push({
       text: newName,
-      user: 'tester1',
-      data: new Date,
-      userIcon: 'https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240'
+      user: 'tester5',
+      date: +new Date,
+      user_icon: 'https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240',
+
 
      });
   }
