@@ -2,7 +2,7 @@
   <ul>
     <div class="msg-container" *ngFor="let item of items | async">
         <mat-card-header>
-            <div mat-card-avatar class="user-icon"></div>
+            <div mat-card-avatar class="user-icon" [ngStyle]="{backgroundImage: 'url(' + item.userIcon + ')'}"></div>
             <mat-card-title>{{item.user}} Holy prist</mat-card-title>
             <mat-card-subtitle>{{item.date | date: 'short'}}</mat-card-subtitle>
         </mat-card-header>

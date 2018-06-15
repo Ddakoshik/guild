@@ -36,10 +36,10 @@ export class ChatComponent implements OnInit {
       text: newName,
       user: 'tester5',
       date: +new Date,
-      user_icon: 'https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240',
+      userIcon: 'https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240',
 
 
-     });
+    });
   }
   updateItem(key: string, newText: string) {
     this.itemsRef.update(key, { text: newText });
