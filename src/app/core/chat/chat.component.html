@@ -6,13 +6,50 @@
             <mat-card-title>{{item.user}} Holy prist</mat-card-title>
             <mat-card-subtitle>{{item.date | date: 'short'}}</mat-card-subtitle>
         </mat-card-header>
-        <p>{{item.text}}</p>
+        
+
+        <div class="msg-box">
+          <div *ngIf="cantEdit==true;else editMsgInput">
+              <p class="msg-text">{{item.text}}</p>
+          </div>
+          
+          <ng-template #editMsgInput>
+            <mat-form-field class="example-full-width">
+              <input [disabled]="cantEdit" (keyup.enter)="updateItem(item.key, updatetext.value)"
+              (blur)="cantEdit = true" #updatetext matInput [value]="item.text">
+            </mat-form-field>
+          </ng-template>
+            
+          
+
+        
+
+          <div *ngIf="cantEdit==true;else editBtn">
+              <button mat-icon-button (click)="cantEdit = false">
+                <mat-icon aria-label="Edit message">edit</mat-icon>
+              </button>
+          </div>
+          <ng-template #editBtn>
+            <button type="button" mat-icon-button (click)="updateItem(item.key, updatetext.value)">
+              <mat-icon aria-label="Edit message">done</mat-icon>
+            </button>
+            <button type="button" mat-icon-button (click)="cantEdit = true">
+              <mat-icon aria-label="Edit message">close</mat-icon>
+            </button>
+          </ng-template>
+          
+
+          <button type="button" mat-icon-button (click)="deleteItem(item.key)">
+            <mat-icon aria-label="Delete message">delete</mat-icon>
+          </button>
       </div>
-    <li *ngFor="let item of items | async">
-      <input type="text" #updatetext [value]="item.text" />
+
+      </div>
+    <!-- <li *ngFor="let item of items | async">
+      <input /> type="text" #updatetext [value]="item.text" />
       <button (click)="updateItem(item.key, updatetext.value)">Update</button>
       <button (click)="deleteItem(item.key)">Delete</button>
-    </li>
+    </li> -->
   </ul>
   <div class="add-msg-container">
     <form class="example-form">
@@ -22,5 +59,14 @@
       <button (click)="addItem(newitem.value)">Add</button>
       <button (click)="deleteEverything()">Delete All</button>
     </form>   
+  </div>
+</div>
+
+<div  class="columns chat-bar">
+  <div  class="column is-10">
+    <input  class="input ng-valid ng-dirty ng-touched">
+  </div>
+  <div  class="column is-2">
+    <button  class="button is-success"> SEND </button>
   </div>
 </div>

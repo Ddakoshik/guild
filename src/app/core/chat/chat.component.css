@@ -4,3 +4,7 @@
 }
 .msg-container{display: flex; flex-direction: row; justify-content: flex-start; align-items: center; }
 .chat-container{}
+.msg-box{display: flex; flex-direction: row; justify-content: flex-start; width: 80%;}
+.msg-box:hover button{opacity: 1; transition: 0.5s;}
+.msg-box button{opacity: 0;}
+.msg-box div:first-child{margin-right: auto;}

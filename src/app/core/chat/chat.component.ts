@@ -14,6 +14,7 @@ export class ChatComponent implements OnInit {
   items: Observable<any[]>;
   nowData = new Date;
 
+  cantEdit = true;
 
   constructor(db: AngularFireDatabase) {
     this.itemsRef = db.list('messages');
@@ -42,6 +43,8 @@ export class ChatComponent implements OnInit {
   }
   updateItem(key: string, newText: string) {
     this.itemsRef.update(key, { text: newText });
+    this.cantEdit = true;
+
   }
   deleteItem(key: string) {
     this.itemsRef.remove(key);
