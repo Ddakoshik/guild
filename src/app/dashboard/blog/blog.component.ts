@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogComponent implements OnInit {
 
-  constructor() { }
+  data: any;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.data = this.route.snapshot.data;
+    console.log(this.data);
   }
 
 }

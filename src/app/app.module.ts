@@ -20,7 +20,7 @@ import { NguCarouselModule } from '@ngu/carousel';
 
 
 import { AuthService } from './shared/services/auth.service';
-import { AuthGuard } from './shared/services/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 // components
 import { AppComponent } from './app.component';
@@ -34,6 +34,8 @@ import { CompositionComponent } from './dashboard/composition/composition.compon
 import { TimetableComponent } from './dashboard/timetable/timetable.component';
 import { BlogComponent } from './dashboard/blog/blog.component';
 import { ChatComponent } from './core/chat/chat.component';
+import { UserDataService } from './shared/services/user-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -58,10 +60,11 @@ import { ChatComponent } from './core/chat/chat.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FormsModule,
+    HttpClientModule,
     NguCarouselModule
 
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, UserDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

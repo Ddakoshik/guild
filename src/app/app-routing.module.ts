@@ -3,34 +3,38 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
-import { AuthGuard } from './shared/services/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { MainComponent } from './dashboard/main/main.component';
 import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
 import { TimetableComponent } from './dashboard/timetable/timetable.component';
 import { BlogComponent } from './dashboard/blog/blog.component';
 
+import { UserDataResolver } from './shared/resolvers/user-data.resolver';
+
 
 
 const routes: Routes = [
   // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
 
-  { path: 'dashboard', component: DashboardComponent,
+  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard],
 children: [
     { path: '', component: MainComponent },
     { path: 'rules', component: RulesComponent },
     { path: 'composition', component: CompositionComponent },
     { path: 'rules', component: TimetableComponent },
-    { path: 'blog', component: BlogComponent },
+    { path: 'blog/:id', component: BlogComponent, resolve: { message: UserDataResolver } },
 ]},
   { path: 'auth', component: AuthComponent},
-  { path: '', redirectTo: '/auth' , pathMatch: 'full'},
+  { path: '', redirectTo: '/dashboard' , pathMatch: 'full'},
   { path: '**', redirectTo: '' }
 ];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ UserDataResolver
+  ]
 })
 export class AppRoutingModule { }

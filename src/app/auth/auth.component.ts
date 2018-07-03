@@ -17,9 +17,9 @@ export class AuthComponent implements OnInit {
 
   signInWithGoogle() {
     this.authService.signInWithGoogle()
-    .then((res) => {
-        this.router.navigate(['dashboard']);
-      })
+    // .then((res) => {
+    //     this.router.navigate(['dashboard']);
+    //   })
     .catch((err) => console.log(err));
   }
 

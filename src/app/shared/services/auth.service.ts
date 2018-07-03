@@ -16,10 +16,10 @@ this.user.subscribe(
           if (user) {
             this.userDetails = user;
             console.log(this.userDetails);
-            this.router.navigate(['/dashboard']);
+            // this.router.navigate(['/dashboard']);
           } else {
             this.userDetails = null;
-            this.router.navigate(['/auth']);
+            // this.router.navigate(['/auth']);
           }
         }
       );
@@ -27,9 +27,12 @@ this.user.subscribe(
 
 
   signInWithGoogle() {
+    console.log('login');
     return this._firebaseAuth.auth.signInWithPopup(
       new firebase.auth.GoogleAuthProvider()
-    );
+    )
+    .then((res) => this.router.navigate(['/']));
+    ;
   }
 
   isLoggedIn() {
@@ -41,7 +44,8 @@ this.user.subscribe(
     }
   logout() {
       this._firebaseAuth.auth.signOut()
-      .then((res) => this.router.navigate(['/']));
+      .then((res) => this.router.navigate(['/auth']));
+      console.log('is logout')
     }
 }
 
