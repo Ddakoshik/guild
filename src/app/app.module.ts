@@ -20,7 +20,7 @@ import { NguCarouselModule } from '@ngu/carousel';
 
 
 import { AuthService } from './shared/services/auth.service';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard'; 
 
 // components
 import { AppComponent } from './app.component';
@@ -36,6 +36,7 @@ import { BlogComponent } from './dashboard/blog/blog.component';
 import { ChatComponent } from './core/chat/chat.component';
 import { UserDataService } from './shared/services/user-data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MessageComponent } from './core/chat/message/message.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     CompositionComponent,
     TimetableComponent,
     BlogComponent,
-    ChatComponent
+    ChatComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

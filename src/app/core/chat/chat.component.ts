@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -14,7 +14,7 @@ export class ChatComponent implements OnInit {
   items: Observable<any[]>;
   nowData = new Date;
 
-  cantEdit = true;
+  @ViewChild('newitem') elForm: ElementRef;
 
   constructor(db: AngularFireDatabase) {
     this.itemsRef = db.list('messages');
@@ -31,24 +31,32 @@ export class ChatComponent implements OnInit {
   }
 
 
+ 
+
   addItem(newName: string) {
     this.itemsRef.push({
       text: newName,
       user: 'tester5',
       date: +new Date,
       userIcon: 'https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240',
-
-
     });
+    this.elForm.nativeElement.value = "";
   }
-  updateItem(key: string, newText: string) {
-    this.itemsRef.update(key, { text: newText });
-    this.cantEdit = true;
 
+
+  updateItem(key: string, newText: string) {
+    
   }
-  deleteItem(key: string) {
-    this.itemsRef.remove(key);
+
+  updateMsgItem($event) {
+    this.itemsRef.update($event.key, { text: $event.newText });
   }
+
+  deleteMsgItem($event) {
+    this.itemsRef.remove($event);
+  }
+
+
   deleteEverything() {
     this.itemsRef.remove();
   }

@@ -7,6 +7,6 @@
 .msg-box button{opacity: 0;}
 .msg-box div:first-child{margin-right: auto;}
 
-.chat-bar{display: flex; }
-.chat-send{width: 80%; display: flex; justify-content: space-between; align-items: center; padding-left: 190px;}
-.chat-input{ width: calc(100% - 95px); }
+.msg-editfild-box{ display: flex; justify-content: flex-start;}
+.msg-editBtn-box1{margin-left: auto;}
+.msg-editBtn-box2{display: flex;}

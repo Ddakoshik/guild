@@ -1,0 +1,49 @@
+<div class="msg-container">
+  <mat-card-header>
+      <div mat-card-avatar class="user-icon" [ngStyle]="{backgroundImage: 'url(' + item.userIcon + ')'}"></div>
+      <mat-card-title>{{item.user}} Holy prist</mat-card-title>
+      <mat-card-subtitle>{{item.date | date: 'short'}}</mat-card-subtitle>
+  </mat-card-header>
+  
+
+  <div class="msg-box">
+    <div *ngIf="cantEdit==true;else editMsgInput">
+        <p class="msg-text">{{item.text}}</p>
+    </div>
+    
+    <ng-template #editMsgInput>
+      <mat-form-field class="msg-editfild-box">
+        <input [disabled]="cantEdit" (keyup.enter)="updateItem(item.key, updatetext.value)"
+         #updatetext matInput [value]="item.text">
+      </mat-form-field>
+      <div class="msg-editBtn-box1">
+          <button type="button" mat-icon-button (click)="updateItem(item.key, updatetext.value)">
+            <mat-icon aria-label="Edit message">done</mat-icon>
+          </button>
+          <button type="button" mat-icon-button (click)="cantEdit = true">
+            <mat-icon aria-label="Edit message">close</mat-icon>
+          </button>
+      </div>
+    </ng-template>
+    
+    
+    
+
+  
+
+
+    <div *ngIf="acauntuser==item.user;" class="msg-editBtn-box2" >
+      <div *ngIf="cantEdit==true;">
+          <button mat-icon-button (click)="cantEdit = false">
+            <mat-icon aria-label="Edit message">edit</mat-icon>
+          </button>
+      </div>
+
+      <button type="button" mat-icon-button (click)="deleteItem(item.key)">
+        <mat-icon aria-label="Delete message">delete</mat-icon>
+      </button>
+    </div>
+
+</div>
+
+</div>
