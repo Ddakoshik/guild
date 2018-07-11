@@ -32,7 +32,6 @@ this.user.subscribe(
       new firebase.auth.GoogleAuthProvider()
     )
     .then((res) => this.router.navigate(['/']));
-    ;
   }
 
   isLoggedIn() {
@@ -45,7 +44,6 @@ this.user.subscribe(
   logout() {
       this._firebaseAuth.auth.signOut()
       .then((res) => this.router.navigate(['/auth']));
-      console.log('is logout')
     }
 }
 

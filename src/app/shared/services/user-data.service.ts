@@ -15,7 +15,7 @@ export class UserDataService {
 
   getPost(postId: string) {
     const endpoint = 'https://hnpwa.com/api/v0/item';
-  
+
     return this.http.get(`${endpoint}/${postId}.json`);
   }
 }

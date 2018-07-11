@@ -26,7 +26,7 @@ import { trigger,  state,  style,  animate,  transition, group, query} from '@an
 })
 export class FooterComponent implements OnInit {
 
-  chatOn = true;
+  chatOn = false;
 
   constructor() { }
 
