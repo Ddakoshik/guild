@@ -8,6 +8,8 @@ export class UserDataResolver implements Resolve<any> {
   constructor(private UDataService: UserDataService ) {}
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.UDataService.getPost(route.paramMap.get('id'));
+    const userdatatest = this.UDataService.getUserdata();
+    console.log('email', userdatatest.lk.b.email);
+    return this.UDataService.getUserdata();
   }
 }

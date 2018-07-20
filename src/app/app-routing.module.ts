@@ -17,13 +17,13 @@ import { UserDataResolver } from './shared/resolvers/user-data.resolver';
 const routes: Routes = [
   // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
 
-  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard],
+  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard], resolve: { message: UserDataResolver },
 children: [
     { path: '', component: MainComponent },
     { path: 'rules', component: RulesComponent },
     { path: 'composition', component: CompositionComponent },
-    { path: 'rules', component: TimetableComponent },
-    { path: 'blog/:id', component: BlogComponent, resolve: { message: UserDataResolver } },
+    { path: 'timeanons', component: TimetableComponent },
+    { path: 'blog/:id', component: BlogComponent, },
 ]},
   { path: 'auth', component: AuthComponent},
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full'},
