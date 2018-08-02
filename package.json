@@ -24,6 +24,8 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@ngu/carousel": "^1.4.8",
+    "@tinymce/tinymce-angular": "^2.0.0",
+    "angular-froala-wysiwyg": "^2.8.4-1",
     "angularfire2": "^5.0.0-rc.7.2-next",
     "core-js": "^2.4.1",
     "firebase": "^4.13.1",

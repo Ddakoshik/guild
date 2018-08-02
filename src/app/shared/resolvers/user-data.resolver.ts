@@ -9,7 +9,7 @@ export class UserDataResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot) {
     const userdatatest = this.UDataService.getUserdata();
-    console.log('email', userdatatest.lk.b.email);
+    // console.log('email', userdatatest.lk.b.email);
     return this.UDataService.getUserdata();
   }
 }
