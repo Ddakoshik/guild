@@ -1,0 +1,20 @@
+<p>Загрузить фото инструмента</p>
+<div>
+  <input #fileInput type="file" (change)="preloadsImg($event)" accept=".png,.jpg" multiple style="display:none;">
+  <button mat-raised-button color="primary" (click)="fileInput.click()" class="newImage-btn" type="button" >Загрузить</button>
+  <button mat-raised-button color="primary" (click)="uploadFile()" class="newImage-btn" type="button" >Отправить</button>
+  <!-- <div>{{ uploadPercent | async }}</div> -->
+  <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+  <div class="box-img-row" >
+    <!-- <img [src]="url" [alt]="url" *ngFor="let url of storURL"> -->
+    <div [ngStyle]="{'background-image': 'url(' + urll.url + ')'}" *ngFor="let urll of preloadurls; let i=index" >
+      <div  class="img-ul-x-mark" (click)="deletingImg(urll.url,i)">
+        <span  class="img-ul-close"></span>
+      </div>
+    </div> 
+   
+  </div>
+  <!-- <div class="box-img-row" >
+    <div [ngStyle]="{'background-image': 'url(' + urll + ')'}" *ngFor="let urll of storURL"></div>
+  </div> -->
+</div>

@@ -1,3 +1,14 @@
 <p>
   blog works!
 </p>
+
+
+<ul>
+  <li *ngFor="let blog of blogs | async">
+    <p>{{ blog.title }}</p>
+    {{ blog.content }}
+  </li>
+</ul>
+
+
+<angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>

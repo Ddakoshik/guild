@@ -7,13 +7,15 @@ import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 // angular - Firebase
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 // carusel slider
 import { NguCarouselModule } from '@ngu/carousel';
@@ -37,6 +39,9 @@ import { ChatComponent } from './core/chat/chat.component';
 import { UserDataService } from './shared/services/user-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageComponent } from './core/chat/message/message.component';
+import { UploadImgComponent } from './core/upload-img/upload-img.component';
+import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +56,9 @@ import { MessageComponent } from './core/chat/message/message.component';
     TimetableComponent,
     BlogComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    UploadImgComponent,
+    BlogPageComponent
   ],
   imports: [
     BrowserModule,
@@ -61,8 +68,11 @@ import { MessageComponent } from './core/chat/message/message.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
     FormsModule,
     HttpClientModule,
+    AngularEditorModule,
     NguCarouselModule
   ],
   providers: [AuthService, AuthGuard, UserDataService],

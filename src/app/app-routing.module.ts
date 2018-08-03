@@ -9,8 +9,10 @@ import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
 import { TimetableComponent } from './dashboard/timetable/timetable.component';
 import { BlogComponent } from './dashboard/blog/blog.component';
+import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 
 import { UserDataResolver } from './shared/resolvers/user-data.resolver';
+
 
 
 
@@ -23,7 +25,8 @@ children: [
     { path: 'rules', component: RulesComponent },
     { path: 'composition', component: CompositionComponent },
     { path: 'timeanons', component: TimetableComponent },
-    { path: 'blog/:id', component: BlogComponent, },
+    { path: 'blog', component: BlogComponent, },
+    { path: 'blog/:id', component: BlogPageComponent, },
 ]},
   { path: 'auth', component: AuthComponent},
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full'},
