@@ -7,8 +7,6 @@ import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { EditorModule } from '@tinymce/tinymce-angular';
 
 // angular - Firebase
 import { environment } from '../environments/environment';
@@ -65,9 +63,6 @@ import { MessageComponent } from './core/chat/message/message.component';
     AngularFireDatabaseModule,
     FormsModule,
     HttpClientModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
-    EditorModule,
     NguCarouselModule
   ],
   providers: [AuthService, AuthGuard, UserDataService],
