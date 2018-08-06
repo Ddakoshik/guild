@@ -10,5 +10,11 @@
   </li>
 </ul>
 
+<input type="text" [(ngModel)]="title" name="title" id="" placeholder="title">
+<app-text-editor [elementId]="'post-body'" (onEditorKeyup)="onBodyTextEditorKeyUp($event)"></app-text-editor>
 
-<angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+
+
+<textarea type="text" [(ngModel)]="content" name="body" id="" placeholder="title"></textarea>
+<button type="submit" (click)="pushArticle()">Send Article</button>
+<input type="submit" value="" (click)="pushArticle()">

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import { Identifiers } from '@angular/compiler';
 
 export interface Blog { title: string; user: string; content: string; }
 
@@ -16,34 +16,14 @@ export class BlogComponent implements OnInit {
 
 
   data: any;
-  config: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '15rem',
-    minHeight: '5rem',
-    placeholder: 'Enter text here...',
-    translate: 'no',
-    uploadUrl: 'v1/images',
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ]
-  };
+
 
 
   private blogCollection: AngularFirestoreCollection<Blog>;
   blogs: Observable<Blog[]>;
+
+  title: string;
+  content: string;
 
   constructor(private afs: AngularFirestore) {
     afs.firestore.settings({ timestampsInSnapshots: true });
@@ -60,6 +40,14 @@ export class BlogComponent implements OnInit {
 
   addItem(blogpost: Blog) {
     this.blogCollection.add(blogpost);
+  }
+
+  onBodyTextEditorKeyUp(event) {
+    console.log('text is change', event);
+  }
+
+  pushArticle() {
+    this.afs.collection('blog').add({'title': this.title, 'body': this.content, 'id': 6});
   }
 
 }
