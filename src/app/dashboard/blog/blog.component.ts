@@ -14,6 +14,14 @@ export interface Blog { title: string; user: string; content: string; }
 })
 export class BlogComponent implements OnInit {
 
+  htmlContent;
+
+  blogpost = {
+    title: 'Test add',
+    user: 'user tester',
+    content: 'Content Content ContentContentContentContentContentContentContent ContentContentContentContent Content ContentContentContent'
+  };
+
 
   data: any;
   config: AngularEditorConfig = {
@@ -58,7 +66,7 @@ export class BlogComponent implements OnInit {
     this.blogs = this.blogCollection.valueChanges();
   }
 
-  addItem(blogpost: Blog) {
+  addArticle(blogpost: Blog) {
     this.blogCollection.add(blogpost);
   }
 
