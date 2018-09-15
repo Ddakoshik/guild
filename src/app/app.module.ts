@@ -8,6 +8,7 @@ import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { QuillModule } from 'ngx-quill';
 
 // angular - Firebase
 import { environment } from '../environments/environment';
@@ -41,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MessageComponent } from './core/chat/message/message.component';
 import { UploadImgComponent } from './core/upload-img/upload-img.component';
 import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
+import { EditorComponent } from './core/editor/editor.component';
 
 
 @NgModule({
@@ -58,7 +60,8 @@ import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
     ChatComponent,
     MessageComponent,
     UploadImgComponent,
-    BlogPageComponent
+    BlogPageComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
     FormsModule,
     HttpClientModule,
     AngularEditorModule,
+    QuillModule,
     NguCarouselModule
   ],
   providers: [AuthService, AuthGuard, UserDataService],
