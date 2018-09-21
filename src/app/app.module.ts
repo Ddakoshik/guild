@@ -43,6 +43,10 @@ import { MessageComponent } from './core/chat/message/message.component';
 import { UploadImgComponent } from './core/upload-img/upload-img.component';
 import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 import { EditorComponent } from './core/editor/editor.component';
+import { EditorQuillComponent } from './core/editor-quill/editor-quill.component';
+import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
+import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
+import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 
 
 @NgModule({
@@ -61,7 +65,11 @@ import { EditorComponent } from './core/editor/editor.component';
     MessageComponent,
     UploadImgComponent,
     BlogPageComponent,
-    EditorComponent
+    EditorComponent,
+    EditorQuillComponent,
+    BlogEditPageComponent,
+    BlogAddPageComponent,
+    BlogShowPostsComponent
   ],
   imports: [
     BrowserModule,

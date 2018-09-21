@@ -1,0 +1,18 @@
+
+<quill-editor [(ngModel)]="editorContent"
+            [style]="style" 
+            [customOptions]="customOptions" 
+            [required]="required" 
+            [minLength]="minLength" 
+            [maxLength]="maxLength" 
+            [readOnly]="isReadOnly" 
+            (onEditorCreated)="handleEditorCreated($event)" 
+            (onContentChanged)="handleChange($event);" 
+            (onSelectionChanged)="handleSelection($event);">
+</quill-editor>
+
+
+<br>
+<br>
+
+<!-- <div class="ql-editor preview" [innerHTML]="editorContent"></div>` -->

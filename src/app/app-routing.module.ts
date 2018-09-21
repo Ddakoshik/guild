@@ -12,6 +12,8 @@ import { BlogComponent } from './dashboard/blog/blog.component';
 import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 
 import { UserDataResolver } from './shared/resolvers/user-data.resolver';
+import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
+import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 
 
 
@@ -20,14 +22,19 @@ const routes: Routes = [
   // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
 
   { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard], resolve: { message: UserDataResolver },
-children: [
+  children: [
     { path: '', component: MainComponent },
     { path: 'rules', component: RulesComponent },
     { path: 'composition', component: CompositionComponent },
     { path: 'timeanons', component: TimetableComponent },
-    { path: 'blog', component: BlogComponent, },
-    { path: 'blog/:id', component: BlogPageComponent, },
-]},
+    { path: 'blog', component: BlogComponent,
+    children: [
+      { path: '', component: BlogShowPostsComponent},
+      { path: 'add', component: BlogAddPageComponent},
+      { path: ':id', component: BlogPageComponent },
+      { path: ':id/edit', component: BlogAddPageComponent },
+    ] },
+  ]},
   { path: 'auth', component: AuthComponent},
   { path: '', redirectTo: '/dashboard' , pathMatch: 'full'},
   { path: '**', redirectTo: '' }
