@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventEmitter } from 'protractor';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 
 
 @Component({
@@ -10,21 +10,22 @@ import { EventEmitter } from 'protractor';
 export class EditorQuillComponent implements OnInit {
 
 
+  html: string;
 
 
-  @Input() editorContent: string;
-  @Input() style: object = {height: '400px'};
-  @Input() customOptions;  // [{import: 'attributors/style/size', whitelist: ['14']}, ];
-  @Input() required: boolean; // false
-  @Input() minLength: number;  // 0
-  @Input() maxLength: number;  // 0
-  @Input() isReadOnly: boolean;  // false
+  @Input() editorContent = '123123 sd2112 ';
+  @Input() style = {height: '400px'};
+  @Input() customOptions = []; // [{import: 'attributors/style/size', whitelist: ['14']}, ];
+  @Input() required = false; // false
+  @Input() minLength = 0;  // 0
+  @Input() maxLength = 0;  // 0
+  @Input() isReadOnly = 0;  // false
 
 
 
-  // @Output() handleEditorCreatedEvent: EventEmitter = new EventEmitter;
-  // @Output() handleChangeEvent: EventEmitter = new EventEmitter;
-  // @Output() handleSelectionEvent: EventEmitter = new EventEmitter;
+  @Output() handleEditorCreatedEvent = new EventEmitter();
+  @Output() handleChangeEvent = new EventEmitter();
+  @Output() handleSelectionEvent = new EventEmitter();
 
 
   constructor() {}
@@ -34,14 +35,13 @@ export class EditorQuillComponent implements OnInit {
   }
 
 
-  // handleEditorCreated(event: any) {
-  //   this.handleEditorCreatedEvent.emit(event);
-  // }
-  // handleChange(event: any) {
-  //   this.handleChangeEvent.emit(event);
-  // }
-
-  // handleSelection(event: any) {
-  //   this.handleSelectionEvent.emit(event);
-  // }
+  handleEditorCreated(event: any) {
+    this.handleEditorCreatedEvent.emit(event);
+  }
+  handleChange(event: any) {
+    this.handleChangeEvent.emit(event);
+  }
+  handleSelection(event: any) {
+    this.handleSelectionEvent.emit(event);
+  }
 }

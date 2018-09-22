@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ActivatedRoute, Router } from '@angular/router';
-
-export interface Blog { title: string; user: string; content: string; }
 
 @Component({
   selector: 'app-blog',
@@ -11,12 +8,8 @@ export interface Blog { title: string; user: string; content: string; }
 })
 export class BlogComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {}
-
-  addNewPostInBlog() {
-      this.router.navigate(['/dashboard/blog/add']);
-  }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
-import { Blog } from '../blog/blog.component';
+import { Blog } from '../../shared/models/blog.model';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-show-posts',
@@ -28,7 +29,7 @@ export class BlogShowPostsComponent implements OnInit {
 
   title: string;
   content: string;
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private router: Router) {
     afs.firestore.settings({ timestampsInSnapshots: true });
   }
 
@@ -50,6 +51,10 @@ export class BlogShowPostsComponent implements OnInit {
   pushArticle() {
     this.afs.collection('blog').add({'title': this.title, 'body': this.content, 'id': 6});
   }
+
+  addNewPostInBlog() {
+    this.router.navigate(['/dashboard/blog/add']);
+}
 
 
 }
