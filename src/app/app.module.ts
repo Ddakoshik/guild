@@ -25,6 +25,9 @@ import { NguCarouselModule } from '@ngu/carousel';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/guards/auth.guard';
 
+// pipes
+import { PipesModule } from './shared/pipes';
+
 // components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -47,6 +50,7 @@ import { EditorQuillComponent } from './core/editor-quill/editor-quill.component
 import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
+
 
 
 @NgModule({
@@ -85,6 +89,7 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
     HttpClientModule,
     AngularEditorModule,
     QuillModule,
+    PipesModule,
     NguCarouselModule
   ],
   providers: [AuthService, AuthGuard, UserDataService],
