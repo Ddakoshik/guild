@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { QuillModule } from 'ngx-quill';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 // angular - Firebase
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
@@ -85,7 +88,11 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
     HttpClientModule,
     AngularEditorModule,
     QuillModule,
-    NguCarouselModule
+    NguCarouselModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [AuthService, AuthGuard, UserDataService],
   bootstrap: [AppComponent]
