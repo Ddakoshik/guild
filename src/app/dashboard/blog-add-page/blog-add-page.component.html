@@ -17,7 +17,12 @@
     <input matInput placeholder="Title">
   </mat-form-field>
 </form>
+<p>{{content | test }}</p>
+<p innerHTML="{{content | htmlTextLength: {maxLength: truncate, html: true} }}"></p>
+<p>{{content | htmlTextLength: {maxLength: 100, html: true} }}</p>
 
 <app-upload-img></app-upload-img>
 
-<app-editor-quill></app-editor-quill>
+<app-editor-quill [editorContent] = "content"
+></app-editor-quill>
+

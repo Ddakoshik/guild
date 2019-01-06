@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -28,6 +27,9 @@ import { NguCarouselModule } from '@ngu/carousel';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/guards/auth.guard';
 
+// pipes
+import { PipesModule } from './shared/pipes';
+
 // components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -50,6 +52,7 @@ import { EditorQuillComponent } from './core/editor-quill/editor-quill.component
 import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
+
 
 
 @NgModule({
@@ -89,10 +92,13 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
     AngularEditorModule,
     QuillModule,
     NguCarouselModule,
+    PipesModule,
+    NguCarouselModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     })
+
   ],
   providers: [AuthService, AuthGuard, UserDataService],
   bootstrap: [AppComponent]

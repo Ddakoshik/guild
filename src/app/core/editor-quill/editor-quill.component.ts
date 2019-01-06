@@ -1,5 +1,28 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+import { QuillModule } from 'ngx-quill';
+
+
+import * as QuillNamespace from 'quill';
+const Quill: any = QuillNamespace;
+import ImageResize from 'quill-image-resize-module';
+Quill.register('modules/imageResize', ImageResize);
+
+// this.editor_modules = {
+//   toolbar: {
+//     container: [
+//       [{ 'font': [] }],
+//       [{ 'size': ['small', false, 'large', 'huge'] }],
+//       ['bold', 'italic', 'underline', 'strike'],
+//       [{ 'header': 1 }, { 'header': 2 }],
+//       [{ 'color': [] }, { 'background': [] }],
+//       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+//       [{ 'align': [] }],
+//       ['link', 'image']
+//     ]
+//   },
+//   imageResize: true
+// };
 
 
 @Component({
