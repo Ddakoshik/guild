@@ -14,16 +14,15 @@ export class UserDataService {
               private userauth: AngularFireAuth) { }
 
 
-  getUserdata() {
-    const user = this.userauth.authState;
-    console.log(user);
-    user.subscribe(
-      (data) => {
-          this.userdata = data;
-          console.log('111', this.userdata);
-      });
-      return this.userdata;
-  }
+  // getUserdata() {
+  //   const user = this.userauth.authState;
+  //   // console.log(user);
+  //   user.subscribe(
+  //     (data) => {
+  //         this.userdata = data;
+  //     });
+  //     return this.userdata;
+  // }
   getTopPosts() {
     return this.http.get(this.endpoint);
   }

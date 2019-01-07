@@ -31,7 +31,7 @@ export class TimetableComponent {
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
 

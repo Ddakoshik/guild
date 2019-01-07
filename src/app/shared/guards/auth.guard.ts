@@ -11,12 +11,12 @@ import 'rxjs/add/operator/do';
 export class AuthGuard implements CanActivate {
 
   constructor(private router: Router,
-              private auth: AngularFireAuth) { }
+              private afAuth: AngularFireAuth) { }
 
   canActivate(): Observable<boolean> {
 
 
-    return this.auth.authState
+    return this.afAuth.authState
     .take(1)
     .map(authState => !!authState)
     .do(auth => !auth ? this.router.navigate(['/auth']) : true);

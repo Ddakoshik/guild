@@ -21,7 +21,7 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
 const routes: Routes = [
   // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
 
-  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard], resolve: { message: UserDataResolver },
+  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard],
   children: [
     { path: '', component: MainComponent },
     { path: 'rules', component: RulesComponent },
