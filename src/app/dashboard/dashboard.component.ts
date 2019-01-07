@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/services/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../Store/reducer/main.reducer';
+import { LogoutFromPlatformAction } from '../Store/action/main.actions';
 
 
 
@@ -10,11 +12,14 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public authService: AuthService,
-              ) {  }
+  constructor(private store: Store<AppState>) {  }
 
   ngOnInit() {
 
+  }
+
+  doLogout() {
+    this.store.dispatch(new LogoutFromPlatformAction());
   }
 
 }

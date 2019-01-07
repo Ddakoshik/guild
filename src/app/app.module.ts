@@ -30,6 +30,13 @@ import { AuthGuard } from './shared/guards/auth.guard';
 // pipes
 import { PipesModule } from './shared/pipes';
 
+// NGRX
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '../../node_modules/@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MainEffect } from './Store/effect/main.effect';
+import { mainReducer } from './Store/reducer/main.reducer';
+
 // components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -94,6 +101,12 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
     NguCarouselModule,
     PipesModule,
     NguCarouselModule,
+    StoreModule.forRoot({mainPage: mainReducer}),
+    EffectsModule.forRoot([MainEffect]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
