@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../Store/reducer/main.reducer';
-import { LogoutFromPlatformAction } from '../Store/action/main.actions';
+import { LogoutFromPlatformAction } from '../Store/actions/auth.actions';
+import { CoreState } from '../Store/reducers';
 
 
 
@@ -12,7 +12,7 @@ import { LogoutFromPlatformAction } from '../Store/action/main.actions';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private store: Store<AppState>) {  }
+  constructor(private store: Store<CoreState>) {  }
 
   ngOnInit() {
 

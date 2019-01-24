@@ -1,32 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError, withLatestFrom } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
-import { MainAction,
+import { AuthAction,
     LoginWithGoogleAction,
     LoginWithGoogleFailAction,
     LoginWithGoogleSuccessAction,
     LogoutFromPlatformAction,
     LogoutFromPlatformSuccessAction,
-    LogoutFromPlatformFailAction } from '../action/main.actions';
+    LogoutFromPlatformFailAction,
+    AuthActionTypes,
+    GetGoogleUserInfoAction,
+    GetGoogleUserInfoSuccessAction,
+    GetGoogleUserInfoFailAction} from '../actions/auth.actions';
 import * as firebase from 'firebase/app';
+import { select, Store } from '@ngrx/store';
+import { getGoogleAuthInfo, getUserInfo, CoreState } from '../reducers';
 
 
 @Injectable()
-export class MainEffect {
+export class AuthEffects {
 
     constructor(
         private actions$: Actions,
         private _firebaseAuth: AngularFireAuth,
+        private store$: Store<CoreState>,
         private router: Router) {}
 
 
 
     @Effect()
     loginWithGoogle$ = this.actions$.pipe(
-    ofType<LoginWithGoogleAction>(MainAction.LoginWithGoogle),
+    ofType<LoginWithGoogleAction>(AuthActionTypes.LoginWithGoogle),
     switchMap(() => {
         return Observable.fromPromise(this._firebaseAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).pipe(
             switchMap((data) => {
@@ -37,10 +44,9 @@ export class MainEffect {
             catchError(() => of(new LoginWithGoogleFailAction())));
     }));
 
-
     @Effect()
     LogoutFromPlatform$ = this.actions$.pipe(
-    ofType<LogoutFromPlatformAction>(MainAction.LogoutFromPlatform),
+    ofType<LogoutFromPlatformAction>(AuthActionTypes.LogoutFromPlatform),
     switchMap(() => {
         return Observable.fromPromise(this._firebaseAuth.auth.signOut()).pipe(
             switchMap(() => {
@@ -48,6 +54,20 @@ export class MainEffect {
                 return [new LogoutFromPlatformSuccessAction()];
             }),
             catchError(() => of(new LogoutFromPlatformFailAction())));
+    }));
+
+    @Effect()
+    getGoogleUserInfo$ = this.actions$.pipe(
+    ofType<GetGoogleUserInfoAction>(AuthActionTypes.GetGoogleUserInfo),
+    withLatestFrom(
+        this.store$.pipe(select(getGoogleAuthInfo)),
+    ),
+    switchMap(([action, googleAuthInfo]) => {
+        return this._firebaseAuth.authState.pipe(
+            switchMap((data) => {
+                return [new GetGoogleUserInfoSuccessAction(data.providerData[0])];
+            }),
+            catchError(() => of(new GetGoogleUserInfoFailAction())));
     }));
 
 

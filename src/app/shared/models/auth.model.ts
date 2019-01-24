@@ -1,8 +1,16 @@
-// export interface Blog {
-//     title: string;
-//     user: string;
-//     content: string;
-// }
+export class Auth {
+    title: string;
+    user: string;
+    content: string;
+
+
+    constructor(data?: Partial<Auth>) {
+        if (data) {
+            Object.assign(this, data);
+        }
+    }
+
+}
 
 
 // export class Vehicle {
