@@ -34,8 +34,8 @@ import { PipesModule } from './shared/pipes';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '../../node_modules/@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { MainEffect } from './Store/effect/main.effect';
-import { mainReducer } from './Store/reducer/main.reducer';
+import { effects } from './Store/effects';
+
 
 // components
 import { AppComponent } from './app.component';
@@ -59,6 +59,8 @@ import { EditorQuillComponent } from './core/editor-quill/editor-quill.component
 import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
+import { reducers } from './Store/reducers';
+import { CoreStoreModule } from './Store/core-store.module';
 
 
 
@@ -87,6 +89,7 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
   imports: [
     BrowserModule,
     MaterialModule,
+    CoreStoreModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -101,8 +104,8 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
     NguCarouselModule,
     PipesModule,
     NguCarouselModule,
-    StoreModule.forRoot({mainPage: mainReducer}),
-    EffectsModule.forRoot([MainEffect]),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
