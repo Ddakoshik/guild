@@ -61,6 +61,8 @@ import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.co
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 import { reducers } from './Store/reducers';
 import { CoreStoreModule } from './Store/core-store.module';
+import { LuxonModule } from 'luxon-angular';
+import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
 
 
 
@@ -84,12 +86,14 @@ import { CoreStoreModule } from './Store/core-store.module';
     EditorQuillComponent,
     BlogEditPageComponent,
     BlogAddPageComponent,
-    BlogShowPostsComponent
+    BlogShowPostsComponent,
+    TimeTableLuxonContainerComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule,
     CoreStoreModule,
+    LuxonModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),

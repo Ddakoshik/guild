@@ -1,0 +1,29 @@
+<p>
+  time-table-luxon-container works!
+</p>
+
+
+
+{{dt}}
+{{dt1 | json}}
+{{dt2 | json}}
+
+<div class="main-week-box">
+  <button mat-mini-fab color="primary">
+      <mat-icon aria-label="Example icon-button with a heart icon">chevron_left</mat-icon>
+    </button>
+    <div class="week-box">
+      <div class="day-box pointer" *ngFor="let day of weekDays" (click)="selectDay(day)" >
+        <span>{{ day | dateTimeToFormat:'MMMM d, yyyy' }}</span>
+        <p>{{day}}</p>
+
+
+      </div>
+    </div>
+    <button mat-mini-fab color="primary" (click)="nextWeek()">
+      <mat-icon aria-label="Example icon-button with a heart icon">chevron_right</mat-icon>
+    </button>
+</div>
+
+
+<!-- <mat-spinner></mat-spinner> -->

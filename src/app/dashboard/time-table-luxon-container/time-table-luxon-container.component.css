@@ -1,0 +1,21 @@
+.day-box{
+    width: 12%;
+    height: 70px;
+    background: #ece8e8;
+}
+.main-week-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.week-box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.pointer{
+    cursor: pointer;
+}
