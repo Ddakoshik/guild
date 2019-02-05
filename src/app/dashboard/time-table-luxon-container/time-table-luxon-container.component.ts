@@ -1,5 +1,116 @@
 import { Component, OnInit } from '@angular/core';
-import { DateTime, Info } from 'luxon';
+import { DateTime, Settings} from 'luxon';
+import { MatTableDataSource } from '@angular/material';
+
+export interface PeriodicElement {
+  id: number;
+  reidLider: ReidLider;
+  raidName: RaidName;
+  info: string;
+  dataTime: string;
+  raidComposition: RaidComposition;
+}
+
+export interface ReidLider {
+  id: number;
+  email: string;
+  nikName: string;
+  name: string;
+}
+
+export interface RaidComposition {
+  tankNeed: number;
+  tankHave: number;
+  healNeed: number;
+  healHave: number;
+  dpsNeed: number;
+  dpsHave: number;
+}
+
+export interface RaidName {
+  id: number;
+  reidDifficult: string;
+  shortName: string;
+  fullname: string;
+}
+
+const dataelEments: PeriodicElement[] = [
+  {
+    id: 1,
+    reidLider: {
+      id: 11145,
+      email: 'roobot@i.ua',
+      nikName: 'Aizik',
+      name: 'Andrii'
+    },
+    raidName: {
+      id: 2,
+      shortName: 'ГС',
+      reidDifficult: 'гер',
+      fullname: 'Гробница Саргераса'
+    },
+    raidComposition: {
+      tankNeed: 2,
+      tankHave: 2,
+      healNeed: 5,
+      healHave: 2,
+      dpsNeed: 10,
+      dpsHave: 3,
+    },
+    dataTime: '2006-01-02T15:04:05-10:00',
+    info: 'So, that’s it. Now we have our material table with all the features like sorting, paging and filtering data.'
+  },
+  {
+    id: 100001,
+    reidLider: {
+      id: 11145,
+      email: 'roobot@i.ua',
+      nikName: 'Losik',
+      name: 'Andrii'
+    },
+    raidName: {
+      id: 2,
+      shortName: 'ГС',
+      reidDifficult: 'гер',
+      fullname: 'Гробница Саргераса'
+    },
+    raidComposition: {
+      tankNeed: 2,
+      tankHave: 2,
+      healNeed: 5,
+      healHave: 2,
+      dpsNeed: 10,
+      dpsHave: 3,
+    },
+    dataTime: '2006-01-02T15:04:05-04:00',
+    info: 'Ok go go'
+  },
+  {
+    id: 444000,
+    reidLider: {
+      id: 11145,
+      email: 'roobot@i.ua',
+      nikName: 'Aizik',
+      name: 'Andrii'
+    },
+    raidName: {
+      id: 2,
+      shortName: 'АПТ',
+      reidDifficult: 'об',
+      fullname: 'Гробница Саргераса'
+    },
+    raidComposition: {
+      tankNeed: 2,
+      tankHave: 2,
+      healNeed: 5,
+      healHave: 2,
+      dpsNeed: 10,
+      dpsHave: 3,
+    },
+    dataTime: '2006-01-02T15:04:05-07:00',
+    info: 'So, that’s it. Now we have our material table with all the features like sorting, paging and filtering data.'
+  }
+];
 
 @Component({
   selector: 'app-time-table-luxon-container',
@@ -8,59 +119,57 @@ import { DateTime, Info } from 'luxon';
 })
 export class TimeTableLuxonContainerComponent implements OnInit {
 
-  controllDay = 0;
+  displayedColumns: string[] = ['id', 'dataTime', 'reidLider', 'raidName', 'raidComposition', 'info' ];
+  dataSource = new MatTableDataSource(dataelEments);
+
   dt = DateTime.local();
-  d = DateTime.fromISO('2014-08-06T13:07:04.054').setLocale('ru');
-  weekDays = [];
-  constructor() { }
+  currentDayIndex = 0;
+  weekData: DateTime[];
+  showWeek: boolean;
+
+  constructor() {
+    Settings.defaultLocale = 'ru';
+   }
 
   ngOnInit() {
-    console.log(DateTime.DATETIME_FULL);
-    console.log('123', DateTime.local());
-    console.log(this.dt.minus({days: 7}).toString());
-    console.log(this.dt.plus({days: 1}).toString());
-    console.log(DateTime.local());
-    console.log(DateTime.fromISO('2017-05-15T08:30:00'));
-    console.log(this.d.toFormat('LLLL'));
-    console.log(this.d.toFormat('MMMM'));
-    console.log(this.d.toFormat('ccc'));
-    console.log(this.d.toFormat('EEE'));
-    console.log(this.d.toFormat('cccc'));
-    console.log(this.d.toFormat('EEEE'));
-    console.log(Info.months());
-    console.log('123', Info.eras('long', { locale: 'ru' }));
-    console.log(Info.features());
-    console.log(Info.meridiems());
-    console.log(Info.monthsFormat());
-    console.log(Info.normalizeZone());
-    // this.weekDays = Info.weekdays();
-    console.log(Info.weekdays());
-    console.log(Info.weekdaysFormat());
-
-
-    this.getWeekArrey(this.controllDay);
+    this.getweekData();
   }
 
 
-  getWeekArrey(controllDay?): void {
-    this.weekDays = [];
-    if (controllDay < 0) {
-      for (let index = controllDay ? controllDay : 0; index < 7 + controllDay; index++) {
-        this.weekDays.push(this.dt.minus({days: index}));
-      }
-    } else {
-      for (let index = controllDay ? controllDay : 0; index < 7 + controllDay; index++) {
-        this.weekDays.push(this.dt.plus({days: index}));
-      }
-    }
-    console.log('@##########', this.weekDays);
-  }
-  selectDay(day) {
-    console.log(day);
+  prevWeek() {
+    this.currentDayIndex = this.currentDayIndex - 7;
+    this.getweekData();
   }
   nextWeek() {
-    this.controllDay = this.controllDay +  7;
-    this.getWeekArrey(this.controllDay);
+    this.currentDayIndex = this.currentDayIndex + 7;
+    this.getweekData();
+  }
+
+  setDay(day) {
+    console.log(day.toFormat('yyyy LLL dd'));
+  }
+
+  changeViev() {
+    this.showWeek = !this.showWeek;
+  }
+
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+
+  getweekData() {
+    this.weekData = [];
+    if (this.currentDayIndex < 0 ) {
+      for (let i = Math.abs(this.currentDayIndex); i < Math.abs(this.currentDayIndex) + 7; i++) {
+        this.weekData.push( this.dt.minus({ days: i }));
+      }
+    } else {
+      for (let i = this.currentDayIndex; i < this.currentDayIndex + 7; i++) {
+        this.weekData.push( this.dt.plus({ days: i }));
+      }
+    }
   }
 
 }

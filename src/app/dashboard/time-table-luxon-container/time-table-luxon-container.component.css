@@ -1,21 +1,47 @@
-.day-box{
-    width: 12%;
-    height: 70px;
-    background: #ece8e8;
-}
-.main-week-box{
+.center{
+    text-align: center;
+  }
+  .pointer{
+    cursor: pointer;
+  }
+  p{
+    margin: 0;
+  }
+  .weekBox{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-}
-.week-box{
+  }
+  .dayBox{
+    width: 12%;
+    height: 70px;
+    background: #ccc;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: nowrap;
-}
+    flex-direction: column;
+    align-items: centre;
+    justify-content: center;
+  }
+  .dayCount{
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+  .dataNumber{
+    font-size: 24px;
+  }
+  .dataNumber span{
+    font-size: 15px;
+  }
+  .header-box{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
 
-.pointer{
-    cursor: pointer;
-}
+  table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
