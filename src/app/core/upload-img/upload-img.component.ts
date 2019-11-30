@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 
 // import { UploadImgService } from './upload-img.service';
 
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireStorage} from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 
 @Component({

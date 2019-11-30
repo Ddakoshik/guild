@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Blog } from '../../shared/models/blog.model';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';

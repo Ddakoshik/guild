@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { QuillModule } from 'ngx-quill';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -14,15 +13,11 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 // angular - Firebase
 import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-// carusel slider
-import { NguCarouselModule } from '@ngu/carousel';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -105,11 +100,8 @@ import { AddEventPopupComponent } from './dashboard/components/add-event-popup/a
     AngularFirestoreModule,
     FormsModule,
     HttpClientModule,
-    AngularEditorModule,
     QuillModule,
-    NguCarouselModule,
     PipesModule,
-    NguCarouselModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({

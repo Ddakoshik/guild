@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, withLatestFrom } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { of, from } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthAction,
     LoginWithGoogleAction,
@@ -35,7 +35,7 @@ export class AuthEffects {
     loginWithGoogle$ = this.actions$.pipe(
     ofType<LoginWithGoogleAction>(AuthActionTypes.LoginWithGoogle),
     switchMap(() => {
-        return Observable.fromPromise(this._firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())).pipe(
+        return from(this._firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())).pipe(
             switchMap((data) => {
                 console.log(data.additionalUserInfo.profile);
                 this.router.navigate(['/']);
@@ -45,10 +45,10 @@ export class AuthEffects {
     }));
 
     @Effect()
-    LogoutFromPlatform$ = this.actions$.pipe(
+    logoutFromPlatform$ = this.actions$.pipe(
     ofType<LogoutFromPlatformAction>(AuthActionTypes.LogoutFromPlatform),
     switchMap(() => {
-        return Observable.fromPromise(this._firebaseAuth.auth.signOut()).pipe(
+        return from(this._firebaseAuth.auth.signOut()).pipe(
             switchMap(() => {
                 this.router.navigate(['/auth']);
                 return [new LogoutFromPlatformSuccessAction()];

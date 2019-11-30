@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime, Settings} from 'luxon';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { AddEventPopupComponent } from '../components/add-event-popup/add-event-popup.component';
 
 export interface PeriodicElement {

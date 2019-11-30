@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ export class ChatComponent implements OnInit {
   items: Observable<any[]>;
   nowData = new Date;
 
-  @ViewChild('newitem') elForm: ElementRef;
+  @ViewChild('newitem', {static: false}) elForm: ElementRef;
 
   constructor(db: AngularFireDatabase) {
     this.itemsRef = db.list('messages');
@@ -27,11 +27,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
-
-
- 
 
   addItem(newName: string) {
     this.itemsRef.push({
@@ -40,12 +36,11 @@ export class ChatComponent implements OnInit {
       date: +new Date,
       userIcon: 'https://vanillapriest.files.wordpress.com/2017/09/wow-vanilla-priest.png?w=240',
     });
-    this.elForm.nativeElement.value = "";
+    this.elForm.nativeElement.value = '';
   }
 
 
   updateItem(key: string, newText: string) {
-    
   }
 
   updateMsgItem($event) {
