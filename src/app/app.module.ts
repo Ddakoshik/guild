@@ -63,6 +63,7 @@ import { reducers } from './Store/reducers';
 import { CoreStoreModule } from './Store/core-store.module';
 import { LuxonModule } from 'luxon-angular';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
+import { AddEventPopupComponent } from './dashboard/components/add-event-popup/add-event-popup.component';
 
 
 
@@ -87,7 +88,8 @@ import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-c
     BlogEditPageComponent,
     BlogAddPageComponent,
     BlogShowPostsComponent,
-    TimeTableLuxonContainerComponent
+    TimeTableLuxonContainerComponent,
+    AddEventPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -121,6 +123,7 @@ import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-c
 
   ],
   providers: [AuthService, AuthGuard, UserDataService],
+  entryComponents: [AddEventPopupComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

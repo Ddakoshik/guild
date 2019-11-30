@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime, Settings} from 'luxon';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
+import { AddEventPopupComponent } from '../components/add-event-popup/add-event-popup.component';
 
 export interface PeriodicElement {
   id: number;
@@ -127,7 +128,7 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   weekData: DateTime[];
   showWeek: boolean;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     Settings.defaultLocale = 'ru';
    }
 
@@ -160,6 +161,14 @@ export class TimeTableLuxonContainerComponent implements OnInit {
 
   addEvent() {
     console.log('addEvent Log');
+    const dialogRef = this.dialog.open(AddEventPopupComponent, {
+      width: '450px',
+      height: '200px'
+    });
+    setTimeout(() => {
+      dialogRef.close();
+    }, 10000);
+
   }
 
 
