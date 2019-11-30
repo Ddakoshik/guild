@@ -1,6 +1,9 @@
 <div class="header-box">
   <h1>Календарь событий</h1>
-  <button mat-stroked-button color="primary" type="button" (click)="changeViev()">События по дням</button>
+  <div class="buttonBox">
+    <button mat-stroked-button color="primary" type="button" (click)="changeViev()">События по дням</button>
+    <button mat-stroked-button class="ml-3" color="primary" type="button" (click)="addEvent()">Добавить событие</button>
+  </div>
 </div>
 
 
@@ -23,7 +26,6 @@
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
-    <button mat-stroked-button color="primary" type="button" (click)="changeViev()">Добавить событие</button>
 </div>
 
 

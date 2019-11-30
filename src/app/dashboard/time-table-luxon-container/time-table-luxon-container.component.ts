@@ -158,6 +158,10 @@ export class TimeTableLuxonContainerComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  addEvent() {
+    console.log('addEvent Log');
+  }
+
 
   getweekData() {
     this.weekData = [];
