@@ -15,7 +15,7 @@ import { AuthAction,
     GetGoogleUserInfoAction,
     GetGoogleUserInfoSuccessAction,
     GetGoogleUserInfoFailAction} from '../actions/auth.actions';
-import * as firebase from 'firebase/app';
+import { auth } from 'firebase/app';
 import { select, Store } from '@ngrx/store';
 import { getGoogleAuthInfo, getUserInfo, CoreState } from '../reducers';
 
@@ -35,7 +35,7 @@ export class AuthEffects {
     loginWithGoogle$ = this.actions$.pipe(
     ofType<LoginWithGoogleAction>(AuthActionTypes.LoginWithGoogle),
     switchMap(() => {
-        return Observable.fromPromise(this._firebaseAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).pipe(
+        return Observable.fromPromise(this._firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())).pipe(
             switchMap((data) => {
                 console.log(data.additionalUserInfo.profile);
                 this.router.navigate(['/']);
