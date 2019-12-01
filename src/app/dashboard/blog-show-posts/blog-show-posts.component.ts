@@ -10,25 +10,18 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./blog-show-posts.component.css']
 })
 export class BlogShowPostsComponent implements OnInit {
-
   htmlContent;
-
   blogpost = {
     title: 'Test add',
     user: 'user tester',
     content: 'Content Content ContentContentContentContentContentContentContent ContentContentContentContent Content ContentContentContent'
   };
-
-
   data: any;
-
-
-
   private blogCollection: AngularFirestoreCollection<Blog>;
   blogs: Observable<Blog[]>;
-
   title: string;
   content: string;
+
   constructor(private afs: AngularFirestore, private router: Router) {
     afs.firestore.settings({ timestampsInSnapshots: true });
   }

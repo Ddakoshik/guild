@@ -63,6 +63,7 @@ import { reducers } from './Store/reducers';
 import { CoreStoreModule } from './Store/core-store.module';
 import { LuxonModule } from 'luxon-angular';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
+import { CoreModule } from './core/core.module';
 
 
 
@@ -92,6 +93,7 @@ import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-c
   imports: [
     BrowserModule,
     MaterialModule,
+    CoreModule,
     CoreStoreModule,
     LuxonModule,
     BrowserAnimationsModule,
@@ -101,7 +103,6 @@ import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-c
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    FormsModule,
     HttpClientModule,
     AngularEditorModule,
     QuillModule,

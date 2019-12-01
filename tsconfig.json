@@ -12,8 +12,9 @@
       "node_modules/@types"
     ],
     "lib": [
+      "dom",
       "es2017",
-      "dom"
+      "es2018.promise"
     ],
     "module": "es2015",
     "baseUrl": "./"

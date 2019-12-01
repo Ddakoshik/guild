@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-blog-add-page',
@@ -9,11 +11,36 @@ export class BlogAddPageComponent implements OnInit {
 
   truncate = 100;
   cont = '12312';
-  content = 'Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила пять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною. Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам компютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.';
+  content = '';
+  blogForm: FormGroup;
+  isSubmitting = false;
+  files = [];
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.blogForm = this.fb.group({
+      title: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit() {
   }
 
+  clear() {
+    console.log('clear');
+  }
+
+  getFiles($event) {
+    this.files.push($event);
+  }
+
+  getTextArea($event) {
+    this.content = $event.html;
+  }
+
+  submitForm() {
+    this.isSubmitting = true;
+    console.log('f', this.files);
+    console.log('c', this.content);
+    console.log('H', this.blogForm);
+  }
 }
