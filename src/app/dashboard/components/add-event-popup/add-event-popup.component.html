@@ -1,3 +1,78 @@
-<p>
-  add-event-popup works!
-</p>
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="insightForm">
+
+    <mat-form-field class="col-12 p-0 pt-3" [floatLabel]="'always'">
+      <mat-label>Title</mat-label>
+      <input matInput
+              maxlength="75"
+              placeholder="Event name"
+              autocomplete="off"
+              formControlName="title">
+    </mat-form-field>
+    <div class="row">
+      <mat-form-field class="col-6">
+        <input matInput 
+          [min]="minDate" 
+          [matDatepicker]="picker" 
+          (dateChange)="onDateChange()"
+          placeholder="Choose a date"
+          formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="col-6">
+        <mat-form-field class="col-12" [floatLabel]="'always'">
+          <mat-label>Start Time</mat-label>
+          <input matInput 
+            type="time"
+            formControlName="startTime">
+        </mat-form-field>
+      
+        <mat-form-field class="col-12" [floatLabel]="'always'">
+          <mat-label>End Time</mat-label>
+          <input matInput
+            type="time"
+            formControlName="endTime">
+        </mat-form-field>
+      </div>
+    </div>
+
+  
+
+    <mat-form-field class="col-12 p-0 pt-3" [floatLabel]="'always'">
+      <mat-label>Title</mat-label>
+      <input matInput
+              maxlength="75"
+              placeholder="Name"
+              autocomplete="off"
+              formControlName="location">
+    </mat-form-field>
+  
+    <h6 class="mat-form-field-label custom-form-label pt-3">Details Title</h6>
+    <quill-editor class="p-0 quill-editor"
+                  [style]="{height: '188px'}"
+                  [maxLength]="editorLimit"
+                  placeholder="Details Placeholder"
+                  [formControl]="insightForm.get('description')"
+                  (onContentChanged)="onTextAreaChanged($event)">
+      <div quill-editor-toolbar>
+        <span class="ql-formats">
+          <button class="ql-bold ql-icons icon-bold p-0 font-size-xl" [title]="'Bold'"></button>
+          <button class="ql-italic ql-icons icon-italic p-0 font-size-xl" [title]="'Italic'"></button>
+          <button class="ql-underline ql-icons icon-undeline p-0 font-size-xl" [title]="'Underline'"></button>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-list ql-icons icon-number_list p-0 font-size-xl" value="ordered" [title]="'Bold'"></button>
+          <button class="ql-list ql-icons icon-bullet p-0 font-size-xl" value="bullet" [title]="'Italic'"></button>
+        </span>
+      </div>
+    </quill-editor>
+    <span class="character-count mt-1">{{ insightDetailsCleanText | count: editorLimit }}</span>
+  
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" class="btn" (click)='cancel()' mat-dialog-close>Cancel</button>
+  <button mat-button type="button" class="btn" (click)='submit()' cdkFocusInitial>Submit</button>
+</div>

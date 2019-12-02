@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime, Settings} from 'luxon';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddEventPopupComponent } from '../components/add-event-popup/add-event-popup.component';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface PeriodicElement {
   id: number;
@@ -35,6 +36,64 @@ export interface RaidName {
   shortName: string;
   fullname: string;
 }
+
+const user = {
+  email: 'roobot@i.ua', // string  используется для авторизации пользователя как уникальный ключ вместо userId
+  gameEmail: 'roobot@i.ua',     // string   используется для рассылки уведомлений
+  googleAvatarURL: 'https://lh5.googleusercontent.com/-TMJU-WItpO0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcBYrbd1nzTgibU02D-6Vo5EOLpTQ/photo.jpg',
+  charecterAvatarURL: '',  // string  если пустой используется googleAvatarURL
+  mainCharecters: 'Aizik', // string  главный игровой персонаж что и будет на аватарке
+  rolePermissions: ['User', 'RaidLider', 'Admin'],   // string[]  акайнт пользователя может обладать такими ролями
+  cherecters: [
+    {
+      gameName: 'Aizik',  // string
+      level: 110,         // number
+      equipmentLevel: '', // string
+      calassName: 'Paladin',
+      calssId: 1,  // number создать константу с  енумкой всех класов и от туда вытягивать calassName
+      guild: 'Shadow Reinbow',  // string  возможно потом будет реализована привязка к гильдиям
+      cherecterDescription: '', // string  описание игрового персонажа
+      roles: [
+        {
+          roleName: 'tank', // string  возможные роли ['rdps', 'mdps', 'heal', 'tank']
+          equipmentLevel: '', // string
+          prioity: 1  // number   приоритет 1 2 3 4 и 0 (никогда)
+        },
+        {
+          roleName: 'heal', // string
+          equipmentLevel: '', // string
+          prioity: 2  // number   приоритет 1 2 3 4 и 0 (никогда)
+        }
+      ]
+    },
+    {
+      gameName: 'Utumba',  // string
+      level: 110,         // number
+      equipmentLevel: '', // string
+      guild: 'Shadow Reinbow'  // string  возможно потом будет реализована привязка к гильдиям
+    },
+    {
+      gameName: 'Aizik',  // string
+      level: 110,         // number
+      equipmentLevel: '', // string
+      calassName: 'Paladin',
+      calssId: 1,  // number создать константу с  енумкой всех класов и от туда вытягивать calassName
+      guild: 'Shadow Reinbow',  // string  возможно потом будет реализована привязка к гильдиям
+      roles: [
+        {
+          roleName: 'rdps', // string  возможные роли ['rdps', 'mdps', 'heal', 'tank']
+          equipmentLevel: '', // string
+          prioity: 1  // number   приоритет 1 2 3 4 и 0 (никогда)
+        },
+        {
+          roleName: 'heal', // string
+          equipmentLevel: '', // string
+          prioity: 2  // number   приоритет 1 2 3 4 и 0 (никогда)
+        }
+      ]
+    },
+  ]
+};
 
 const dataelEments: PeriodicElement[] = [
   {
@@ -121,7 +180,7 @@ const dataelEments: PeriodicElement[] = [
 })
 export class TimeTableLuxonContainerComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'dataTime', 'reidLider', 'raidName', 'raidComposition', 'info' ];
+  displayedColumns: string[] = ['id', 'dataTime', 'reidLider', 'raidName', 'raidComposition', 'info'];
   dataSource = new MatTableDataSource(dataelEments);
 
   dt = DateTime.local();
@@ -129,7 +188,17 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   weekData: DateTime[];
   showWeek: boolean;
 
-  constructor(public dialog: MatDialog) {
+  defaultOptions: ModalOptions = {
+    class: 'modal-big',
+    keyboard: false,
+    backdrop: true,
+    // ignoreBackdropClick: true,
+    animated: false
+  };
+
+  ref: BsModalRef;
+
+  constructor(private modalService: BsModalService, public dialog: MatDialog) {
     Settings.defaultLocale = 'ru';
    }
 
@@ -161,15 +230,26 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   }
 
   addEvent() {
-    console.log('addEvent Log');
+    // this.ref = this.modalService.show(AddEventPopupComponent, {
+    //   ...this.defaultOptions,
+    //   initialState: {
+    //     name: '12'
+    //   }
+    // });
     const dialogRef = this.dialog.open(AddEventPopupComponent, {
-      width: '450px',
-      height: '200px'
+      width: '550px',
+      disableClose: true,
+      data: { name: 'Andrii', animal: 'tiger' }
     });
-    setTimeout(() => {
-      dialogRef.close();
-    }, 10000);
+    // setTimeout(() => {
+    //   dialogRef.close();
+    // }, 10000);
 
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.animal = result;
+    // });
   }
 
 

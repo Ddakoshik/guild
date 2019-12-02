@@ -1,0 +1,7 @@
+.time-row{
+    display: flex;
+}
+
+:host ::ng-deep .mat-dialog-actions{
+    justify-content: flex-end;
+}

@@ -5,11 +5,14 @@ import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CoreStoreModule } from './Store/core-store.module';
+import { LuxonModule } from 'luxon-angular';
 
 // angular - Firebase
 import { environment } from '../environments/environment';
@@ -55,11 +58,10 @@ import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 import { reducers } from './Store/reducers';
-import { CoreStoreModule } from './Store/core-store.module';
-import { LuxonModule } from 'luxon-angular';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
 import { AddEventPopupComponent } from './dashboard/components/add-event-popup/add-event-popup.component';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -99,9 +101,12 @@ import { AddEventPopupComponent } from './dashboard/components/add-event-popup/a
     AngularFireStorageModule,
     AngularFirestoreModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     QuillModule,
     PipesModule,
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
