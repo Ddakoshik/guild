@@ -5,7 +5,6 @@ import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -102,7 +101,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    ReactiveFormsModule,
     HttpClientModule,
     QuillModule,
     PipesModule,

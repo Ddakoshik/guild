@@ -1,10 +1,7 @@
 
 <mat-card class="main-tems-box" *ngIf="blog">
     <mat-card-title>{{blog.title}}</mat-card-title>
-    <!--<div   style = "background-image: url('../../../assets/img/U0NSB8F9YAJR1447979691565.jpg');"class="img-box"></div>-->
-  <ul>
-    <li *ngFor="let image of blog.url"><img [src]="image.fileUrl" class="img-box"></li>
-  </ul>
+    <div [ngStyle]="{'background-image': 'url(' + blog.url + ')'}" class="img-box"></div>
     <mat-card-content>
       <mat-card-header>
           <div mat-card-avatar class="example-header-image" style="background-image: url('../../../assets/img/wow-vanilla-priest.png');"></div>
@@ -13,7 +10,6 @@
       </mat-card-header>
       <p innerHTML="{{blog.body | htmlTextLength: {maxLength: 3000, html: true} }}" style="overflow: hidden;"></p>
     </mat-card-content>
-<!--{{blog.url | json }}-->
 </mat-card>
 
 

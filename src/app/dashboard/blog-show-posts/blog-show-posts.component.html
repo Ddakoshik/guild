@@ -5,17 +5,9 @@
   </button>
 </div>
 
-
 <ul>
   <li *ngFor="let blog of blogs | async">
-    <!--<p>{{ blog.title }}</p>-->
-    <!--{{ blog.body }}-->
-    <!--{{blog | json}}-->
     <app-main [blog]="blog"></app-main>
   </li>
 </ul>
 
-<!-- <input type="text" [(ngModel)]="title" name="title" id="" placeholder="title">
-<textarea type="text" [(ngModel)]="content" name="body" id="" placeholder="title"></textarea>
-
-<button type="submit" (click)="pushArticle()">Send Article</button> -->

@@ -5,6 +5,12 @@ import { Blog } from '../../shared/models/blog.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
+export interface ImgFile {
+  fileUrl: string;
+  name: string;
+  timeCreated: Date;
+}
+
 @Component({
   selector: 'app-blog-add-page',
   templateUrl: './blog-add-page.component.html',
@@ -17,7 +23,7 @@ export class BlogAddPageComponent implements OnInit {
   content = '';
   blogForm: FormGroup;
   isSubmitting = false;
-  files = [];
+  file: ImgFile;
   user: any;
   id: number;
 
@@ -39,12 +45,12 @@ export class BlogAddPageComponent implements OnInit {
     this.id = 7;
   }
 
-  clear() {
-    console.log('clear');
+  cancel() {
+    this.router.navigate(['/dashboard/blog']);
   }
 
   getFiles($event) {
-    this.files.push($event);
+    this.file = $event;
   }
 
   getTextArea($event) {
@@ -57,19 +63,15 @@ export class BlogAddPageComponent implements OnInit {
       console.log('invalid Form');
       return;
     }
-    // console.log('Title', this.blogForm.value.title);
-    // console.log('f', this.files);
-    // console.log('c', this.content);
-    // console.log('H', this.blogForm);
 
     this.afs.collection('blog').add({
       'title': this.blogForm.value.title,
       'body': this.content,
       'id': this.id,
-      'url': this.files,
+      'url': this.file.fileUrl,
+      'urlName': this.file.name,
       'userID': this.user.email
     });
-    // this.blogCollection.add();
     this.router.navigate(['/dashboard/blog']);
   }
 }
