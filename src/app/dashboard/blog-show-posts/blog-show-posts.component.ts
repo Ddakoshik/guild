@@ -23,7 +23,7 @@ export class BlogShowPostsComponent implements OnInit {
   content: string;
 
   constructor(private afs: AngularFirestore, private router: Router) {
-    afs.firestore.settings({ timestampsInSnapshots: true });
+    afs.firestore.settings({});
   }
 
   ngOnInit() {

@@ -20,7 +20,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -120,7 +120,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     })
 
   ],
-  providers: [AuthService, AuthGuard, UserDataService],
+  providers: [
+    { provide: FirestoreSettingsToken, useValue: {} },
+    AuthService,
+    AuthGuard,
+    UserDataService],
   entryComponents: [AddEventPopupComponent],
   bootstrap: [AppComponent]
 })

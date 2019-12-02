@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Blog } from '../../shared/models/blog.model';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +26,7 @@ export class BlogAddPageComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router) {
 
-    afs.firestore.settings({ timestampsInSnapshots: true });
+    afs.firestore.settings({});
     this.blogForm = this.fb.group({
       title: ['', [Validators.required]],
     });
