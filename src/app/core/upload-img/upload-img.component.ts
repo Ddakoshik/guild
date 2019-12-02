@@ -1,7 +1,5 @@
-import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
-
+import { Component, OnInit, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
 // import { UploadImgService } from './upload-img.service';
-
 import { AngularFireStorage} from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 
@@ -20,26 +18,20 @@ export class UploadImgComponent implements OnInit {
   testArr = [];
 
   profileUrl: Observable<string | null>;
+  @Output()
+  fileuploaded = new EventEmitter();
 
   constructor(private afStorage: AngularFireStorage,
-            //  private tokenService: UploadImgService
-            ) {
-
-   }
-
-
+              //  private tokenService: UploadImgService
+              ) {}
 
   ngOnInit() { }
-
-
 
   preloadsImg(event) {
     for (let i = 0; i <=  event.target.files['length'] - 1; i++) {
       if (event.target.files && event.target.files[i]) {
-
         // this.testArr.push(event.target.files[i]);
         // console.log(this.testArr);
-
         const reader = new FileReader();
 
         reader.onload = (eventtemp: any) => {
@@ -51,8 +43,8 @@ export class UploadImgComponent implements OnInit {
       }
     }
   }
-  uploadFile() {
 
+  uploadFile() {
     for (let i = 0; i <=  this.preloadurls['length'] - 1; i++) {
       const file = this.preloadurls[i].file;
       // console.log(file);
@@ -60,12 +52,19 @@ export class UploadImgComponent implements OnInit {
       const filePath = `img/${date.getTime()}${date.getMilliseconds()}`;
       const customMetadata = { filename: filePath, test: 'is ok' };
       const task = this.afStorage.upload(filePath, file,  { customMetadata });
-      task.then(
-        x =>  {
+
+      let mFile;
+      task.then(x =>  {
           this.storURL.push(x.downloadURL);
-          console.log(this.storURL);
-            }
-      );
+        mFile = {
+          fileUrl: x.metadata.downloadURLs[0],
+          name: `${date.getTime()}${date.getMilliseconds()}`,
+          timeCreated: date
+        };
+          console.log('filedate', x);
+        })
+        .finally(() => this.fileuploaded.emit(mFile));
+
     }
   }
 

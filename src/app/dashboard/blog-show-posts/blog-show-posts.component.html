@@ -8,8 +8,10 @@
 
 <ul>
   <li *ngFor="let blog of blogs | async">
-    <p>{{ blog.title }}</p>
-    {{ blog.content }}
+    <!--<p>{{ blog.title }}</p>-->
+    <!--{{ blog.body }}-->
+    <!--{{blog | json}}-->
+    <app-main [blog]="blog"></app-main>
   </li>
 </ul>
 

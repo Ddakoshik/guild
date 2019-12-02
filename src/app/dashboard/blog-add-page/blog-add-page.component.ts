@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { Blog } from '../../shared/models/blog.model';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-add-page',
@@ -9,11 +14,62 @@ export class BlogAddPageComponent implements OnInit {
 
   truncate = 100;
   cont = '12312';
-  content = 'Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила пять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною. Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам компютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.';
+  content = '';
+  blogForm: FormGroup;
+  isSubmitting = false;
+  files = [];
+  user: any;
+  id: number;
 
-  constructor() { }
+  constructor(
+    private afs: AngularFirestore,
+    private fb: FormBuilder,
+    private router: Router) {
 
-  ngOnInit() {
+    afs.firestore.settings({ timestampsInSnapshots: true });
+    this.blogForm = this.fb.group({
+      title: ['', [Validators.required]],
+    });
   }
 
+  ngOnInit() {
+    // TODO: getUser
+    this.user = { uid: 'mNJTSg1wQGcSvCBLIB7E5LXhZ8H3', email: 'sergeyver@nitka.com', iuser: 'LGykuFrzezHZo1h74' };
+    // TODO: getID from list of all blogs lates
+    this.id = 7;
+  }
+
+  clear() {
+    console.log('clear');
+  }
+
+  getFiles($event) {
+    this.files.push($event);
+  }
+
+  getTextArea($event) {
+    this.content = $event.html;
+  }
+
+  submitForm() {
+    this.isSubmitting = true;
+    if (this.blogForm.invalid) {
+      console.log('invalid Form');
+      return;
+    }
+    // console.log('Title', this.blogForm.value.title);
+    // console.log('f', this.files);
+    // console.log('c', this.content);
+    // console.log('H', this.blogForm);
+
+    this.afs.collection('blog').add({
+      'title': this.blogForm.value.title,
+      'body': this.content,
+      'id': this.id,
+      'url': this.files,
+      'userID': this.user.email
+    });
+    // this.blogCollection.add();
+    this.router.navigate(['/dashboard/blog']);
+  }
 }

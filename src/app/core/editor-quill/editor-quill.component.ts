@@ -31,10 +31,7 @@ Quill.register('modules/imageResize', ImageResize);
   styleUrls: ['./editor-quill.component.scss']
 })
 export class EditorQuillComponent implements OnInit {
-
-
   html: string;
-
 
   @Input() editorContent = '123123 sd2112 ';
   @Input() style = {height: '400px'};
@@ -44,19 +41,14 @@ export class EditorQuillComponent implements OnInit {
   @Input() maxLength = 0;  // 0
   @Input() isReadOnly = 0;  // false
 
-
-
   @Output() handleEditorCreatedEvent = new EventEmitter();
   @Output() handleChangeEvent = new EventEmitter();
   @Output() handleSelectionEvent = new EventEmitter();
 
-
   constructor() {}
-
 
   ngOnInit() {
   }
-
 
   handleEditorCreated(event: any) {
     this.handleEditorCreatedEvent.emit(event);

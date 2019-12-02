@@ -60,6 +60,7 @@ import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-po
 import { reducers } from './Store/reducers';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
 import { AddEventPopupComponent } from './dashboard/components/add-event-popup/add-event-popup.component';
+import { CoreModule } from './core/core.module';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -91,6 +92,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
   imports: [
     BrowserModule,
     MaterialModule,
+    CoreModule,
     CoreStoreModule,
     LuxonModule,
     BrowserAnimationsModule,
@@ -100,7 +102,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     QuillModule,

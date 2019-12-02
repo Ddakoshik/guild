@@ -1,28 +1,29 @@
 
+<div>
+  <form [formGroup]="blogForm" (ngSubmit)="submitForm()">
+    <div class="header">
+      <h1>Add new blog post</h1>
+      <div class="button-grup">
+        <button mat-fab color="primary" (click)="clear()" >
+          <mat-icon  aria-label="Save">clear</mat-icon>
+        </button>
+        <button mat-fab type="submit" color="primary">
+          <mat-icon  aria-label="Save">done</mat-icon>
+        </button>
+      </div>
+    </div>
 
-<div class="header">
-  <h1>Add new blog post</h1>
-  <div class="button-grup">
-    <button mat-fab color="primary" (click)="addNewPostInBlog()" >
-      <mat-icon  aria-label="Save">clear</mat-icon>
-    </button>
-    <button mat-fab color="primary" (click)="addNewPostInBlog()" >
-      <mat-icon  aria-label="Save">done</mat-icon>
-    </button>
-  </div>
+    <mat-form-field >
+      <input matInput placeholder="Title" formControlName="title">
+    </mat-form-field>
 
+    <!--<p>{{content}}</p>-->
+    <p innerHTML="{{content | htmlTextLength: {maxLength: truncate, html: true} }}"></p>
+    <!--<p>{{content | htmlTextLength: {maxLength: 100, html: true} }}</p>-->
+
+    <app-upload-img (fileuploaded)=getFiles($event)></app-upload-img>
+
+    <app-editor-quill [editorContent] = "content"
+                      (handleChangeEvent)="getTextArea($event)"></app-editor-quill>
+  </form>
 </div>
-<form class="form">
-  <mat-form-field >
-    <input matInput placeholder="Title">
-  </mat-form-field>
-</form>
-<p>{{content}}</p>
-<p innerHTML="{{content | htmlTextLength: {maxLength: truncate, html: true} }}"></p>
-<p>{{content | htmlTextLength: {maxLength: 100, html: true} }}</p>
-
-<app-upload-img></app-upload-img>
-
-<app-editor-quill [editorContent] = "content"
-></app-editor-quill>
-
