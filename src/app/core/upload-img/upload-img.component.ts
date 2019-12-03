@@ -54,11 +54,9 @@ export class UploadImgComponent implements OnInit {
                   name: `${date.getTime()}${date.getMilliseconds()}`,
                   timeCreated: date
                 };
-          console.log('mFile', mFile);
           this.fileuploaded.emit(mFile);
         });
       });
-      // .finally(() => this.fileuploaded.emit(mFile));
     }
   }
 

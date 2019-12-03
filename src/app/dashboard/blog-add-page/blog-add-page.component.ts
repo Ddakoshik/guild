@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Blog } from '../../shared/models/blog.model';
+import { BehaviorSubject, Subject, Observable, Subscription } from 'rxjs';
+import { Blog, ImgFile } from '../../shared/models/blog.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-
-export interface ImgFile {
-  fileUrl: string;
-  name: string;
-  timeCreated: Date;
-}
+import { Store, select } from '@ngrx/store';
+import { CoreState, selectGoogleAuthInfo } from '../../Store/reducers';
+import { GoogleAuthInfo } from '../../shared/models/auth.model';
 
 @Component({
   selector: 'app-blog-add-page',
@@ -24,10 +21,13 @@ export class BlogAddPageComponent implements OnInit {
   blogForm: FormGroup;
   isSubmitting = false;
   file: ImgFile;
-  user: any;
+  user$: Observable<GoogleAuthInfo>;
+  user: GoogleAuthInfo;
+  subscriptions: Subscription[] = [];
   id: number;
 
   constructor(
+    private store$: Store<CoreState>,
     private afs: AngularFirestore,
     private fb: FormBuilder,
     private router: Router) {
@@ -40,7 +40,10 @@ export class BlogAddPageComponent implements OnInit {
 
   ngOnInit() {
     // TODO: getUser
-    this.user = { uid: 'mNJTSg1wQGcSvCBLIB7E5LXhZ8H3', email: 'sergeyver@nitka.com', iuser: 'LGykuFrzezHZo1h74' };
+    this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
+    this.subscriptions.push(this.user$.subscribe(val => {
+      this.user = val;
+    }));
     // TODO: getID from list of all blogs lates
     this.id = 7;
   }

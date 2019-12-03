@@ -17,9 +17,7 @@
       <input matInput placeholder="Title" formControlName="title">
     </mat-form-field>
 
-    <!--<p>{{content}}</p>-->
-    <p innerHTML="{{content | htmlTextLength: {maxLength: truncate, html: true} }}"></p>
-    <!--<p>{{content | htmlTextLength: {maxLength: 100, html: true} }}</p>-->
+    <!-- <p innerHTML="{{content | htmlTextLength: {maxLength: truncate, html: true} }}"></p> -->
 
     <app-upload-img (fileuploaded)=getFiles($event)></app-upload-img>
 

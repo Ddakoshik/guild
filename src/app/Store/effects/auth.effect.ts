@@ -17,7 +17,7 @@ import { AuthAction,
     GetGoogleUserInfoFailAction} from '../actions/auth.actions';
 import { auth } from 'firebase/app';
 import { select, Store } from '@ngrx/store';
-import { getGoogleAuthInfo, getUserInfo, CoreState } from '../reducers';
+import { selectGoogleAuthInfo, CoreState } from '../reducers';
 
 
 @Injectable()
@@ -60,7 +60,7 @@ export class AuthEffects {
     getGoogleUserInfo$ = this.actions$.pipe(
     ofType<GetGoogleUserInfoAction>(AuthActionTypes.GetGoogleUserInfo),
     withLatestFrom(
-        this.store$.pipe(select(getGoogleAuthInfo)),
+        this.store$.pipe(select(selectGoogleAuthInfo)),
     ),
     switchMap(([action, googleAuthInfo]) => {
         return this._firebaseAuth.authState.pipe(

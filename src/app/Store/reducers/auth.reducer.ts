@@ -1,14 +1,14 @@
 import { AuthActionTypes, AuthAction } from '../actions/auth.actions';
+import { GoogleAuthInfo } from '../../shared/models/auth.model';
 
 
 export interface AuthState {
-  googleAuthInfo: any;
+  googleAuthInfo: GoogleAuthInfo;
   userInfo: any;
 }
 
-
 export const initialState = {
-  googleAuthInfo: [],
+  googleAuthInfo: {uid: null, displayName: null, photoURL: null, email: null},
   userInfo: []
 };
 
@@ -31,7 +31,3 @@ export function reducer(state = initialState, action: AuthAction): AuthState {
       return state;
   }
 }
-
-
-export const getGoogleAuthInfo = (state: AuthState) => state.googleAuthInfo;
-export const getUserInfo = (state: AuthState) => state.userInfo;
