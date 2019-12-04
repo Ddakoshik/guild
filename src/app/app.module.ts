@@ -64,6 +64,8 @@ import { CoreModule } from './core/core.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UserProfileContainerComponent } from './dashboard/containers/user-profile-container/user-profile-container.component';
 import { UserProfileComponent } from './dashboard/components/user-profile/user-profile.component';
+import { EventsContainerComponent } from './dashboard/containers/events-container/events-container.component';
+import { EventsTableComponent } from './dashboard/components/events-table/events-table.component';
 
 
 @NgModule({
@@ -90,7 +92,9 @@ import { UserProfileComponent } from './dashboard/components/user-profile/user-p
     TimeTableLuxonContainerComponent,
     AddEventPopupComponent,
     UserProfileContainerComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    EventsContainerComponent,
+    EventsTableComponent
   ],
   imports: [
     BrowserModule,

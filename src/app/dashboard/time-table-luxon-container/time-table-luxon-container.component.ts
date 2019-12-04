@@ -1,12 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DateTime, Settings} from 'luxon';
-import { MatTableDataSource } from '@angular/material/table';
-import { AddEventPopupComponent } from '../components/add-event-popup/add-event-popup.component';
-import { MatDialog } from '@angular/material/dialog';
-import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { dataelEments, reidDataArrey } from '../../shared/models/constants';
-import { EventModel, EventModelId } from '../../shared/models/event.model';
 
 @Component({
   selector: 'app-time-table-luxon-container',
@@ -15,17 +8,11 @@ import { EventModel, EventModelId } from '../../shared/models/event.model';
 })
 export class TimeTableLuxonContainerComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'dataTime', 'reidLider', 'raidName', 'raidComposition', 'info'];
-  dataSource = new MatTableDataSource(dataelEments);
-
-  reidDataArreyData = reidDataArrey;
   dt = DateTime.local();
   currentDayIndex = 0;
   weekData: DateTime[];
-  showWeek: boolean;
 
-  private eventCollection: AngularFirestoreCollection<EventModel>;
-  events: Observable<EventModelId[]>;
+  @Input() isShowWeek: boolean;
 
   // buferArrey = [];
   // raidComposition = {
@@ -43,19 +30,11 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   // };
   // koef = 1;
 
-  constructor(private afs: AngularFirestore, public dialog: MatDialog) {
+  constructor() {
     Settings.defaultLocale = 'ru';
    }
 
   ngOnInit() {
-    this.eventCollection = this.afs.collection<EventModel>('event');
-    this.events = this.eventCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const dataObj = a.payload.doc.data() as EventModel;
-        const id = a.payload.doc.id;
-        return { id, ...dataObj };
-      });
-    });
     this.getweekData();
     // this.createRaid();
   }
@@ -73,21 +52,8 @@ export class TimeTableLuxonContainerComponent implements OnInit {
     console.log(day.toFormat('yyyy LLL dd'));
   }
 
-  changeViev() {
-    this.showWeek = !this.showWeek;
-  }
 
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  addEvent() {
-    const dialogRef = this.dialog.open(AddEventPopupComponent, {
-      width: '550px',
-      disableClose: true,
-      data: { name: 'Andrii', animal: 'tiger' }
-    });
     // setTimeout(() => {
     //   dialogRef.close();
     // }, 10000);
@@ -97,7 +63,7 @@ export class TimeTableLuxonContainerComponent implements OnInit {
     //   console.log('The dialog was closed');
     //   this.animal = result;
     // });
-  }
+  // }
 
   // createRaid() {
 

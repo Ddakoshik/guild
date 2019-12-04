@@ -1,0 +1,12 @@
+<div class="header-box">
+    <h1>Календарь событий</h1>
+    <div class="buttonBox">
+        <button mat-stroked-button color="primary" type="button" (click)="changeViev()">События по дням</button>
+        <button mat-stroked-button class="ml-3" color="primary" type="button" (click)="addEvent()">Добавить событие</button>
+    </div>
+</div>
+
+
+<app-time-table-luxon-container [isShowWeek]="showWeek"></app-time-table-luxon-container>
+
+<app-events-table [data]='events | async'></app-events-table>
