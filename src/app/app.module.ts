@@ -62,6 +62,8 @@ import { AddEventPopupComponent } from './dashboard/components/add-event-popup/a
 import { CoreModule } from './core/core.module';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { UserProfileContainerComponent } from './dashboard/containers/user-profile-container/user-profile-container.component';
+import { UserProfileComponent } from './dashboard/components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -86,7 +88,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     BlogAddPageComponent,
     BlogShowPostsComponent,
     TimeTableLuxonContainerComponent,
-    AddEventPopupComponent
+    AddEventPopupComponent,
+    UserProfileContainerComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

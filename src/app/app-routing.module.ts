@@ -14,6 +14,7 @@ import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 import { UserDataResolver } from './shared/resolvers/user-data.resolver';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
+import { UserProfileContainerComponent } from './dashboard/containers/user-profile-container/user-profile-container.component';
 
 
 
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'rules', component: RulesComponent },
     { path: 'composition', component: CompositionComponent },
     { path: 'timeanons', component: TimetableComponent },
+    { path: 'profile', component: UserProfileContainerComponent },
     { path: 'blog', component: BlogComponent,
     children: [
       { path: '', component: BlogShowPostsComponent},
