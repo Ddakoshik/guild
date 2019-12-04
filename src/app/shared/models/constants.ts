@@ -33,12 +33,6 @@ export const user = {
       gameName: 'Utumba',  // string
       level: 110,         // number
       equipmentLevel: '', // string
-      guild: 'Shadow Reinbow'  // string  возможно потом будет реализована привязка к гильдиям
-    },
-    {
-      gameName: 'Aizik',  // string
-      level: 110,         // number
-      equipmentLevel: '', // string
       calassName: 'Paladin',
       calssId: 1,  // number создать константу с  енумкой всех класов и от туда вытягивать calassName
       guild: 'Shadow Reinbow',  // string  возможно потом будет реализована привязка к гильдиям
@@ -80,13 +74,56 @@ export const raidLocation = [
     id: 1,
     shortName: 'ГС',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Гробница Саргераса'
+    fullname: 'Гробница Саргераса',
+    imgName: ''
   },
   {
     id: 2,
-    shortName: 'ГС',
+    shortName: 'ЦН',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Гробница Саргераса'
+    fullname: 'Цитадель Ночи'
+  },
+  {
+    id: 3,
+    shortName: 'АПТ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Анторус, Пылающий Трон'
+  },
+  {
+    id: 4,
+    shortName: 'ИК',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Изумрудный Кошмар'
+  },
+  {
+    id: 5,
+    shortName: 'ИД',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Испытание доблести'
+  },
+  {
+    id: 6,
+    shortName: 'ВД',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Вечный дворец'
+  },
+  {
+    id: 7,
+    shortName: 'БД',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Битва за Дазар`алор'
+  },
+  {
+    id: 8,
+    shortName: 'У',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Ульдир'
+  },
+  {
+    id: 9,
+    shortName: 'ГШ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Горнило Штормов'
   }
 
 ];

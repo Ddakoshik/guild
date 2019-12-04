@@ -27,22 +27,21 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   private eventCollection: AngularFirestoreCollection<EventModel>;
   events: Observable<EventModelId[]>;
 
-
-  buferArrey = [];
-  raidComposition = {
-    tankNeed: 2,
-    tankHave: 0,
-    healNeed: 5,
-    healHave: 0,
-    dpsNeed: 4,
-    dpsHave: 0,
-  };
-  raid = {
-    tank: [],
-    heal: [],
-    dps: []
-  };
-  koef = 1;
+  // buferArrey = [];
+  // raidComposition = {
+  //   tankNeed: 2,
+  //   tankHave: 0,
+  //   healNeed: 5,
+  //   healHave: 0,
+  //   dpsNeed: 4,
+  //   dpsHave: 0,
+  // };
+  // raid = {
+  //   tank: [],
+  //   heal: [],
+  //   dps: []
+  // };
+  // koef = 1;
 
   constructor(private afs: AngularFirestore, public dialog: MatDialog) {
     Settings.defaultLocale = 'ru';
@@ -58,7 +57,7 @@ export class TimeTableLuxonContainerComponent implements OnInit {
       });
     });
     this.getweekData();
-    this.createRaid();
+    // this.createRaid();
   }
 
   prevWeek() {
@@ -100,48 +99,47 @@ export class TimeTableLuxonContainerComponent implements OnInit {
     // });
   }
 
-  createRaid() {
+  // createRaid() {
 
-    if (this.koef > 3) {
-      this.koef = 1;
-    }
+  //   if (this.koef > 3) {
+  //     this.koef = 1;
+  //   }
 
-    const userArrey = this.buferArrey.length ? this.buferArrey : this.reidDataArreyData;
+  //   const userArrey = this.buferArrey.length ? this.buferArrey : this.reidDataArreyData;
 
-    this.fillRaidArrey(userArrey, this.raidComposition, this.raid, this.koef);
+  //   this.fillRaidArrey(userArrey, this.raidComposition, this.raid, this.koef);
 
-    console.log('raidArrey', [...this.raid.tank, ...this.raid.heal, ...this.raid.dps]);
-    console.log('buferArrey', this.buferArrey);
-    const raidLength = this.raidComposition.dpsNeed + this.raidComposition.healNeed + this.raidComposition.tankNeed;
-    if ([...this.raid.tank, ...this.raid.heal, ...this.raid.dps].length === raidLength) {
-      return this.raid;
-    } else  {
-      this.koef++;
-      this.createRaid();
-    }
-  }
+  //   console.log('raidArrey', [...this.raid.tank, ...this.raid.heal, ...this.raid.dps]);
+  //   console.log('buferArrey', this.buferArrey);
+  //   const raidLength = this.raidComposition.dpsNeed + this.raidComposition.healNeed + this.raidComposition.tankNeed;
+  //   if ([...this.raid.tank, ...this.raid.heal, ...this.raid.dps].length === raidLength) {
+  //     return this.raid;
+  //   } else  {
+  //     this.koef++;
+  //     this.createRaid();
+  //   }
+  // }
 
-  fillRaidArrey(usersQueueArrey, raidComposition, raid, koef) {
-    const userBuferArrey = [...usersQueueArrey];
-    const noRoleUserArrey = [];
-    userBuferArrey.forEach(element => {
-      if (element.tank === koef && raidComposition.tankNeed > raidComposition.tankHave) {
-        raidComposition.tankHave++;
-        return raid.tank.push({...element, role: 'tank'});
-      }
-      if (element.heal === koef && raidComposition.healNeed > raidComposition.healHave) {
-        raidComposition.healHave++;
-        return raid.heal.push({...element, role: 'heal'});
-      }
-      if (element.dps === koef && raidComposition.dpsNeed > raidComposition.dpsHave) {
-        raidComposition.dpsHave++;
-        return raid.dps.push({...element, role: 'dps'});
-      }
-      return noRoleUserArrey.push(element);
-    });
-    this.buferArrey = noRoleUserArrey;
-  }
-
+  // fillRaidArrey(usersQueueArrey, raidComposition, raid, koef) {
+  //   const userBuferArrey = [...usersQueueArrey];
+  //   const noRoleUserArrey = [];
+  //   userBuferArrey.forEach(element => {
+  //     if (element.tank === koef && raidComposition.tankNeed > raidComposition.tankHave) {
+  //       raidComposition.tankHave++;
+  //       return raid.tank.push({...element, role: 'tank'});
+  //     }
+  //     if (element.heal === koef && raidComposition.healNeed > raidComposition.healHave) {
+  //       raidComposition.healHave++;
+  //       return raid.heal.push({...element, role: 'heal'});
+  //     }
+  //     if (element.dps === koef && raidComposition.dpsNeed > raidComposition.dpsHave) {
+  //       raidComposition.dpsHave++;
+  //       return raid.dps.push({...element, role: 'dps'});
+  //     }
+  //     return noRoleUserArrey.push(element);
+  //   });
+  //   this.buferArrey = noRoleUserArrey;
+  // }
 
   getweekData() {
     this.weekData = [];
