@@ -11,11 +11,11 @@ export const user = {
     {
       gameName: 'Aizik',  // string
       level: 110,         // number
-      equipmentLevel: '', // string
+      equipmentLevel: '1488', // string
       calassName: 'Paladin',
       calssId: 1,  // number создать константу с  енумкой всех класов и от туда вытягивать calassName
       guild: 'Shadow Reinbow',  // string  возможно потом будет реализована привязка к гильдиям
-      cherecterDescription: '', // string  описание игрового персонажа
+      cherecterDescription: 'asdasdsadasd', // string  описание игрового персонажа
       roles: [
         {
           roleName: 'tank', // string  возможные роли ['rdps', 'mdps', 'heal', 'tank']
@@ -26,17 +26,16 @@ export const user = {
           roleName: 'heal', // string
           equipmentLevel: '', // string
           prioity: 2  // number   приоритет 1 2 3 4 и 0 (никогда)
+        },
+        {
+          roleName: 'rdps', // string
+          equipmentLevel: '', // string
+          prioity: 3  // number   приоритет 1 2 3 4 и 0 (никогда)
         }
       ]
     },
     {
       gameName: 'Utumba',  // string
-      level: 110,         // number
-      equipmentLevel: '', // string
-      guild: 'Shadow Reinbow'  // string  возможно потом будет реализована привязка к гильдиям
-    },
-    {
-      gameName: 'Aizik',  // string
       level: 110,         // number
       equipmentLevel: '', // string
       calassName: 'Paladin',
