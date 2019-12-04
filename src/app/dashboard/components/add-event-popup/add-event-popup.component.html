@@ -1,4 +1,10 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-title class="dilog-title">
+    <h1 class="pr-5" >Add new event</h1>
+    <button mat-icon-button aria-label="close button" class="close-button" mat-dialog-close (click)="cancel()">
+      <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
 <div mat-dialog-content>
   <form [formGroup]="insightForm">
 
@@ -15,7 +21,6 @@
         <input matInput 
           [min]="minDate" 
           [matDatepicker]="picker" 
-          (dateChange)="onDateChange()"
           placeholder="Choose a date"
           formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -73,6 +78,6 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button type="button" class="btn" (click)='cancel()' mat-dialog-close>Cancel</button>
-  <button mat-button type="button" class="btn" (click)='submit()' cdkFocusInitial>Submit</button>
+  <button mat-button type="button" class="btn" (click)="cancel()" mat-dialog-close>Cancel</button>
+  <button mat-button type="button" class="btn" (click)="submit()" cdkFocusInitial>Submit</button>
 </div>

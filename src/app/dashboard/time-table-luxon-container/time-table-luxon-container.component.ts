@@ -2,176 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DateTime, Settings} from 'luxon';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddEventPopupComponent } from '../components/add-event-popup/add-event-popup.component';
-import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { MatDialog } from '@angular/material/dialog';
-
-export interface PeriodicElement {
-  id: number;
-  reidLider: ReidLider;
-  raidName: RaidName;
-  info: string;
-  dataTime: string;
-  raidComposition: RaidComposition;
-}
-
-export interface ReidLider {
-  id: number;
-  email: string;
-  nikName: string;
-  name: string;
-}
-
-export interface RaidComposition {
-  tankNeed: number;
-  tankHave: number;
-  healNeed: number;
-  healHave: number;
-  dpsNeed: number;
-  dpsHave: number;
-}
-
-export interface RaidName {
-  id: number;
-  reidDifficult: string;
-  shortName: string;
-  fullname: string;
-}
-
-const user = {
-  email: 'roobot@i.ua', // string  используется для авторизации пользователя как уникальный ключ вместо userId
-  gameEmail: 'roobot@i.ua',     // string   используется для рассылки уведомлений
-  googleAvatarURL: 'https://lh5.googleusercontent.com/-TMJU-WItpO0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcBYrbd1nzTgibU02D-6Vo5EOLpTQ/photo.jpg',
-  charecterAvatarURL: '',  // string  если пустой используется googleAvatarURL
-  mainCharecters: 'Aizik', // string  главный игровой персонаж что и будет на аватарке
-  rolePermissions: ['User', 'RaidLider', 'Admin'],   // string[]  акайнт пользователя может обладать такими ролями
-  cherecters: [
-    {
-      gameName: 'Aizik',  // string
-      level: 110,         // number
-      equipmentLevel: '', // string
-      calassName: 'Paladin',
-      calssId: 1,  // number создать константу с  енумкой всех класов и от туда вытягивать calassName
-      guild: 'Shadow Reinbow',  // string  возможно потом будет реализована привязка к гильдиям
-      cherecterDescription: '', // string  описание игрового персонажа
-      roles: [
-        {
-          roleName: 'tank', // string  возможные роли ['rdps', 'mdps', 'heal', 'tank']
-          equipmentLevel: '', // string
-          prioity: 1  // number   приоритет 1 2 3 4 и 0 (никогда)
-        },
-        {
-          roleName: 'heal', // string
-          equipmentLevel: '', // string
-          prioity: 2  // number   приоритет 1 2 3 4 и 0 (никогда)
-        }
-      ]
-    },
-    {
-      gameName: 'Utumba',  // string
-      level: 110,         // number
-      equipmentLevel: '', // string
-      guild: 'Shadow Reinbow'  // string  возможно потом будет реализована привязка к гильдиям
-    },
-    {
-      gameName: 'Aizik',  // string
-      level: 110,         // number
-      equipmentLevel: '', // string
-      calassName: 'Paladin',
-      calssId: 1,  // number создать константу с  енумкой всех класов и от туда вытягивать calassName
-      guild: 'Shadow Reinbow',  // string  возможно потом будет реализована привязка к гильдиям
-      roles: [
-        {
-          roleName: 'rdps', // string  возможные роли ['rdps', 'mdps', 'heal', 'tank']
-          equipmentLevel: '', // string
-          prioity: 1  // number   приоритет 1 2 3 4 и 0 (никогда)
-        },
-        {
-          roleName: 'heal', // string
-          equipmentLevel: '', // string
-          prioity: 2  // number   приоритет 1 2 3 4 и 0 (никогда)
-        }
-      ]
-    },
-  ]
-};
-
-const dataelEments: PeriodicElement[] = [
-  {
-    id: 1,
-    reidLider: {
-      id: 11145,
-      email: 'roobot@i.ua',
-      nikName: 'Aizik',
-      name: 'Andrii'
-    },
-    raidName: {
-      id: 2,
-      shortName: 'ГС',
-      reidDifficult: 'гер',
-      fullname: 'Гробница Саргераса'
-    },
-    raidComposition: {
-      tankNeed: 2,
-      tankHave: 2,
-      healNeed: 5,
-      healHave: 2,
-      dpsNeed: 10,
-      dpsHave: 3,
-    },
-    dataTime: '2006-01-02T15:04:05-10:00',
-    info: 'So, that’s it. Now we have our material table with all the features like sorting, paging and filtering data.'
-  },
-  {
-    id: 100001,
-    reidLider: {
-      id: 11145,
-      email: 'roobot@i.ua',
-      nikName: 'Losik',
-      name: 'Andrii'
-    },
-    raidName: {
-      id: 2,
-      shortName: 'ГС',
-      reidDifficult: 'гер',
-      fullname: 'Гробница Саргераса'
-    },
-    raidComposition: {
-      tankNeed: 2,
-      tankHave: 2,
-      healNeed: 5,
-      healHave: 2,
-      dpsNeed: 10,
-      dpsHave: 3,
-    },
-    dataTime: '2006-01-02T15:04:05-04:00',
-    info: 'Ok go go'
-  },
-  {
-    id: 444000,
-    reidLider: {
-      id: 11145,
-      email: 'roobot@i.ua',
-      nikName: 'Aizik',
-      name: 'Andrii'
-    },
-    raidName: {
-      id: 2,
-      shortName: 'АПТ',
-      reidDifficult: 'об',
-      fullname: 'Гробница Саргераса'
-    },
-    raidComposition: {
-      tankNeed: 2,
-      tankHave: 2,
-      healNeed: 5,
-      healHave: 2,
-      dpsNeed: 10,
-      dpsHave: 3,
-    },
-    dataTime: '2006-01-02T15:04:05-07:00',
-    info: 'So, that’s it. Now we have our material table with all the features like sorting, paging and filtering data.'
-  }
-];
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { dataelEments, reidDataArrey } from '../../shared/models/constants';
+import { EventModel, EventModelId } from '../../shared/models/event.model';
 
 @Component({
   selector: 'app-time-table-luxon-container',
@@ -183,29 +18,48 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   displayedColumns: string[] = ['id', 'dataTime', 'reidLider', 'raidName', 'raidComposition', 'info'];
   dataSource = new MatTableDataSource(dataelEments);
 
+  reidDataArreyData = reidDataArrey;
   dt = DateTime.local();
   currentDayIndex = 0;
   weekData: DateTime[];
   showWeek: boolean;
 
-  defaultOptions: ModalOptions = {
-    class: 'modal-big',
-    keyboard: false,
-    backdrop: true,
-    // ignoreBackdropClick: true,
-    animated: false
+  private eventCollection: AngularFirestoreCollection<EventModel>;
+  events: Observable<EventModelId[]>;
+
+
+  buferArrey = [];
+  raidComposition = {
+    tankNeed: 2,
+    tankHave: 0,
+    healNeed: 5,
+    healHave: 0,
+    dpsNeed: 4,
+    dpsHave: 0,
   };
+  raid = {
+    tank: [],
+    heal: [],
+    dps: []
+  };
+  koef = 1;
 
-  ref: BsModalRef;
-
-  constructor(private modalService: BsModalService, public dialog: MatDialog) {
+  constructor(private afs: AngularFirestore, public dialog: MatDialog) {
     Settings.defaultLocale = 'ru';
    }
 
   ngOnInit() {
+    this.eventCollection = this.afs.collection<EventModel>('event');
+    this.events = this.eventCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const dataObj = a.payload.doc.data() as EventModel;
+        const id = a.payload.doc.id;
+        return { id, ...dataObj };
+      });
+    });
     this.getweekData();
+    this.createRaid();
   }
-
 
   prevWeek() {
     this.currentDayIndex = this.currentDayIndex - 7;
@@ -230,12 +84,6 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   }
 
   addEvent() {
-    // this.ref = this.modalService.show(AddEventPopupComponent, {
-    //   ...this.defaultOptions,
-    //   initialState: {
-    //     name: '12'
-    //   }
-    // });
     const dialogRef = this.dialog.open(AddEventPopupComponent, {
       width: '550px',
       disableClose: true,
@@ -250,6 +98,48 @@ export class TimeTableLuxonContainerComponent implements OnInit {
     //   console.log('The dialog was closed');
     //   this.animal = result;
     // });
+  }
+
+  createRaid() {
+
+    if (this.koef > 3) {
+      this.koef = 1;
+    }
+
+    const userArrey = this.buferArrey.length ? this.buferArrey : this.reidDataArreyData;
+
+    this.fillRaidArrey(userArrey, this.raidComposition, this.raid, this.koef);
+
+    console.log('raidArrey', [...this.raid.tank, ...this.raid.heal, ...this.raid.dps]);
+    console.log('buferArrey', this.buferArrey);
+    const raidLength = this.raidComposition.dpsNeed + this.raidComposition.healNeed + this.raidComposition.tankNeed;
+    if ([...this.raid.tank, ...this.raid.heal, ...this.raid.dps].length === raidLength) {
+      return this.raid;
+    } else  {
+      this.koef++;
+      this.createRaid();
+    }
+  }
+
+  fillRaidArrey(usersQueueArrey, raidComposition, raid, koef) {
+    const userBuferArrey = [...usersQueueArrey];
+    const noRoleUserArrey = [];
+    userBuferArrey.forEach(element => {
+      if (element.tank === koef && raidComposition.tankNeed > raidComposition.tankHave) {
+        raidComposition.tankHave++;
+        return raid.tank.push({...element, role: 'tank'});
+      }
+      if (element.heal === koef && raidComposition.healNeed > raidComposition.healHave) {
+        raidComposition.healHave++;
+        return raid.heal.push({...element, role: 'heal'});
+      }
+      if (element.dps === koef && raidComposition.dpsNeed > raidComposition.dpsHave) {
+        raidComposition.dpsHave++;
+        return raid.dps.push({...element, role: 'dps'});
+      }
+      return noRoleUserArrey.push(element);
+    });
+    this.buferArrey = noRoleUserArrey;
   }
 
 

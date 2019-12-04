@@ -1,19 +1,27 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DateTime, Settings} from 'luxon';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { GoogleAuthInfo } from '../../../shared/models/auth.model';
+import { Store, select } from '@ngrx/store';
+import { CoreState, selectGoogleAuthInfo } from '../../../Store/reducers';
 
 @Component({
   selector: 'app-add-event-popup',
   templateUrl: './add-event-popup.component.html',
   styleUrls: ['./add-event-popup.component.css']
 })
-export class AddEventPopupComponent implements OnInit {
+export class AddEventPopupComponent implements OnInit, OnDestroy {
 
   insightForm: FormGroup;
   insightDetailsCleanText: string;
   editorLimit = 4000;
+  user$: Observable<GoogleAuthInfo>;
+  user: GoogleAuthInfo;
+  subscriptions: Subscription[] = [];
+
   // allowedFileExtensions = AllowedFileExtensions;
   // uploadedAll = true;
   // categoriesList: Array<InsightCategory>;
@@ -37,36 +45,53 @@ export class AddEventPopupComponent implements OnInit {
 
   minDate = new Date();
 
-  constructor(
-    public dialogRef: MatDialogRef<AddEventPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private afs: AngularFirestore,
+              private store$: Store<CoreState>,
+              public dialogRef: MatDialogRef<AddEventPopupComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {    }
 
 
   ngOnInit() {
-    // this.categoriesList = this.settings.InsightCategories;
-    // this.categoriesSelect = this.initialState.Categories.map((cat: InsightCategory) => cat);
-    // this.files = this.initialState.Files.map((file: InsightFile) => new FileUploaderFile(file));
+    this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
+    this.subscriptions.push(this.user$.subscribe(val => {
+      this.user = val;
+    }));
     this.initForm();
   }
 
   submit(): void {
-    const utcFormat1 = DateTime.fromJSDate(this.insightForm.value.date).toUTC().toISO();
-    console.log(utcFormat1);
+    const utcFormat = DateTime.fromJSDate(this.insightForm.value.date).toUTC().toISO();
+    // const utcFormat2 = DateTime.fromISO(utcFormat).toLocaleString(DateTime.DATETIME_FULL);
 
-    const utcFormat2 = DateTime.fromISO(utcFormat1).toLocaleString(DateTime.DATETIME_FULL);
-    console.log(utcFormat2);
-
-    console.log(this.insightForm.value);
-    // this.uploadedAll = false;
-    // this.insightForm.disable();
-    // this.action.emit({ action: 'save', data: new InsightCreateModel({...this.insightForm.value, deletedFiles: this.deletedFiles })});
+    this.afs.collection('event').add(
+      {
+        ...this.insightForm.value,
+        date: utcFormat,
+        reidLider: {
+          email: this.user.email,
+          nikName: 'Aizik',
+          name: this.user.displayName
+        },
+        raidName: {
+          id: 2,
+          shortName: 'ГС',
+          reidDifficult: 'гер',
+          fullname: 'Гробница Саргераса'
+        },
+        raidComposition: {
+          tankNeed: 2,
+          tankHave: 2,
+          healNeed: 5,
+          healHave: 2,
+          dpsNeed: 10,
+          dpsHave: 3,
+        },
+      });
+    this.dialogRef.close({...this.insightForm.value, date: utcFormat });
   }
 
-  cancel(): void {
-    // if (this.uploadedAll) {
-    //   this.action.emit({ action: 'cancel', data: {} });
-    // }
-  }
+
+
 
 
 
@@ -74,20 +99,21 @@ export class AddEventPopupComponent implements OnInit {
     this.insightForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
-      location: new FormControl(''),
-      startTime: new FormControl(''),
+      startTime: new FormControl('', [Validators.required]),
       endTime: new FormControl(''),
-      authorName: new FormControl('Andrii'),
       description: new FormControl(''),
+      location: new FormControl(''),
+      raidName: new FormControl(''),
+      raidLiderName: new FormControl(''),
     });
   }
 
-  // canDeactivateFromHostListener(): Promise<boolean> | boolean {
-  //   return this.uploadedAll;
-  // }
-
   onTextAreaChanged(data): void {
     this.insightDetailsCleanText = data.text.slice(0, -1);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sbs => sbs.unsubscribe());
   }
 
 

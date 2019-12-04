@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject, Observable, Subscription } from 'rxjs';
 import { Blog, ImgFile } from '../../shared/models/blog.model';
@@ -13,7 +13,7 @@ import { GoogleAuthInfo } from '../../shared/models/auth.model';
   templateUrl: './blog-add-page.component.html',
   styleUrls: ['./blog-add-page.component.css']
 })
-export class BlogAddPageComponent implements OnInit {
+export class BlogAddPageComponent implements OnInit, OnDestroy {
 
   truncate = 100;
   cont = '12312';
@@ -76,5 +76,9 @@ export class BlogAddPageComponent implements OnInit {
       'userID': this.user.email
     });
     this.router.navigate(['/dashboard/blog']);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sbs => sbs.unsubscribe());
   }
 }
