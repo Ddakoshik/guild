@@ -1,0 +1,18 @@
+<div class="header-box py-4">
+    <h1 class="m-0">Календарь событий</h1>
+    <div class="buttonBox">
+        <button mat-stroked-button color="primary" type="button" (click)="changeViev()">События по дням</button>
+        <button mat-stroked-button class="ml-3" color="primary" type="button" (click)="addEvent()">Добавить событие</button>
+    </div>
+</div>
+
+
+<app-time-table-luxon-container 
+    [isShowWeek]="showWeek"
+    (filterByDate)="isFilterByDate($event)"></app-time-table-luxon-container>
+
+<app-events-table 
+    [data]='events | async'
+    (isAcceptEvent)="isAcceptEvent($event)"
+    (isEditEvent)="isEditEvent($event)"
+    (isDeleteEvent)="isDeleteEvent($event)"></app-events-table>

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 
 import { HtmlTextLengthPipe } from './html-text-length.pipe';
+import { CountdownPipe } from './text-counter.pipe';
 
 export const PIPES = [
   HtmlTextLengthPipe,
+  CountdownPipe
 ];
 
 @NgModule({

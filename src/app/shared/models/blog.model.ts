@@ -3,3 +3,9 @@ export interface Blog {
     user: string;
     content: string;
 }
+
+export interface ImgFile {
+    fileUrl: string;
+    name: string;
+    timeCreated: Date;
+}

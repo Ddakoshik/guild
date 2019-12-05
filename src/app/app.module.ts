@@ -5,24 +5,21 @@ import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { QuillModule } from 'ngx-quill';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CoreStoreModule } from './Store/core-store.module';
+import { LuxonModule } from 'luxon-angular';
 
 // angular - Firebase
 import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-// carusel slider
-import { NguCarouselModule } from '@ngu/carousel';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -60,8 +57,17 @@ import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 import { reducers } from './Store/reducers';
-import { CoreStoreModule } from './Store/core-store.module';
+import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
+import { CoreModule } from './core/core.module';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { UserProfileContainerComponent } from './dashboard/containers/user-profile-container/user-profile-container.component';
+import { UserProfileComponent } from './dashboard/components/user-profile/user-profile.component';
+import { EventsContainerComponent } from './dashboard/containers/events-container/events-container.component';
+import { EventsTableComponent } from './dashboard/components/events-table/events-table.component';
+import { EventPopupJoinComponent } from './dashboard/components/event-popup-join/event-popup-join.component';
+import { EventPopupAddComponent } from './dashboard/components/event-popup-add/event-popup-add.component';
+import { EventPopupEditComponent } from './dashboard/components/event-popup-edit/event-popup-edit.component';
 
 
 @NgModule({
@@ -84,12 +90,22 @@ import { CoreStoreModule } from './Store/core-store.module';
     EditorQuillComponent,
     BlogEditPageComponent,
     BlogAddPageComponent,
-    BlogShowPostsComponent
+    BlogShowPostsComponent,
+    TimeTableLuxonContainerComponent,
+    UserProfileContainerComponent,
+    UserProfileComponent,
+    EventsContainerComponent,
+    EventsTableComponent,
+    EventPopupAddComponent,
+    EventPopupEditComponent,
+    EventPopupJoinComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule,
+    CoreModule,
     CoreStoreModule,
+    LuxonModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -97,13 +113,11 @@ import { CoreStoreModule } from './Store/core-store.module';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    FormsModule,
     HttpClientModule,
-    AngularEditorModule,
     QuillModule,
-    NguCarouselModule,
     PipesModule,
-    NguCarouselModule,
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
@@ -116,7 +130,12 @@ import { CoreStoreModule } from './Store/core-store.module';
     })
 
   ],
-  providers: [AuthService, AuthGuard, UserDataService],
+  providers: [
+    { provide: FirestoreSettingsToken, useValue: {} },
+    AuthService,
+    AuthGuard,
+    UserDataService],
+  entryComponents: [EventPopupAddComponent, EventPopupEditComponent, EventPopupJoinComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

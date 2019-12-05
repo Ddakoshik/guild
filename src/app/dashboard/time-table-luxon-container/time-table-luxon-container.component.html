@@ -1,0 +1,13 @@
+
+<div class="weekBox" *ngIf="isShowWeek">
+  <button mat-mini-fab color="primary" type="button" (click)="prevWeek()">
+      <mat-icon aria-label="Example icon-button with a heart icon">chevron_left</mat-icon>
+    </button>
+      <div class="dayBox pointer" *ngFor="let day of weekData" (click)="setDay(day)" >
+        <p class="dayCount center"> {{ day | dateTimeToFormat:'cccc'}}</p>
+        <p class="dataNumber center">{{ day | dateTimeToFormat:'dd'}}<span>.{{ day | dateTimeToFormat:'LL'}}</span> </p>
+      </div>
+    <button mat-mini-fab color="primary" type="button" (click)="nextWeek()" >
+      <mat-icon aria-label="Example icon-button with a heart icon">chevron_right</mat-icon>
+    </button>
+</div>

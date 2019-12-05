@@ -12,13 +12,9 @@ export class Auth {
 
 }
 
-
-// export class Vehicle {
-//     constructor(
-//         public brand: string,
-//         public year: number,
-//         public code: string,
-//         public millage: number,
-//         public id?: string
-//     ) {}
-// }
+export interface GoogleAuthInfo {
+    uid: string;
+    displayName: string;
+    photoURL: string;
+    email: string;
+}

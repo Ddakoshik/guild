@@ -1,0 +1,72 @@
+<div class="headerSearch">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+</div>
+
+<mat-spinner *ngIf="!dataSource"></mat-spinner>
+
+<div *ngIf="dataSource">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- DataTime Column -->
+        <ng-container matColumnDef="dataTime">
+        <th mat-header-cell *matHeaderCellDef> Время </th>
+        <td mat-cell *matCellDef="let element"> {{element.date | dateTimeFromIso | dateTimeToFormat:'ccc (dd.LL)'}} </td>
+        </ng-container>
+
+        <!-- ReidLider Column -->
+        <ng-container matColumnDef="reidLider">
+        <th mat-header-cell *matHeaderCellDef> Лидер </th>
+        <td mat-cell *matCellDef="let element"> {{element.reidLider.nikName}} </td>
+        </ng-container>
+
+        <!-- RaidName Column -->
+        <ng-container matColumnDef="raidName">
+        <th mat-header-cell *matHeaderCellDef> Рейд </th>
+        <td mat-cell *matCellDef="let element"> {{element.raidName.shortName}} - {{element.raidName.reidDifficult}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="raidComposition">
+        <th mat-header-cell *matHeaderCellDef> Состав </th>
+        <td mat-cell *matCellDef="let element">
+            <div class="role-box py-2">
+                <span class="flex"><span class="icon tank-icon mr-1"></span> Танки</span> <span>{{element.raidComposition.tankHave}}/{{element.raidComposition.tankNeed}} </span>  
+                <span class="flex"><span class="icon heal-icon mr-1"></span>Хилы</span> <span>{{element.raidComposition.healHave}}/{{element.raidComposition.healNeed}} </span>  
+                <span class="flex"><span class="icon dps-icon mr-1"></span>Дд/Рдд</span> <span>{{element.raidComposition.dpsHave}}/{{element.raidComposition.dpsNeed}}</span> 
+            </div>
+        </td>
+        </ng-container>
+
+        <!-- Info Column -->
+        <ng-container matColumnDef="info">
+        <th mat-header-cell *matHeaderCellDef> Дополнительная инфа </th>
+        <td mat-cell *matCellDef="let element"> {{element.info}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="acceptEvent(element)" aria-label="Join event button">
+                    <mat-icon>person_add</mat-icon>
+                </button>
+                <button mat-icon-button (click)="editEvent(element)" aria-label="Edit event button">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteEvent(element)" aria-label="Delete event button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

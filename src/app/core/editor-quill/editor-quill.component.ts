@@ -8,22 +8,6 @@ const Quill: any = QuillNamespace;
 import ImageResize from 'quill-image-resize-module';
 Quill.register('modules/imageResize', ImageResize);
 
-// this.editor_modules = {
-//   toolbar: {
-//     container: [
-//       [{ 'font': [] }],
-//       [{ 'size': ['small', false, 'large', 'huge'] }],
-//       ['bold', 'italic', 'underline', 'strike'],
-//       [{ 'header': 1 }, { 'header': 2 }],
-//       [{ 'color': [] }, { 'background': [] }],
-//       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-//       [{ 'align': [] }],
-//       ['link', 'image']
-//     ]
-//   },
-//   imageResize: true
-// };
-
 
 @Component({
   selector: 'app-editor-quill',
@@ -31,10 +15,9 @@ Quill.register('modules/imageResize', ImageResize);
   styleUrls: ['./editor-quill.component.scss']
 })
 export class EditorQuillComponent implements OnInit {
-
-
   html: string;
 
+  editor_modules;
 
   @Input() editorContent = '123123 sd2112 ';
   @Input() style = {height: '400px'};
@@ -44,19 +27,29 @@ export class EditorQuillComponent implements OnInit {
   @Input() maxLength = 0;  // 0
   @Input() isReadOnly = 0;  // false
 
-
-
   @Output() handleEditorCreatedEvent = new EventEmitter();
   @Output() handleChangeEvent = new EventEmitter();
   @Output() handleSelectionEvent = new EventEmitter();
 
-
   constructor() {}
 
-
   ngOnInit() {
+    // this.editor_modules = {
+    //   toolbar: {
+    //     container: [
+    //       [{ 'font': [] }],
+    //       [{ 'size': ['small', false, 'large', 'huge'] }],
+    //       ['bold', 'italic', 'underline', 'strike'],
+    //       [{ 'header': 1 }, { 'header': 2 }],
+    //       [{ 'color': [] }, { 'background': [] }],
+    //       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    //       [{ 'align': [] }],
+    //       ['link', 'image']
+    //     ]
+    //   },
+    //   imageResize: true
+    // };
   }
-
 
   handleEditorCreated(event: any) {
     this.handleEditorCreatedEvent.emit(event);

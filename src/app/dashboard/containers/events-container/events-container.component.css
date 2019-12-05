@@ -1,0 +1,21 @@
+.center{
+    text-align: center;
+}
+p{
+    margin: 0;
+}
+
+.header-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.ml-3{
+    margin-left: 24px;
+}
