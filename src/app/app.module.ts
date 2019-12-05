@@ -58,7 +58,6 @@ import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.co
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 import { reducers } from './Store/reducers';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
-import { AddEventPopupComponent } from './dashboard/components/add-event-popup/add-event-popup.component';
 import { CoreModule } from './core/core.module';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -66,6 +65,9 @@ import { UserProfileContainerComponent } from './dashboard/containers/user-profi
 import { UserProfileComponent } from './dashboard/components/user-profile/user-profile.component';
 import { EventsContainerComponent } from './dashboard/containers/events-container/events-container.component';
 import { EventsTableComponent } from './dashboard/components/events-table/events-table.component';
+import { EventPopupJoinComponent } from './dashboard/components/event-popup-join/event-popup-join.component';
+import { EventPopupAddComponent } from './dashboard/components/event-popup-add/event-popup-add.component';
+import { EventPopupEditComponent } from './dashboard/components/event-popup-edit/event-popup-edit.component';
 
 
 @NgModule({
@@ -90,11 +92,13 @@ import { EventsTableComponent } from './dashboard/components/events-table/events
     BlogAddPageComponent,
     BlogShowPostsComponent,
     TimeTableLuxonContainerComponent,
-    AddEventPopupComponent,
     UserProfileContainerComponent,
     UserProfileComponent,
     EventsContainerComponent,
-    EventsTableComponent
+    EventsTableComponent,
+    EventPopupAddComponent,
+    EventPopupEditComponent,
+    EventPopupJoinComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +135,7 @@ import { EventsTableComponent } from './dashboard/components/events-table/events
     AuthService,
     AuthGuard,
     UserDataService],
-  entryComponents: [AddEventPopupComponent],
+  entryComponents: [EventPopupAddComponent, EventPopupEditComponent, EventPopupJoinComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

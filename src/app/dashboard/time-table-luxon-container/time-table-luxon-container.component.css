@@ -1,12 +1,6 @@
 .center{
   text-align: center;
 }
-.pointer{
-  cursor: pointer;
-}
-p{
-  margin: 0;
-}
 .weekBox{
   display: flex;
   justify-content: space-between;
@@ -30,11 +24,6 @@ p{
 }
 .dataNumber span{
   font-size: 15px;
-}
-.header-box{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 table {

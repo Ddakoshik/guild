@@ -3,8 +3,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { EventModel, EventModelId } from '../../../shared/models/event.model';
-import { AddEventPopupComponent } from '../../components/add-event-popup/add-event-popup.component';
 import { DateTime } from 'luxon';
+import { EventPopupAddComponent } from '../../components/event-popup-add/event-popup-add.component';
+import { EventPopupJoinComponent } from '../../components/event-popup-join/event-popup-join.component';
 
 @Component({
   selector: 'app-events-container',
@@ -32,7 +33,7 @@ export class EventsContainerComponent implements OnInit {
   }
 
   addEvent() {
-    const dialogRef = this.dialog.open(AddEventPopupComponent, {
+    const dialogRef = this.dialog.open(EventPopupAddComponent, {
       width: '550px',
       disableClose: true,
       data: { name: 'Andrii', animal: 'tiger' }
@@ -45,5 +46,21 @@ export class EventsContainerComponent implements OnInit {
 
   isFilterByDate(date: DateTime) {
     console.log('date', date);
+  }
+
+  isAcceptEvent(eventId: string) {
+    const dialogRef = this.dialog.open(EventPopupJoinComponent, {
+      width: '550px',
+      disableClose: true,
+      data: eventId
+    });
+  }
+
+  isEditEvent(eventId: string) {
+
+  }
+
+  isDeleteEvent(eventId: string) {
+
   }
 }

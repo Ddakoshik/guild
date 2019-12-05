@@ -51,7 +51,6 @@ export class TimeTableLuxonContainerComponent implements OnInit {
 
   setDay(day: DateTime) {
     this.filterByDate.emit(day);
-    console.log(day.toFormat('yyyy LLL dd'));
   }
 
 

@@ -1,19 +1,19 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DateTime, Settings} from 'luxon';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { DateTime} from 'luxon';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
 import { CoreState, selectGoogleAuthInfo } from '../../../Store/reducers';
 
 @Component({
-  selector: 'app-add-event-popup',
-  templateUrl: './add-event-popup.component.html',
-  styleUrls: ['./add-event-popup.component.css']
+  selector: 'app-event-popup-add',
+  templateUrl: './event-popup-add.component.html',
+  styleUrls: ['./event-popup-add.component.css']
 })
-export class AddEventPopupComponent implements OnInit, OnDestroy {
+export class EventPopupAddComponent implements OnInit, OnDestroy {
 
   insightForm: FormGroup;
   insightDetailsCleanText: string;
@@ -47,7 +47,7 @@ export class AddEventPopupComponent implements OnInit, OnDestroy {
 
   constructor(private afs: AngularFirestore,
               private store$: Store<CoreState>,
-              public dialogRef: MatDialogRef<AddEventPopupComponent>,
+              public dialogRef: MatDialogRef<EventPopupAddComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {    }
 
 
@@ -87,7 +87,8 @@ export class AddEventPopupComponent implements OnInit, OnDestroy {
           dpsHave: 3,
         },
       });
-    this.dialogRef.close({...this.insightForm.value, date: utcFormat });
+    this.dialogRef.close();
+    // this.dialogRef.close({...this.insightForm.value, date: utcFormat });
   }
 
 
@@ -115,7 +116,5 @@ export class AddEventPopupComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.forEach(sbs => sbs.unsubscribe());
   }
-
-
 
 }

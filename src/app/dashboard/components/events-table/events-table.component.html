@@ -37,9 +37,11 @@
         <ng-container matColumnDef="raidComposition">
         <th mat-header-cell *matHeaderCellDef> Состав </th>
         <td mat-cell *matCellDef="let element">
-            <span>Танки {{element.raidComposition.tankHave}}/{{element.raidComposition.tankNeed}} </span>  
-            <span>Хилы {{element.raidComposition.healHave}}/{{element.raidComposition.healNeed}} </span>  
-            <span>Дд/Рдд {{element.raidComposition.dpsHave}}/{{element.raidComposition.dpsNeed}}</span> 
+            <div class="role-box py-2">
+                <span class="flex"><span class="icon tank-icon mr-1"></span> Танки</span> <span>{{element.raidComposition.tankHave}}/{{element.raidComposition.tankNeed}} </span>  
+                <span class="flex"><span class="icon heal-icon mr-1"></span>Хилы</span> <span>{{element.raidComposition.healHave}}/{{element.raidComposition.healNeed}} </span>  
+                <span class="flex"><span class="icon dps-icon mr-1"></span>Дд/Рдд</span> <span>{{element.raidComposition.dpsHave}}/{{element.raidComposition.dpsNeed}}</span> 
+            </div>
         </td>
         </ng-container>
 
@@ -52,13 +54,13 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="acceptEvent(element)" aria-label="Edit button">
-                    <mat-icon>group_add</mat-icon>
+                <button mat-icon-button (click)="acceptEvent(element)" aria-label="Join event button">
+                    <mat-icon>person_add</mat-icon>
                 </button>
-                <button mat-icon-button (click)="editEvent(element)" aria-label="Edit button">
+                <button mat-icon-button (click)="editEvent(element)" aria-label="Edit event button">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button (click)="deleteEvent(element)" aria-label="Edit button">
+                <button mat-icon-button (click)="deleteEvent(element)" aria-label="Delete event button">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>
