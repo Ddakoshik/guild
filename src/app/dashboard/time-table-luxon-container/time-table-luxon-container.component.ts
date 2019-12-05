@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { DateTime, Settings} from 'luxon';
 
 @Component({
@@ -13,6 +13,7 @@ export class TimeTableLuxonContainerComponent implements OnInit {
   weekData: DateTime[];
 
   @Input() isShowWeek: boolean;
+  @Output() filterByDate: EventEmitter<DateTime> = new EventEmitter<DateTime>();
 
   // buferArrey = [];
   // raidComposition = {
@@ -48,7 +49,8 @@ export class TimeTableLuxonContainerComponent implements OnInit {
     this.getweekData();
   }
 
-  setDay(day) {
+  setDay(day: DateTime) {
+    this.filterByDate.emit(day);
     console.log(day.toFormat('yyyy LLL dd'));
   }
 

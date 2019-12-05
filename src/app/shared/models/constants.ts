@@ -80,13 +80,14 @@ export const raidLocation = [
     shortName: 'ГС',
     reidDifficult: ['об', 'гер', 'миф'],
     fullname: 'Гробница Саргераса',
-    imgName: ''
+    imgName: 'fp-tomb-of-sargeras.png'
   },
   {
     id: 2,
     shortName: 'ЦН',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Цитадель Ночи'
+    fullname: 'Цитадель Ночи',
+    imgName: 'fp-nighthold.png'
   },
   {
     id: 3,
@@ -98,13 +99,15 @@ export const raidLocation = [
     id: 4,
     shortName: 'ИК',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Изумрудный Кошмар'
+    fullname: 'Изумрудный Кошмар',
+    imgName: 'fp-emerald-nightmare.png'
   },
   {
     id: 5,
     shortName: 'ИД',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Испытание доблести'
+    fullname: 'Испытание доблести',
+    imgName: 'fp-nighthold.png'
   },
   {
     id: 6,
@@ -129,8 +132,168 @@ export const raidLocation = [
     shortName: 'ГШ',
     reidDifficult: ['об', 'гер', 'миф'],
     fullname: 'Горнило Штормов'
+  },
+  {
+    id: 10,
+    shortName: 'ВМ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Верховный Молот',
+    imgName: 'fp-Highmaul.jpg'
+  },
+  {
+    id: 11,
+    shortName: 'ЛЧ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Литейная клана Черной горы',
+    imgName: 'fp-BlackrockFoundry.jpg'
+  },
+  {
+    id: 12,
+    shortName: 'ЦАП',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Цитадель Адского Пламени',
+    imgName: 'fp-hellfire-citadel.png'
+  },
+  {
+    id: 13,
+    shortName: 'ОО',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Осада Оргриммара',
+    imgName: 'fp-SiegeOfOrgrimmar.png'
+  },
+  {
+    id: 14,
+    shortName: 'ПМ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Подземелья Могу`шан',
+    imgName: 'fp-MoguShanVaults.png'
+  },
+  {
+    id: 15,
+    shortName: 'ПГ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Престол Гроз',
+    imgName: 'fp-ThroneOfThunder.png'
+  },
+  {
+    id: 16,
+    shortName: 'СС',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Сердце Страха',
+    imgName: 'fp-HeartOfFear.png'
+  },
+  {
+    id: 17,
+    shortName: 'ТВВ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Терраса Вечной Весны',
+    imgName: 'fp-TerraceOfEndlessSpring.png'
+  },
+  {
+    id: 18,
+    shortName: 'КБ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Крепость Барадин',
+    imgName: 'fp-BH.jpg'
+  },
+  {
+    id: 19,
+    shortName: 'ДД',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Душа Дракона',
+    imgName: 'fp-DS.png'
+  },
+  {
+    id: 20,
+    shortName: 'ОП',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Огненные Просторы',
+    imgName: 'fp-Firelands.png'
+  },
+  {
+    id: 21,
+    shortName: 'СБ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Сумеречный бастион',
+    imgName: 'fp-BoT.jpg'
+  },
+  {
+    id: 22,
+    shortName: 'ТКТ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Твердыня Крыла Тьмы',
+    imgName: 'fp-BWD.jpg'
+  },
+  {
+    id: 23,
+    shortName: 'ТЧВ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Трон Четырех Ветров',
+    imgName: 'fp-Tot4W.jpg'
+  },
+  {
+    id: 24,
+    shortName: 'ЛО',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Логово Ониксии',
+    imgName: 'fp-Onyxia.jpg'
+  },
+  {
+    id: 25,
+    shortName: 'Н',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Наксрамас',
+    imgName: 'fp-naxxramas.jpg'
+  },
+  {
+    id: 26,
+    shortName: 'ОС',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Обсидиановое святилище',
+    imgName: 'fp-OS.jpg'
+  },
+  {
+    id: 27,
+    shortName: 'ОВ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Око Вечности',
+    imgName: 'fp-EoE.jpg'
+  },
+  {
+    id: 28,
+    shortName: 'УЛ',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Ульдуар',
+    imgName: 'fp-Ulduar.jpg'
+  },
+  {
+    id: 29,
+    shortName: 'ХА',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Хранилище Аркавона',
+    imgName: 'fp-VoA.jpg'
+  },
+  {
+    id: 30,
+    shortName: 'ИК',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Испытание крестоносца',
+    imgName: 'fp-CC.jpg'
+  },
+  {
+    id: 31,
+    shortName: 'РС',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Рубиновое святилище',
+    imgName: 'fp-RS.jpg'
+  },
+  {
+    id: 32,
+    shortName: 'ЦЛК',
+    reidDifficult: ['об', 'гер', 'миф'],
+    fullname: 'Цитадель Ледяной Короны',
+    imgName: 'fp-ICC.jpg'
   }
-
 ];
 
 

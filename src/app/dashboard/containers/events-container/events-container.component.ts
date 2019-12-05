@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { EventModel, EventModelId } from '../../../shared/models/event.model';
 import { AddEventPopupComponent } from '../../components/add-event-popup/add-event-popup.component';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-events-container',
@@ -40,5 +41,9 @@ export class EventsContainerComponent implements OnInit {
 
   changeViev() {
     this.showWeek = !this.showWeek;
+  }
+
+  isFilterByDate(date: DateTime) {
+    console.log('date', date);
   }
 }
