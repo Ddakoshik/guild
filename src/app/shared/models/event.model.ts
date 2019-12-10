@@ -1,7 +1,7 @@
 export interface PeriodicElement {
     id: number;
     reidLider: ReidLider;
-    raidName: RaidName;
+    raidLocetionData: RaidLocetionData;
     info: string;
     dataTime: string;
     raidComposition: RaidComposition;
@@ -22,11 +22,12 @@ export interface RaidComposition {
     dpsHave: number;
 }
 
-export interface RaidName {
+export interface RaidLocetionData {
     id: number;
     reidDifficult: string;
     shortName: string;
-    fullname: string;
+    fullName: string;
+    imgName?: string;
 }
 
 export interface EventModel {
@@ -36,8 +37,10 @@ export interface EventModel {
     timeEnd: string;
     description: string;
     reidLider: ReidLider;
-    raidName: RaidName;
+    raidLocetionData: RaidLocetionData;
     raidComposition: RaidComposition;
+    raidLocetionId: number;
+    reidDifficultId: string;
 }
 
 export interface EventModelId extends EventModel { id: string; }
