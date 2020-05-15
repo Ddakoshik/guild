@@ -13,7 +13,7 @@ import { EventModel, EventModelId } from '../../../shared/models/event.model';
 @Component({
   selector: 'app-event-popup-add',
   templateUrl: './event-popup-add.component.html',
-  styleUrls: ['./event-popup-add.component.css']
+  styleUrls: ['./event-popup-add.component.scss']
 })
 export class EventPopupAddComponent implements OnInit, OnDestroy {
 

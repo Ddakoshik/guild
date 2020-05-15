@@ -11,7 +11,7 @@ import { GoogleAuthInfo } from '../../shared/models/auth.model';
 @Component({
   selector: 'app-blog-add-page',
   templateUrl: './blog-add-page.component.html',
-  styleUrls: ['./blog-add-page.component.css']
+  styleUrls: ['./blog-add-page.component.scss']
 })
 export class BlogAddPageComponent implements OnInit, OnDestroy {
 

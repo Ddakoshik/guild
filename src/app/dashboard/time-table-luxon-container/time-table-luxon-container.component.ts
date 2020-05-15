@@ -4,7 +4,7 @@ import { DateTime, Settings} from 'luxon';
 @Component({
   selector: 'app-time-table-luxon-container',
   templateUrl: './time-table-luxon-container.component.html',
-  styleUrls: ['./time-table-luxon-container.component.css']
+  styleUrls: ['./time-table-luxon-container.component.scss']
 })
 export class TimeTableLuxonContainerComponent implements OnInit {
 

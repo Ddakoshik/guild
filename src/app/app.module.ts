@@ -68,6 +68,7 @@ import { EventsTableComponent } from './dashboard/components/events-table/events
 import { EventPopupJoinComponent } from './dashboard/components/event-popup-join/event-popup-join.component';
 import { EventPopupAddComponent } from './dashboard/components/event-popup-add/event-popup-add.component';
 import { EventPopupEditComponent } from './dashboard/components/event-popup-edit/event-popup-edit.component';
+import { GameCharactersTileComponent } from './dashboard/components/game-characters-tile/game-characters-tile.component';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import { EventPopupEditComponent } from './dashboard/components/event-popup-edit
     EventsTableComponent,
     EventPopupAddComponent,
     EventPopupEditComponent,
-    EventPopupJoinComponent
+    EventPopupJoinComponent,
+    GameCharactersTileComponent
   ],
   imports: [
     BrowserModule,

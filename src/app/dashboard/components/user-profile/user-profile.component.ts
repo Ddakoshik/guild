@@ -12,7 +12,7 @@ export class Profile {
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
   profileForm: FormGroup;
@@ -49,5 +49,9 @@ export class UserProfileComponent implements OnInit {
       charecterAvatarURL: new FormControl(''),
       mainCharecters: new FormControl('')
     });
+  }
+
+  addNewCharecter() {
+    console.log('open modal and add new charecter');  // TODO add new charecters
   }
 }

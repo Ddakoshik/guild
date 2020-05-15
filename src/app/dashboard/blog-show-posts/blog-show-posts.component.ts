@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-blog-show-posts',
   templateUrl: './blog-show-posts.component.html',
-  styleUrls: ['./blog-show-posts.component.css']
+  styleUrls: ['./blog-show-posts.component.scss']
 })
 export class BlogShowPostsComponent implements OnInit {
   private blogCollection: AngularFirestoreCollection<Blog>;

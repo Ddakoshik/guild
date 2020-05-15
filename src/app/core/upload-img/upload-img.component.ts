@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-upload-img',
   templateUrl: './upload-img.component.html',
-  styleUrls: ['./upload-img.component.css']
+  styleUrls: ['./upload-img.component.scss']
 })
 export class UploadImgComponent implements OnInit {
   fileToUpload: File = null;

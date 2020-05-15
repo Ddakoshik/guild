@@ -10,7 +10,7 @@ import { EventPopupJoinComponent } from '../../components/event-popup-join/event
 @Component({
   selector: 'app-events-container',
   templateUrl: './events-container.component.html',
-  styleUrls: ['./events-container.component.css']
+  styleUrls: ['./events-container.component.scss']
 })
 export class EventsContainerComponent implements OnInit {
 

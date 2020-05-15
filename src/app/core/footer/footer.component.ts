@@ -5,7 +5,7 @@ import { trigger,  state,  style,  animate,  transition, group, query} from '@an
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'],
+  styleUrls: ['./footer.component.scss'],
   animations: [
     trigger('chatAnimation', [
       transition('void => *', [
