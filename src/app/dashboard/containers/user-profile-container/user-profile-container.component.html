@@ -1,6 +1,3 @@
-<app-user-profile></app-user-profile>
-<div class="add-new-charecter">
-    <button mat-fab color="primary" (click)="addNewCharecter()" >
-        <mat-icon  aria-label="Add new charecter">add</mat-icon>
-    </button>
-</div>
+<app-user-profile [userData]='userData'></app-user-profile>
+
+<app-game-characters-tile [characters]='characters'></app-game-characters-tile>

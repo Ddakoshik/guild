@@ -1,13 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { user } from '../../../shared/models/constants';
-
-export class Profile {
-  gameEmail: string;     // string   используется для рассылки уведомлений
-  googleAvatarURL: string;
-  charecterAvatarURL: string;  // string  если пустой используется googleAvatarURL
-  mainCharecters: string;
-}
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,13 +10,15 @@ export class UserProfileComponent implements OnInit {
   profileForm: FormGroup;
   profileData: any = null;
 
+  @Input() set userData(data: any) {
+    this.profileData = data;
+    this.initForm();
+    this.updateFormValue();
+  }
+
   constructor() { }
 
   ngOnInit() {
-    this.profileData = user;
-
-    this.initForm();
-    this.updateFormValue();
   }
 
   updateFormValue(): void {
@@ -49,9 +43,5 @@ export class UserProfileComponent implements OnInit {
       charecterAvatarURL: new FormControl(''),
       mainCharecters: new FormControl('')
     });
-  }
-
-  addNewCharecter() {
-    console.log('open modal and add new charecter');  // TODO add new charecters
   }
 }

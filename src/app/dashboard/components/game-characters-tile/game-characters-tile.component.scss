@@ -1,0 +1,23 @@
+@import "variables";
+
+.tile-box{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tile{
+    width: 25%;
+    min-height: 200px;
+    background-color: #3737374a;
+    border: 1px solid rgb(250, 253, 50);
+}
+
+.add-new-charecter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:host ::ng-deep {
+
+}

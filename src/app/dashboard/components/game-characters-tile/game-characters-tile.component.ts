@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-game-characters-tile',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameCharactersTileComponent implements OnInit {
 
+  @Input() characters: any;  // TODO add type
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addNewCharecter() {
+    console.log('open modal and add new charecter');  // TODO add new charecters
   }
 
 }
