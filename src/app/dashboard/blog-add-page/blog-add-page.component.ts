@@ -5,8 +5,9 @@ import { Blog, ImgFile } from '../../shared/models/blog.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { CoreState, selectGoogleAuthInfo } from '../../Store/reducers';
+import { CoreState } from '../../Store/reducers';
 import { GoogleAuthInfo } from '../../shared/models/auth.model';
+import { selectGoogleAuthInfo } from '../../Store/selectors';
 
 @Component({
   selector: 'app-blog-add-page',

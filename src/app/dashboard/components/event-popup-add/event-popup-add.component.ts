@@ -6,9 +6,10 @@ import { DateTime} from 'luxon';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
-import { CoreState, selectGoogleAuthInfo } from '../../../Store/reducers';
+import { CoreState } from '../../../Store/reducers';
 import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 import { EventModel, EventModelId } from '../../../shared/models/event.model';
+import { selectGoogleAuthInfo } from '../../../Store/selectors';
 
 @Component({
   selector: 'app-event-popup-add',
