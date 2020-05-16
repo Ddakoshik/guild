@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store} from '@ngrx/store';
-import { GetGoogleUserInfoAction } from './Store/actions';
-import { CoreState } from './Store/reducers';
+import { GetGoogleUserInfoAction } from './store/actions';
+import { CoreState } from './store/reducers';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,9 @@ import { CoreState } from './Store/reducers';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private store: Store<CoreState>) {  }
+  constructor(private store$: Store<CoreState>) {  }
 
   ngOnInit() {
-    this.store.dispatch(new GetGoogleUserInfoAction());
+    this.store$.dispatch(new GetGoogleUserInfoAction());
   }
 }

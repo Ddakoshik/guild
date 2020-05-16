@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class GameCharactersTileComponent implements OnInit {
 
   @Input() characters: any;  // TODO add type
+  
 
   constructor() { }
 

@@ -10,7 +10,7 @@ import { QuillModule } from 'ngx-quill';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { CoreStoreModule } from './Store/core-store.module';
+import { CoreStoreModule } from './store/core-store.module';
 import { LuxonModule } from 'luxon-angular';
 
 // angular - Firebase
@@ -31,8 +31,6 @@ import { PipesModule } from './shared/pipes';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '../../node_modules/@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { effects } from './Store/effects';
-
 
 // components
 import { AppComponent } from './app.component';
@@ -56,7 +54,6 @@ import { EditorQuillComponent } from './core/editor-quill/editor-quill.component
 import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
-import { reducers } from './Store/reducers';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
 import { CoreModule } from './core/core.module';
 

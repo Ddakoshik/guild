@@ -12,3 +12,16 @@ export const getUserProfileSuccess = createAction(
 export const getUserProfileFail = createAction(
   '[UserProfile] Get User Profile Fail'
 );
+
+export const openAddCharacterModal = createAction(
+  '[UserProfile Api] Open Add Cgarecter Modal'
+);
+
+export const openEditCharacterModal = createAction(
+  '[UserProfile Api] Open Edit Cgarecter Modal',
+  props<{CharacterData: any}>()
+);
+
+
+
+

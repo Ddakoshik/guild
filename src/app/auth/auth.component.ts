@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LoginWithGoogleAction } from '../Store/actions/auth.actions';
-import { CoreState } from '../Store/reducers';
+import { LoginWithGoogleAction } from '../store/actions/auth.actions';
+import { CoreState } from '../store/reducers';
 
 @Component({
   selector: 'app-auth',
@@ -10,12 +10,12 @@ import { CoreState } from '../Store/reducers';
 })
 export class AuthComponent implements OnInit {
 
-  constructor( private store: Store<CoreState> ) { }
+  constructor( private store$: Store<CoreState> ) { }
 
   ngOnInit() {  }
 
   signInWithGoogle() {
-    this.store.dispatch(new LoginWithGoogleAction());
+    this.store$.dispatch(new LoginWithGoogleAction());
   }
 
 }
