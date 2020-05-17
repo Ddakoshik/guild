@@ -66,6 +66,7 @@ import { EventPopupJoinComponent } from './dashboard/components/event-popup-join
 import { EventPopupAddComponent } from './dashboard/components/event-popup-add/event-popup-add.component';
 import { EventPopupEditComponent } from './dashboard/components/event-popup-edit/event-popup-edit.component';
 import { GameCharactersTileComponent } from './dashboard/components/game-characters-tile/game-characters-tile.component';
+import { CharacterModalComponent } from './dashboard/components/character-modal/character-modal.component';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import { GameCharactersTileComponent } from './dashboard/components/game-charact
     EventPopupAddComponent,
     EventPopupEditComponent,
     EventPopupJoinComponent,
-    GameCharactersTileComponent
+    GameCharactersTileComponent,
+    CharacterModalComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,12 @@ import { GameCharactersTileComponent } from './dashboard/components/game-charact
     AuthService,
     AuthGuard,
     UserDataService],
-  entryComponents: [EventPopupAddComponent, EventPopupEditComponent, EventPopupJoinComponent],
+  entryComponents: [
+    EventPopupAddComponent,
+    EventPopupEditComponent,
+    EventPopupJoinComponent,
+    CharacterModalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

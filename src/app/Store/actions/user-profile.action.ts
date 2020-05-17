@@ -19,7 +19,7 @@ export const openAddCharacterModal = createAction(
 
 export const openEditCharacterModal = createAction(
   '[UserProfile Api] Open Edit Cgarecter Modal',
-  props<{CharacterData: any}>()
+  props<{characterData: any}>()
 );
 
 

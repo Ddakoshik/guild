@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { user } from '../../../shared/models/constants';
 import { Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
+import { openAddCharacterModal, openEditCharacterModal } from '../../../store/actions/user-profile.action';
 
 @Component({
   selector: 'app-user-profile-container',
@@ -30,8 +31,12 @@ export class UserProfileContainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  addCharacter () {
+  openAddNewCharacterModal (): void {
+    this.store$.dispatch(openAddCharacterModal());
+  }
 
+  openEditCharacterModal (item: any): void {
+    this.store$.dispatch(openEditCharacterModal({characterData: item}));
   }
 
 }

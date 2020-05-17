@@ -4,11 +4,14 @@
             <div class="class">{{item.class}}</div>
             <div class="class">{{item.race}}</div>
             <div class="name">{{item.name}}</div>
+            <button (click)="openEditCharacterModal(item)">
+                <mat-icon  aria-label="Edit charecter">create</mat-icon>
+            </button>
         </div>
     </ng-container>
     
     <div class="add-new-charecter tile">
-        <button mat-fab color="primary" (click)="addNewCharecter()" >
+        <button mat-fab color="primary" (click)="openAddNewCharacterModal()" >
             <mat-icon  aria-label="Add new charecter">add</mat-icon>
         </button>
     </div>

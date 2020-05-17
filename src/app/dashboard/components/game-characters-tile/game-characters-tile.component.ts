@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-game-characters-tile',
@@ -8,15 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
 export class GameCharactersTileComponent implements OnInit {
 
   @Input() characters: any;  // TODO add type
-  
+  @Output() addNewCharacter: EventEmitter<null> = new EventEmitter<null>();
+  @Output() editCharacter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  addNewCharecter() {
-    console.log('open modal and add new charecter');  // TODO add new charecters
+  openAddNewCharacterModal() {
+    this.addNewCharacter.emit();
+  }
+
+  openEditCharacterModal(item: any) {
+    this.editCharacter.emit(item);
   }
 
 }

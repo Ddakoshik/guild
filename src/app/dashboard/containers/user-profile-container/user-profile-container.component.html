@@ -1,3 +1,6 @@
 <app-user-profile [userData]='userData'></app-user-profile>
 
-<app-game-characters-tile [characters]='characters'></app-game-characters-tile>
+<app-game-characters-tile 
+    [characters]='characters'
+    (addNewCharacter)="openAddNewCharacterModal()"
+    (editCharacter)="openEditCharacterModal($event)"></app-game-characters-tile>
