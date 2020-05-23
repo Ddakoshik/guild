@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventsTableComponent } from './events-table.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MaterialModule } from '../../../shared/material.module';
 
 describe('EventsTableComponent', () => {
   let component: EventsTableComponent;
@@ -8,7 +10,11 @@ describe('EventsTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventsTableComponent ]
+      declarations: [ EventsTableComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [
+        MaterialModule
+      ]
     })
     .compileComponents();
   }));

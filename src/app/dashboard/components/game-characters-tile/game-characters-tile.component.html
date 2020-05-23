@@ -4,8 +4,11 @@
             <div class="class">{{item.class}}</div>
             <div class="class">{{item.race}}</div>
             <div class="name">{{item.name}}</div>
-            <button (click)="openEditCharacterModal(item)">
-                <mat-icon  aria-label="Edit charecter">create</mat-icon>
+            <button mat-icon-button (click)="openEditCharacterModal(item)" aria-label="Edit charecter">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteCherecer(item)" aria-label="Delete charecter">
+                <mat-icon>delete</mat-icon>
             </button>
         </div>
     </ng-container>

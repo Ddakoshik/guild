@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogAddPageComponent } from './blog-add-page.component';
+import { MaterialModule } from '../../shared/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('BlogAddPageComponent', () => {
   let component: BlogAddPageComponent;
@@ -8,7 +10,11 @@ describe('BlogAddPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlogAddPageComponent ]
+      declarations: [ BlogAddPageComponent ],
+      imports: [
+        MaterialModule,
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
   }));

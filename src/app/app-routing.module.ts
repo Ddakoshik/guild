@@ -21,7 +21,6 @@ import { EventsContainerComponent } from './dashboard/containers/events-containe
 
 
 const routes: Routes = [
-  // { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent},
 
   { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard],
   children: [

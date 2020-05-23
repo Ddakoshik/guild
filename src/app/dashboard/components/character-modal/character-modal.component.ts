@@ -12,8 +12,7 @@ export class CharacterModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CharacterModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log(data);
-    }
+  }
 
   ngOnInit() {
   }

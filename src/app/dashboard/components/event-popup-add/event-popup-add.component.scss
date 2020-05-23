@@ -3,14 +3,16 @@
 }
 .dilog-title {
     position: relative;
+    .close-button{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
 } 
 
-.dilog-title .close-button{
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-:host ::ng-deep .mat-dialog-actions{
-    justify-content: flex-end;
+:host ::ng-deep {
+    .mat-dialog-actions{
+        justify-content: flex-end;
+        padding: 24px 0;
+    }
 }

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeTableLuxonContainerComponent } from './time-table-luxon-container.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('TimeTableLuxonContainerComponent', () => {
   let component: TimeTableLuxonContainerComponent;
@@ -8,7 +9,8 @@ describe('TimeTableLuxonContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeTableLuxonContainerComponent ]
+      declarations: [ TimeTableLuxonContainerComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));

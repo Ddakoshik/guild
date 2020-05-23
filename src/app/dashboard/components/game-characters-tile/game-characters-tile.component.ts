@@ -24,4 +24,8 @@ export class GameCharactersTileComponent implements OnInit {
     this.editCharacter.emit(item);
   }
 
+  openDeleteCherecerConfirmation(item: any) {
+    console.log('Realise delete method and delete:', item );  // TODO Realise delete method
+  }
+
 }
