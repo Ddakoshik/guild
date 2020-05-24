@@ -21,11 +21,10 @@
     width: 25%;
     height: 100%;
     margin-right: 20px;
-}
-
-.img-container img {
-    width: 100%;
-    height: 100%;
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .char-data, .char-spec, .char-description {
@@ -33,4 +32,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.role-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }

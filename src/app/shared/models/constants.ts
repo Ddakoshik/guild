@@ -1,11 +1,9 @@
 import { PeriodicElement } from './event.model';
 
 export const user = {
-  email: 'roobot@i.ua', // string  используется для авторизации пользователя как уникальный ключ вместо userId
-  gameEmail: 'roobot@i.ua',     // string   используется для рассылки уведомлений
-  googleAvatarURL: 'https://lh5.googleusercontent.com/-TMJU-WItpO0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcBYrbd1nzTgibU02D-6Vo5EOLpTQ/photo.jpg',
-  charecterAvatarURL: '',  // string  если пустой используется googleAvatarURL
-  mainCharecters: 'Aizik', // string  главный игровой персонаж что и будет на аватарке
+  userNickname: 'Drakoshik',
+  userEmail: 'roobot@i.ua',
+  userAvatarURL: 'https://lh5.googleusercontent.com/-TMJU-WItpO0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcBYrbd1nzTgibU02D-6Vo5EOLpTQ/photo.jpg',
   rolePermissions: ['User', 'RaidLider', 'Admin'],   // string[]  акайнт пользователя может обладать такими ролями
   cherecters: [
     {

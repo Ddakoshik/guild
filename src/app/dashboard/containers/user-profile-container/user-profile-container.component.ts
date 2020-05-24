@@ -39,4 +39,8 @@ export class UserProfileContainerComponent implements OnInit {
     this.store$.dispatch(openEditCharacterModal({characterData: item}));
   }
 
+  updateUserProfileData (userData: any) {
+    console.log(userData, 'store save action');
+  }
+
 }
