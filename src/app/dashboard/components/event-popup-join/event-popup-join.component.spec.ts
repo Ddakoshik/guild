@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventPopupJoinComponent } from './event-popup-join.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('EventPopupJoinComponent', () => {
   let component: EventPopupJoinComponent;
@@ -8,7 +9,10 @@ describe('EventPopupJoinComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventPopupJoinComponent ]
+      declarations: [ EventPopupJoinComponent ],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+      ]
     })
     .compileComponents();
   }));

@@ -12,13 +12,16 @@ export class UserProfileComponent implements OnInit {
 
   @Input() set userData(data: any) {
     this.profileData = data;
-    this.initForm();
+    if (!this.profileForm) {
+      this.initForm();
+    }
     this.updateFormValue();
   }
 
   constructor() { }
 
   ngOnInit() {
+    this.initForm();
   }
 
   updateFormValue(): void {

@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainComponent } from './main.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PipesModule } from '../../shared/pipes';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -10,7 +11,10 @@ describe('MainComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MainComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [
+        PipesModule
+      ]
     })
     .compileComponents();
   }));

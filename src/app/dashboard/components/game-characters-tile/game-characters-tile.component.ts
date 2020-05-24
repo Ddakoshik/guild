@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class GameCharactersTileComponent implements OnInit {
 
-  @Input() characters: any;  // TODO add type
+  @Input() characters: any = [];  // TODO add type
   @Output() addNewCharacter: EventEmitter<null> = new EventEmitter<null>();
   @Output() editCharacter: EventEmitter<any> = new EventEmitter<any>();
 
