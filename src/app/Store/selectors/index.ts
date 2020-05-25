@@ -1,2 +1,2 @@
 export * from './auth.selectors';
-// export * from './admin-settings.selectors';
+export * from './user-profile.selectors';

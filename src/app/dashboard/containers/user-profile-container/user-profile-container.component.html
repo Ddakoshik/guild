@@ -1,5 +1,5 @@
 <app-user-profile
-    [userData]='userData'
+    [userData]='userProfileData$ | async'
     (updateUserProfileData)="updateUserProfileData($event)"></app-user-profile>
 
 <app-game-characters-tile 

@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { user } from '../../../shared/models/constants';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import { openAddCharacterModal, openEditCharacterModal } from '../../../store/actions/user-profile.action';
+import {
+  openAddCharacterModal,
+  openEditCharacterModal,
+  getUserProfile,
+  updateUserProfile
+} from '../../../store/actions/user-profile.action';
+import { selectUserProfileData } from '../../../store/selectors';
+import { User } from '../../../shared/models/blog.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-user-profile-container',
@@ -25,10 +33,14 @@ export class UserProfileContainerComponent implements OnInit {
   ];
 
   userData = user;
+  userProfileData$: Observable<User>;
 
   constructor(private store$: Store<CoreState>) { }
 
   ngOnInit() {
+    this.store$.dispatch(getUserProfile());
+    this.userProfileData$ = this.store$.pipe(select(selectUserProfileData));
+    // this.loading$ = this.store$.pipe(select(selectLoadingManagement));
   }
 
   openAddNewCharacterModal (): void {
@@ -39,8 +51,8 @@ export class UserProfileContainerComponent implements OnInit {
     this.store$.dispatch(openEditCharacterModal({characterData: item}));
   }
 
-  updateUserProfileData (userData: any) {
-    console.log(userData, 'store save action');
+  updateUserProfileData (userData: User): void {
+    this.store$.dispatch(updateUserProfile({profileData: userData}));
   }
 
 }

@@ -9,3 +9,12 @@ export interface ImgFile {
     name: string;
     timeCreated: Date;
 }
+
+export interface User {
+    authUserEmail: string;
+    userAvatarURL: string;
+    userNickname: string;
+    userEmail: string;
+    rolePermissions: string[];
+    docId?: string;
+}

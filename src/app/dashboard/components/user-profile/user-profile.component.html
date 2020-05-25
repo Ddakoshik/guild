@@ -1,4 +1,4 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="profileData">
     <div class="header">
         <h1>Профиль пользователя</h1>
         <button *ngIf="!isEdit" mat-fab color="primary" (click)="editProfileData()">
@@ -20,7 +20,7 @@
     <div class="role-box mt-4">
         <p class="mr-2">Роль:</p>
         <mat-chip-list aria-label="User Roles">
-            <mat-chip *ngFor="let role of profileData.rolePermissions">{{role}}</mat-chip>
+            <mat-chip *ngFor="let role of profileData?.rolePermissions">{{role}}</mat-chip>
         </mat-chip-list>
     </div>
 
@@ -29,7 +29,7 @@
         <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
             <mat-label>Никнейм</mat-label>
             <input matInput
-                    maxlength="75"
+                    maxlength="200"
                     placeholder="Введите ваш никнейм"
                     autocomplete="off"
                     formControlName="userNickname">
@@ -47,7 +47,7 @@
         <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
             <mat-label>Аватар пользователя</mat-label>
             <input matInput
-                    maxlength="75"
+                    maxlength="200"
                     placeholder="Встатвте ссылку на аватар"
                     autocomplete="off"
                     formControlName="userAvatarURL">

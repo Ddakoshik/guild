@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { User } from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,16 +9,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class UserProfileComponent implements OnInit {
   profileForm: FormGroup;
-  profileData: any = null;
-  isEdit: boolean = false;
+  profileData: User = null;
+  isEdit = false;
 
-  @Input() set userData(data: any) {
-    this.profileData = data;
-    this.initForm();
-    this.updateFormValue();
+  @Input() set userData(data: User) {
+    if (data) {
+      this.profileData = data;
+      this.initForm();
+      this.updateFormValue();
+    }
   }
 
-  @Output() updateUserProfileData: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateUserProfileData: EventEmitter<User> = new EventEmitter<User>();
 
   constructor() { }
 
