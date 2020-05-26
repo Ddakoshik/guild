@@ -60,16 +60,14 @@ export class UserProfileEffects {
     updateUserProfile$ = createEffect(() => this.actions$.pipe(
       ofType(updateUserProfile),
       withLatestFrom(this.store$.pipe(select(selectUserProfileData))),
-      tap(([action, userProfileData]) => {
-          const data = action.profileData;
-          this.db.collection<User>('users').doc(userProfileData.docId).update({...data})
-          .then(() => {
-            this.store$.dispatch(updateProfileSuccess());
-          }).catch(function(error) {
-            this.store$.dispatch(updateProfileFail());
-            // console.log('Error getting document:', error);
-          });
-      })), {dispatch: false});
+      mergeMap(([action, userProfileData]) => {
+        return of(this.db.collection<User>('users').doc(userProfileData.docId).update(action.profileData))
+        .pipe(
+          map(() => updateProfileSuccess()),
+          catchError(error => of(updateProfileFail()))
+        );
+      })
+    ));
 
 
   constructor(
