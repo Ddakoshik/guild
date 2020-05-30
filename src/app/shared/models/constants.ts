@@ -387,53 +387,128 @@ export const dataelEments: PeriodicElement[] = [
 ];
 
 
-export const classOfCharacters = [
+export const classOfCharactersConstnt = [
   {
-    className: 'Воин',
-    imgName: 'class_warrior.jpg'
+    id: 1,
+    name: 'Воин',
+    icon: 'class_warrior.jpg'
   },
   {
-    className: 'Друид',
-    imgName: 'class_druid.jpg'
+    id: 2,
+    name: 'Друид',
+    icon: 'class_druid.jpg'
   },
   {
-    className: 'Жрец',
-    imgName: 'class_priest.jpg'
+    id: 3,
+    name: 'Жрец',
+    icon: 'class_priest.jpg'
   },
   {
-    className: 'Маг',
-    imgName: 'class_mage.jpg'
+    id: 4,
+    name: 'Маг',
+    icon: 'class_mage.jpg'
   },
   {
-    className: 'Охотник',
-    imgName: 'class_hunter.jpg'
+    id: 5,
+    name: 'Охотник',
+    icon: 'class_hunter.jpg'
   },
   {
-    className: 'Паладин',
-    imgName: 'class_paladin.jpg'
+    id: 6,
+    name: 'Паладин',
+    icon: 'class_paladin.jpg'
   },
   {
-    className: 'Разбойник',
-    imgName: 'class_rogue.jpg'
+    id: 7,
+    name: 'Разбойник',
+    icon: 'class_rogue.jpg'
   },
   {
-    className: 'Рыцарь смерти',
-    imgName: 'class_deathknight.jpg'
+    id: 8,
+    name: 'Рыцарь смерти',
+    icon: 'class_deathknight.jpg'
   },
   {
-    className: 'Чернокнижник',
-    imgName: 'class_warlock.jpg'
+    id: 9,
+    name: 'Чернокнижник',
+    icon: 'class_warlock.jpg'
   },
   {
-    className: 'Шаман',
-    imgName: 'class_shaman.jpg'
+    id: 10,
+    name: 'Шаман',
+    icon: 'class_shaman.jpg'
   },
   {
-    className: 'Монах',
-    imgName: 'classicon_monk.jpg'
+    id: 11,
+    name: 'Монах',
+    icon: 'classicon_monk.jpg'
   },
   {
-    className: 'Охотник на демонов',
-    imgName: 'achievement_boss_illidan.jpg'
+    id: 12,
+    name: 'Охотник на демонов',
+    icon: 'achievement_boss_illidan.jpg'
+  },
+];
+
+export const raceOfCharactersConstnt = [
+  {
+    id: 1,
+    name: 'Воин',
+    icon: 'class_warrior.jpg'
+  },
+  {
+    id: 2,
+    name: 'Друид',
+    icon: 'class_druid.jpg'
+  },
+  {
+    id: 3,
+    name: 'Жрец',
+    icon: 'class_priest.jpg'
+  },
+  {
+    id: 4,
+    name: 'Маг',
+    icon: 'class_mage.jpg'
+  },
+  {
+    id: 5,
+    name: 'Охотник',
+    icon: 'class_hunter.jpg'
+  },
+  {
+    id: 6,
+    name: 'Паладин',
+    icon: 'class_paladin.jpg'
+  },
+  {
+    id: 7,
+    name: 'Разбойник',
+    icon: 'class_rogue.jpg'
+  },
+  {
+    id: 8,
+    name: 'Рыцарь смерти',
+    icon: 'class_deathknight.jpg'
+  },
+  {
+    id: 9,
+    name: 'Чернокнижник',
+    icon: 'class_warlock.jpg'
+  },
+  {
+    id: 10,
+    name: 'Шаман',
+    icon: 'class_shaman.jpg'
+  },
+  {
+    id: 11,
+    name: 'Монах',
+    icon: 'classicon_monk.jpg'
+  },
+  {
+    id: 12,
+    name: 'Охотник на демонов',
+    icon: 'achievement_boss_illidan.jpg'
   },
 ];

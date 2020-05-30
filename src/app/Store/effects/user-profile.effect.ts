@@ -9,7 +9,9 @@ import {
   getUserProfileFail,
   updateUserProfile,
   updateProfileSuccess,
-  updateProfileFail
+  updateProfileFail,
+  addNewCharacter,
+  closeAddCharacterModal
 } from '../actions/user-profile.action';
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterModalComponent } from '../../dashboard/components/character-modal/character-modal.component';
@@ -29,11 +31,44 @@ export const modalConfig = {
 @Injectable()
 export class UserProfileEffects {
 
+    // openAddCharacterModal$ = createEffect(() => this.actions$.pipe(
+    //   ofType(openAddCharacterModal),
+    //   tap(() => this.dialog.open(CharacterModalComponent, {
+    //       ...modalConfig
+    //   }))), {dispatch: false});
+
     openAddCharacterModal$ = createEffect(() => this.actions$.pipe(
       ofType(openAddCharacterModal),
-      tap(() => this.dialog.open(CharacterModalComponent, {
-          ...modalConfig
-      }))), {dispatch: false});
+      mergeMap((action) => {
+        let dialogRef = this.dialog.open(CharacterModalComponent, {
+          ...modalConfig,
+          data: { chracterData: null, action: null }
+        });
+        return dialogRef.afterClosed();
+      }),
+      map((result: any) => {
+        if (result === undefined) {
+          return closeAddCharacterModal();
+        }
+        return addNewCharacter({ characterData: result });
+      })
+    ));
+
+
+      // flatMap(([_, username]) => {
+      //   let dialogRef = this.dialog.open(Dialog, {
+      //     data: { name: username, animal: '' }
+      //   });
+      //   return dialogRef.afterClosed();
+      // }),
+      // map((result: string) => {
+      //   if (result === undefined) {
+      //     return new CloseDialog();
+      //   }
+  
+      //   return new ResultDialog({ animal: result });
+      // })
+
 
     openEditCharacterModal$ = createEffect(() => this.actions$.pipe(
       ofType(openEditCharacterModal),

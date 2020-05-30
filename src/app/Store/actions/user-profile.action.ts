@@ -31,11 +31,29 @@ export const updateProfileFail = createAction(
 
 
 export const openAddCharacterModal = createAction(
-  '[UserProfile Api] Open Add Cgarecter Modal'
+  '[UserProfile] Open Add Cgarecter Modal'
+);
+
+export const closeAddCharacterModal = createAction(
+  '[UserProfile] Close Add Cgarecter Modal'
 );
 
 export const openEditCharacterModal = createAction(
-  '[UserProfile Api] Open Edit Cgarecter Modal',
+  '[UserProfile] Open Edit Cgarecter Modal',
+  props<{characterData: any}>()
+);
+
+export const closeEditCharacterModal = createAction(
+  '[UserProfile] Close Edit Character Modal'
+);
+
+export const addNewCharacter = createAction(
+  '[UserProfile Api] Add New Character',
+  props<{characterData: any}>()
+);
+
+export const updateCharacter = createAction(
+  '[UserProfile Api] Update Character',
   props<{characterData: any}>()
 );
 
