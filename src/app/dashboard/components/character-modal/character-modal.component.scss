@@ -7,6 +7,11 @@
     }
 } 
 
+.select-icon{
+    height: 36px;
+    width: 36px;
+}
+
 :host ::ng-deep {
     .mat-dialog-actions{
         justify-content: flex-end;

@@ -1,7 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { classOfCharactersConstnt, raceOfCharactersConstnt } from '../../../shared/models/constants';
+import {
+  classOfCharactersConstnt,
+  raceOfCharactersConstnt,
+  fractionOfCharactersConstnt,
+  sexOfCharactersConstnt
+} from '../../../shared/models/constants';
 
 @Component({
   selector: 'app-character-modal',
@@ -15,6 +20,8 @@ export class CharacterModalComponent implements OnInit {
   characterData: any;
   classOfCharacters = classOfCharactersConstnt;
   raceOfCharacters = raceOfCharactersConstnt;
+  fractionOfCharacters = fractionOfCharactersConstnt;
+  sexOfCharacters = sexOfCharactersConstnt;
 
   constructor(
     private fb: FormBuilder,
@@ -31,9 +38,11 @@ export class CharacterModalComponent implements OnInit {
   private initForm(): void {
     this.characterForm = this.fb.group({
       name: [this.characterData ? this.characterData.name : '' , [Validators.required]],
-      equipmentLevel: [this.characterData ? this.characterData.equipmentLevel : '' , [Validators.required]],
+      sex: [this.characterData ? this.characterData.sex.id : '' , [Validators.required]],
+      fraction: [this.characterData ? this.characterData.fraction.id : '' , [Validators.required]],
       class: [this.characterData ? this.characterData.class.id : '' , [Validators.required]],
       race: [this.characterData ? this.characterData.race.id : '' , [Validators.required]],
+      equipmentLevel: [this.characterData ? this.characterData.equipmentLevel : '' , [Validators.required]],
     });
   }
 

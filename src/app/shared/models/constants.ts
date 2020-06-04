@@ -453,62 +453,73 @@ export const classOfCharactersConstnt = [
 export const raceOfCharactersConstnt = [
   {
     id: 1,
-    name: 'Воин',
-    icon: 'class_warrior.jpg'
+    name: 'Дворфы',
+    icon: 'race_dwarf.png'
   },
   {
     id: 2,
-    name: 'Друид',
-    icon: 'class_druid.jpg'
+    name: 'Гномы',
+    icon: 'race_gnome.png'
   },
   {
     id: 3,
-    name: 'Жрец',
-    icon: 'class_priest.jpg'
+    name: 'Люди',
+    icon: 'race_human.png'
   },
   {
     id: 4,
-    name: 'Маг',
-    icon: 'class_mage.jpg'
+    name: 'Ночные ельфы',
+    icon: 'race_nelf.png'
   },
   {
     id: 5,
-    name: 'Охотник',
-    icon: 'class_hunter.jpg'
+    name: 'Орки',
+    icon: 'race_orc.png'
   },
   {
     id: 6,
-    name: 'Паладин',
-    icon: 'class_paladin.jpg'
+    name: 'Таурены',
+    icon: 'race_tauren.png'
   },
   {
     id: 7,
-    name: 'Разбойник',
-    icon: 'class_rogue.jpg'
+    name: 'Троли',
+    icon: 'race_troll.png'
   },
   {
     id: 8,
-    name: 'Рыцарь смерти',
-    icon: 'class_deathknight.jpg'
+    name: 'Нежить',
+    icon: 'race_undead.png'
+  }
+// TODO add feamale icon
+// race_femaledwarf.png
+// race_femalegnome.png
+// race_femalehuman.png
+// race_femalenelf.png
+];
+
+export const fractionOfCharactersConstnt = [
+  {
+    id: 1,
+    name: 'Орда',
+    icon: 'fraction_horde.png'
   },
   {
-    id: 9,
-    name: 'Чернокнижник',
-    icon: 'class_warlock.jpg'
+    id: 2,
+    name: 'Альянс',
+    icon: 'fraction_alliance.png'
+  },
+];
+
+export const sexOfCharactersConstnt = [
+  {
+    id: 1,
+    name: 'Мущина',
+    icon: 'fraction_horde.png'
   },
   {
-    id: 10,
-    name: 'Шаман',
-    icon: 'class_shaman.jpg'
-  },
-  {
-    id: 11,
-    name: 'Монах',
-    icon: 'classicon_monk.jpg'
-  },
-  {
-    id: 12,
-    name: 'Охотник на демонов',
-    icon: 'achievement_boss_illidan.jpg'
+    id: 2,
+    name: 'Женщина',
+    icon: 'fraction_alliance.png'
   },
 ];
