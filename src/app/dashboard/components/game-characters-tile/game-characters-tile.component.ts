@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Character } from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-game-characters-tile',
@@ -7,9 +8,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class GameCharactersTileComponent implements OnInit {
 
-  @Input() characters: any = [];  // TODO add type
+  @Input() characters: Character[] = [];
   @Output() addNewCharacter: EventEmitter<null> = new EventEmitter<null>();
-  @Output() editCharacter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() editCharacter: EventEmitter<Character> = new EventEmitter<Character>();
+  @Output() deleteCherecer: EventEmitter<Character> = new EventEmitter<null>();
 
   constructor() { }
 
@@ -20,12 +22,12 @@ export class GameCharactersTileComponent implements OnInit {
     this.addNewCharacter.emit();
   }
 
-  openEditCharacterModal(item: any) {
+  openEditCharacterModal(item: Character) {
     this.editCharacter.emit(item);
   }
 
-  openDeleteCherecerConfirmation(item: any) {
-    console.log('Realise delete method and delete:', item );  // TODO Realise delete method
+  openDeleteCherecerConfirmation(item: Character) {
+    this.deleteCherecer.emit(item);
   }
 
 }

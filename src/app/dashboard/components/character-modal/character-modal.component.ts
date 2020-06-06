@@ -7,6 +7,7 @@ import {
   fractionOfCharactersConstnt,
   sexOfCharactersConstnt
 } from '../../../shared/models/constants';
+import { Character } from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-character-modal',
@@ -17,7 +18,7 @@ import {
 export class CharacterModalComponent implements OnInit {
 
   characterForm: FormGroup;
-  characterData: any;
+  characterData: Character = null;
   classOfCharacters = classOfCharactersConstnt;
   raceOfCharacters = raceOfCharactersConstnt;
   fractionOfCharacters = fractionOfCharactersConstnt;
@@ -26,23 +27,26 @@ export class CharacterModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CharacterModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: {chracterData: Character}) {
       this.characterData = data.chracterData;
-      console.log('data', data.chracterData);
   }
 
   ngOnInit() {
     this.initForm();
   }
 
+  get isEditMod () {
+    return !!this.characterData;
+  }
+
   private initForm(): void {
     this.characterForm = this.fb.group({
       name: [this.characterData ? this.characterData.name : '' , [Validators.required]],
-      sex: [this.characterData ? this.characterData.sex.id : '' , [Validators.required]],
-      fraction: [this.characterData ? this.characterData.fraction.id : '' , [Validators.required]],
-      class: [this.characterData ? this.characterData.class.id : '' , [Validators.required]],
-      race: [this.characterData ? this.characterData.race.id : '' , [Validators.required]],
       equipmentLevel: [this.characterData ? this.characterData.equipmentLevel : '' , [Validators.required]],
+      sexId: [this.characterData ? this.characterData.sexId : '' , [Validators.required]],
+      fractionId: [this.characterData ? this.characterData.fractionId : '' , [Validators.required]],
+      classId: [this.characterData ? this.characterData.classId : '' , [Validators.required]],
+      raceId: [this.characterData ? this.characterData.raceId : '' , [Validators.required]]
     });
   }
 
@@ -50,12 +54,22 @@ export class CharacterModalComponent implements OnInit {
     return `../../../assets/img/${iconType}/${iconName}`;
   }
 
-  // this.testInput = this.fb.group({
-  //   hello: [null, { validators: [Validators.required], updateOn: 'blur' }]
+  addNewCharacter() {
+    if (this.characterForm.valid) {
+      const formValue = this.characterForm.value;
+      this.dialogRef.close(formValue);
+    } else {
+      this.characterForm.markAllAsTouched();
+    }
+  }
 
-  // - Игровой никнейм (Text Input)
-  // - Уровень предметов (Text Input)
-  // - Игровой клас (Select + Img)
-  // - Игровая раса (Select + Img)
+  updateCharacter(): void {
+    if (this.characterForm.valid) {
+      const formValue = this.characterForm.value;
+      this.dialogRef.close({...formValue, docId: this.characterData.docId});
+    } else {
+      this.characterForm.markAllAsTouched();
+    }
+  }
 
 }

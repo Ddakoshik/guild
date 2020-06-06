@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { user } from '../../../shared/models/constants';
 import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
 import {
   openAddCharacterModal,
   openEditCharacterModal,
   getUserProfile,
-  updateUserProfile
+  updateUserProfile,
+  getCharacters,
+  deleteCharacter
 } from '../../../store/actions/user-profile.action';
-import { selectUserProfileData } from '../../../store/selectors';
-import { User } from '../../../shared/models/blog.model';
+import { selectUserProfileData, selectCharactersList } from '../../../store/selectors';
+import { User, Character } from '../../../shared/models/blog.model';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -19,40 +20,33 @@ import {Observable} from 'rxjs';
 })
 export class UserProfileContainerComponent implements OnInit {
 
-  characters = [
-    {
-      name: 'Aizik',
-      race: 'ork',
-      class: 'paladin'
-    },
-    {
-      name: 'Utumba',
-      race: 'ork',
-      class: 'shaman'
-    }
-  ];
-
-  userData = user;
   userProfileData$: Observable<User>;
+  charactersList$: Observable<Character[]>;
 
   constructor(private store$: Store<CoreState>) { }
 
   ngOnInit() {
     this.store$.dispatch(getUserProfile());
+    this.store$.dispatch(getCharacters());
     this.userProfileData$ = this.store$.pipe(select(selectUserProfileData));
+    this.charactersList$ = this.store$.pipe(select(selectCharactersList));
     // this.loading$ = this.store$.pipe(select(selectLoadingManagement));
+  }
+
+  updateUserProfileData (userData: User): void {
+    this.store$.dispatch(updateUserProfile({profileData: userData}));
   }
 
   openAddNewCharacterModal (): void {
     this.store$.dispatch(openAddCharacterModal());
   }
 
-  openEditCharacterModal (item: any): void {
+  openEditCharacterModal (item: Character): void {
     this.store$.dispatch(openEditCharacterModal({characterData: item}));
   }
 
-  updateUserProfileData (userData: User): void {
-    this.store$.dispatch(updateUserProfile({profileData: userData}));
+  deleteCherecer(item: Character): void {
+    this.store$.dispatch(deleteCharacter({characterData: item}));
   }
 
 }

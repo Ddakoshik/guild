@@ -1,15 +1,17 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as actions from '../actions/user-profile.action';
-import { User } from '../../shared/models/blog.model';
+import { User, Character } from '../../shared/models/blog.model';
 
 
 
 export interface State {
   userProfileData: User;
+  charactersList: Character[];
 }
 
 export const initialState = {
   userProfileData: null,
+  charactersList: []
 };
 
 const userProfileReducer = createReducer(
@@ -17,6 +19,11 @@ const userProfileReducer = createReducer(
   on(actions.getUserProfileSuccess, (state, action) => ({
     ...state,
     userProfileData: {...state.userProfileData, ...action.profileData}
+  })),
+
+  on(actions.getCharactersSuccess, (state, action) => ({
+    ...state,
+    charactersList: [...action.charactersList]
   })),
 
   // on(actions.updateWbsCodeEngagementsManage, (state, action) => {

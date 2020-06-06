@@ -2,6 +2,7 @@ export interface Blog {
     title: string;
     user: string;
     content: string;
+    docId?: string;
 }
 
 export interface ImgFile {
@@ -16,5 +17,16 @@ export interface User {
     userNickname: string;
     userEmail: string;
     rolePermissions: string[];
+    docId?: string;
+}
+
+export interface Character {
+    authUserEmail: string;
+    name: string;
+    equipmentLevel: string;
+    sexId: number;
+    fractionId: number;
+    classId: number;
+    raceId: number;
     docId?: string;
 }

@@ -11,12 +11,23 @@ import {
   updateProfileSuccess,
   updateProfileFail,
   addNewCharacter,
-  closeAddCharacterModal
+  closeAddCharacterModal,
+  addNewCharacterSuccess,
+  getCharactersFail,
+  getCharactersSuccess,
+  getCharacters,
+  updateCharacter,
+  updateCharacterFail,
+  updateCharacterSuccess,
+  closeEditCharacterModal,
+  deleteCharacter,
+  deleteCharacterSuccess,
+  deleteCharacterFail
 } from '../actions/user-profile.action';
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterModalComponent } from '../../dashboard/components/character-modal/character-modal.component';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Blog, User } from '../../shared/models/blog.model';
+import { User, Character } from '../../shared/models/blog.model';
 import { CoreState } from '../reducers';
 import { Store, select } from '@ngrx/store';
 import { selectUserEmail, selectUserProfileData } from '../selectors';
@@ -31,66 +42,54 @@ export const modalConfig = {
 @Injectable()
 export class UserProfileEffects {
 
-    // openAddCharacterModal$ = createEffect(() => this.actions$.pipe(
-    //   ofType(openAddCharacterModal),
-    //   tap(() => this.dialog.open(CharacterModalComponent, {
-    //       ...modalConfig
-    //   }))), {dispatch: false});
-
     openAddCharacterModal$ = createEffect(() => this.actions$.pipe(
       ofType(openAddCharacterModal),
       mergeMap((action) => {
-        let dialogRef = this.dialog.open(CharacterModalComponent, {
+        const dialogRef = this.dialog.open(CharacterModalComponent, {
           ...modalConfig,
-          data: { chracterData: null, action: null }
+          data: {chracterData: null}
         });
         return dialogRef.afterClosed();
       }),
       map((result: any) => {
-        if (result === undefined) {
+        if (result === undefined || !result) {
           return closeAddCharacterModal();
         }
         return addNewCharacter({ characterData: result });
       })
     ));
 
-
-      // flatMap(([_, username]) => {
-      //   let dialogRef = this.dialog.open(Dialog, {
-      //     data: { name: username, animal: '' }
-      //   });
-      //   return dialogRef.afterClosed();
-      // }),
-      // map((result: string) => {
-      //   if (result === undefined) {
-      //     return new CloseDialog();
-      //   }
-  
-      //   return new ResultDialog({ animal: result });
-      // })
-
-
     openEditCharacterModal$ = createEffect(() => this.actions$.pipe(
       ofType(openEditCharacterModal),
-      tap((action) => this.dialog.open(CharacterModalComponent, {
+      mergeMap((action) => {
+        const dialogRef = this.dialog.open(CharacterModalComponent, {
           ...modalConfig,
-          data: action.characterData
-      }))), {dispatch: false});
+          data: {chracterData: action.characterData}
+        });
+        return dialogRef.afterClosed();
+      }),
+      map((result: any) => {
+        if (result === undefined || !result) {
+          return closeEditCharacterModal();
+        }
+        return updateCharacter({ characterData: result });
+      })
+    ));
 
     getUserProfile$ = createEffect(() => this.actions$.pipe(
       ofType(getUserProfile),
       withLatestFrom(this.store$.pipe(select(selectUserEmail))),
       switchMap(([action, authUserEmail]) => {
-          return this.db.collection<User>('users', ref => ref.where('authUserEmail', '==', authUserEmail))
-          .valueChanges({ idField: 'docId'})
-          .pipe(
-            map((data) => {
-              return getUserProfileSuccess({profileData: data[0]});
-            }),
-            catchError(() => of(getUserProfileFail()))
-          );
-        })
-      ));
+        return this.db.collection<User>('users', ref => ref.where('authUserEmail', '==', authUserEmail))
+        .valueChanges({ idField: 'docId'})
+        .pipe(
+          map((data) => {
+            return getUserProfileSuccess({profileData: data[0]});
+          }),
+          catchError(() => of(getUserProfileFail()))
+        );
+      })
+    ));
 
     updateUserProfile$ = createEffect(() => this.actions$.pipe(
       ofType(updateUserProfile),
@@ -103,6 +102,65 @@ export class UserProfileEffects {
         );
       })
     ));
+
+    getCharacters$ = createEffect(() => this.actions$.pipe(
+      ofType(getCharacters),
+      withLatestFrom(this.store$.pipe(select(selectUserEmail))),
+      switchMap(([action, authUserEmail]) => {
+        return this.db.collection<Character>('characters', ref => ref.where('authUserEmail', '==', authUserEmail))
+        .valueChanges({ idField: 'docId'})
+        .pipe(
+          map((data) => {
+            console.log(data);
+            return getCharactersSuccess({charactersList: data});
+          }),
+          catchError(() => of(getCharactersFail()))
+        );
+      })
+    ));
+
+    addNewCharacter$ = createEffect(() => this.actions$.pipe(
+      ofType(addNewCharacter),
+      withLatestFrom(this.store$.pipe(select(selectUserEmail))),
+      switchMap(([action, authUserEmail]) => {
+        return of(this.db.collection<Character>('characters').add({authUserEmail: authUserEmail, ...action.characterData}))
+        .pipe(
+          map((data) => {
+            return addNewCharacterSuccess();
+          }),
+          catchError(() => of(getUserProfileFail()))
+        );
+      })
+    ));
+
+    updateCharacter$ = createEffect(() => this.actions$.pipe(
+      ofType(updateCharacter),
+      switchMap((action) => {
+        return of(this.db.collection<Character>('characters').doc(action.characterData.docId).update(action.characterData))
+        .pipe(
+          map((data) => {
+            return updateCharacterSuccess();
+          }),
+          catchError(() => of(updateCharacterFail()))
+        );
+      })
+    ));
+
+    deleteCharacter$ = createEffect(() => this.actions$.pipe(
+      ofType(deleteCharacter),
+      switchMap((action) => {
+        return of(this.db.collection<Character>('characters').doc(action.characterData.docId).delete())
+        .pipe(
+          map((data) => {
+            return deleteCharacterSuccess();
+          }),
+          catchError(() => of(deleteCharacterFail()))
+        );
+      })
+    ));
+
+
+
 
 
   constructor(
