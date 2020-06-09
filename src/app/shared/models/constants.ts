@@ -514,7 +514,7 @@ export const fractionOfCharactersConstnt = [
 export const sexOfCharactersConstnt = [
   {
     id: 1,
-    name: 'Мущина',
+    name: 'Мужчина',
     icon: 'fraction_horde.png'
   },
   {

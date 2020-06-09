@@ -22,7 +22,9 @@ import {
   closeEditCharacterModal,
   deleteCharacter,
   deleteCharacterSuccess,
-  deleteCharacterFail
+  deleteCharacterFail,
+  openDeleteCharacterConfirmationModal,
+  closeDeleteCharacterConfirmationModal
 } from '../actions/user-profile.action';
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterModalComponent } from '../../dashboard/components/character-modal/character-modal.component';
@@ -32,6 +34,8 @@ import { CoreState } from '../reducers';
 import { Store, select } from '@ngrx/store';
 import { selectUserEmail, selectUserProfileData } from '../selectors';
 import { of } from 'rxjs';
+import { ModalService } from '../../shared/modals/modal.service';
+import { ConfirmDialogModel } from '../../shared/models/modal.model';
 
 export const modalConfig = {
     width: '800px',
@@ -159,6 +163,28 @@ export class UserProfileEffects {
       })
     ));
 
+    engagementManageRemoveEngagementConfirm$ = createEffect(() => this.actions$.pipe(
+      ofType(openDeleteCharacterConfirmationModal),
+      tap((action) => {
+        const modalData: ConfirmDialogModel = {
+          title: 'Удалить персонажа?',
+          message: `Персонаж ${action.characterData.name} будет удален с вашего профиля. Подтвердите удаление.`
+        };
+        const confirmSubscr = this.modalService.confirmDialog(modalData).subscribe((res) => {
+          confirmSubscr.unsubscribe();
+          if (res) {
+            this.store$.dispatch(deleteCharacter({characterData: action.characterData}));
+          } else {
+            this.store$.dispatch(closeDeleteCharacterConfirmationModal());
+          }
+        });
+
+      })), {dispatch: false});
+
+
+
+
+
 
 
 
@@ -167,6 +193,7 @@ export class UserProfileEffects {
     private actions$: Actions,
     private dialog: MatDialog,
     private db: AngularFirestore,
+    private modalService: ModalService,
     private store$: Store<CoreState>
   ) {}
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MaterialModule } from './shared/material.module';
+import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -103,7 +103,6 @@ import { CharacterModalComponent } from './dashboard/components/character-modal/
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
     CoreModule,
     CoreStoreModule,
     LuxonModule,
@@ -117,6 +116,7 @@ import { CharacterModalComponent } from './dashboard/components/character-modal/
     HttpClientModule,
     QuillModule,
     PipesModule,
+    SharedModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     StoreModule.forRoot({}),
@@ -132,10 +132,8 @@ import { CharacterModalComponent } from './dashboard/components/character-modal/
 
   ],
   providers: [
-    { provide: FirestoreSettingsToken, useValue: {} },
-    AuthService,
-    AuthGuard,
-    UserDataService],
+    { provide: FirestoreSettingsToken, useValue: {} }
+  ],
   entryComponents: [
     EventPopupAddComponent,
     EventPopupEditComponent,

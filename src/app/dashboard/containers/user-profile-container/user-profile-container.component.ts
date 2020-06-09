@@ -7,7 +7,7 @@ import {
   getUserProfile,
   updateUserProfile,
   getCharacters,
-  deleteCharacter
+  openDeleteCharacterConfirmationModal
 } from '../../../store/actions/user-profile.action';
 import { selectUserProfileData, selectCharactersList } from '../../../store/selectors';
 import { User, Character } from '../../../shared/models/blog.model';
@@ -46,7 +46,7 @@ export class UserProfileContainerComponent implements OnInit {
   }
 
   deleteCherecer(item: Character): void {
-    this.store$.dispatch(deleteCharacter({characterData: item}));
+    this.store$.dispatch(openDeleteCharacterConfirmationModal({characterData: item}));
   }
 
 }

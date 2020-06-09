@@ -49,6 +49,3 @@ export class AuthService {
       .then((res) => this.router.navigate(['/auth']));
     }
 }
-
-
-
