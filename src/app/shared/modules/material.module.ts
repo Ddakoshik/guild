@@ -30,6 +30,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const matModules = [
   MatAutocompleteModule,
@@ -63,7 +64,8 @@ const matModules = [
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
-  MatFormFieldModule];
+  MatFormFieldModule,
+  DragDropModule];
 
 @NgModule({
   imports: [...matModules],

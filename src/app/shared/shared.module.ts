@@ -7,9 +7,11 @@ import { ModalService } from './modals/modal.service';
 
 import { ComfirmationModalMaterialComponent } from './modals/comfirmation-modal-material/comfirmation-modal-material.component';
 import { UserDataService } from './services/user-data.service';
+import { CharacterRoleOrderComponent } from './components/character-role-order/character-role-order.component';
 
 export const COMPONENTS = [
-  ComfirmationModalMaterialComponent
+  ComfirmationModalMaterialComponent,
+  CharacterRoleOrderComponent
 ];
 
 

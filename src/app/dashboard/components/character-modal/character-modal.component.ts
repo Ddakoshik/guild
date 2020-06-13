@@ -39,6 +39,10 @@ export class CharacterModalComponent implements OnInit {
     return !!this.characterData;
   }
 
+  get classControlValue () {
+    return this.characterForm.get('classId').value;
+  }
+
   private initForm(): void {
     this.characterForm = this.fb.group({
       name: [this.characterData ? this.characterData.name : '' , [Validators.required]],
@@ -72,4 +76,7 @@ export class CharacterModalComponent implements OnInit {
     }
   }
 
+  updateRoleOrder(data) {
+    console.log(data);
+  }
 }

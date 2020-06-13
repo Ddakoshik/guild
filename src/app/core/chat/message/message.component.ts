@@ -11,8 +11,9 @@ export class MessageComponent implements OnInit {
   acauntuser = 'tester5';   /*TODO: Conect user data to this parameter*/
 
   @Input() item: any;
-  @Output() updateMsgEvent = new EventEmitter();
-  @Output() deleteMsgEvent = new EventEmitter<string>();
+  @Output() updateMsgEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteMsgEvent: EventEmitter<string> = new EventEmitter<string>();
+
 
   constructor() { }
 

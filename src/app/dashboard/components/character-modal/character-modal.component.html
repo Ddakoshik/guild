@@ -72,7 +72,13 @@
                 </mat-select>
             </mat-form-field>
         </div>
-               
+        <div *ngIf="classControlValue">
+            <app-character-role-order 
+                [characterRoleOrder]="[]" 
+                [classId]="classControlValue"
+                (changeRoleOrder)="updateRoleOrder($event)"></app-character-role-order>
+        </div>
+
     </form>
 </div>
 <div mat-dialog-actions>
