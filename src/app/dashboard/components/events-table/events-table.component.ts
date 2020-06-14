@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { PeriodicElement } from '../../../shared/models/event.model';
+import { reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 
 @Component({
   selector: 'app-events-table',
   templateUrl: './events-table.component.html',
-  styleUrls: ['./events-table.component.css']
+  styleUrls: ['./events-table.component.scss']
 })
 export class EventsTableComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'dataTime', 'reidLider', 'raidName', 'raidComposition', 'info', 'action'];
-  dataSource;
+  dataSource: MatTableDataSource<PeriodicElement>;
 
   @Input() set data(data: PeriodicElement[]) {
     this.dataSource = new MatTableDataSource(data);
@@ -18,6 +19,10 @@ export class EventsTableComponent implements OnInit {
   @Output() isAcceptEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output() isEditEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output() isDeleteEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  get isShowTable() {
+    return this.dataSource.data ? !!this.dataSource.data.length : false;
+  }
 
   constructor() { }
 
@@ -35,12 +40,14 @@ export class EventsTableComponent implements OnInit {
 
   editEvent(element) {
     this.isEditEvent.emit(element.id);
-    // TODO add update mechanism in firestore
   }
 
   deleteEvent(element) {
     this.isDeleteEvent.emit(element.id);
-    // TODO delete event from firestore
+  }
+
+  reidDifficult(reidDifficultId: number) {
+    return reidDifficultsArreyConstnt.find(obj => obj.id === reidDifficultId).name;
   }
 
 }

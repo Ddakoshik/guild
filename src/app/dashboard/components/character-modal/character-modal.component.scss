@@ -1,0 +1,20 @@
+.dilog-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h1 {
+        font-size: 26px;
+    }
+} 
+
+.select-icon{
+    height: 36px;
+    width: 36px;
+}
+
+:host ::ng-deep {
+    .mat-dialog-actions{
+        justify-content: flex-end;
+        padding: 24px 0;
+    }
+}

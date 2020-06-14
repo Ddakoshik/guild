@@ -17,7 +17,8 @@ import { AuthAction,
     GetGoogleUserInfoFailAction} from '../actions/auth.actions';
 import { auth } from 'firebase/app';
 import { select, Store } from '@ngrx/store';
-import { selectGoogleAuthInfo, CoreState } from '../reducers';
+import { CoreState } from '../reducers';
+import { selectGoogleAuthInfo } from '../selectors';
 
 
 @Injectable()

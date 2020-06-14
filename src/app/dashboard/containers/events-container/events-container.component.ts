@@ -10,7 +10,7 @@ import { EventPopupJoinComponent } from '../../components/event-popup-join/event
 @Component({
   selector: 'app-events-container',
   templateUrl: './events-container.component.html',
-  styleUrls: ['./events-container.component.css']
+  styleUrls: ['./events-container.component.scss']
 })
 export class EventsContainerComponent implements OnInit {
 
@@ -34,9 +34,16 @@ export class EventsContainerComponent implements OnInit {
 
   addEvent() {
     const dialogRef = this.dialog.open(EventPopupAddComponent, {
-      width: '550px',
+      width: '800px',
+      disableClose: true
+    });
+  }
+
+  isEditEvent(eventId: string) {
+    const dialogRef = this.dialog.open(EventPopupAddComponent, {
+      width: '800px',
       disableClose: true,
-      data: { name: 'Andrii', animal: 'tiger' }
+      data: eventId
     });
   }
 
@@ -50,17 +57,24 @@ export class EventsContainerComponent implements OnInit {
 
   isAcceptEvent(eventId: string) {
     const dialogRef = this.dialog.open(EventPopupJoinComponent, {
-      width: '550px',
+      width: '800px',
       disableClose: true,
       data: eventId
     });
   }
 
-  isEditEvent(eventId: string) {
 
-  }
 
   isDeleteEvent(eventId: string) {
+    this.afs.collection('event')
+      .doc(eventId)
+      .delete()
+      .then(function () {
+          console.log('Document successfully deleted!');
+      }).catch(
+          function(error) {
+          console.error('Error removing document: ', error);
+      });
 
   }
 }

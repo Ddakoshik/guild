@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+  styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
 
@@ -11,8 +11,9 @@ export class MessageComponent implements OnInit {
   acauntuser = 'tester5';   /*TODO: Conect user data to this parameter*/
 
   @Input() item: any;
-  @Output() updateMsgEvent = new EventEmitter();
-  @Output() deleteMsgEvent = new EventEmitter<string>();
+  @Output() updateMsgEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteMsgEvent: EventEmitter<string> = new EventEmitter<string>();
+
 
   constructor() { }
 

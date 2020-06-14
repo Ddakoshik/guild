@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { user } from '../../../shared/models/constants';
-
-export class Profile {
-  gameEmail: string;     // string   используется для рассылки уведомлений
-  googleAvatarURL: string;
-  charecterAvatarURL: string;  // string  если пустой используется googleAvatarURL
-  mainCharecters: string;
-}
+import { User } from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
   profileForm: FormGroup;
-  profileData: any = null;
+  profileData: User = null;
+  isEdit = false;
+
+  @Input() set userData(data: User) {
+    if (data) {
+      this.profileData = data;
+      this.initForm();
+      this.updateFormValue();
+    }
+  }
+
+  @Output() updateUserProfileData: EventEmitter<User> = new EventEmitter<User>();
 
   constructor() { }
 
   ngOnInit() {
-    this.profileData = user;
-
-    this.initForm();
-    this.updateFormValue();
   }
 
   updateFormValue(): void {
@@ -33,21 +33,37 @@ export class UserProfileComponent implements OnInit {
     formKeys.map(key => {
       control[key].setValue(this.profileData[key]);
     });
-
-    console.log(this.profileForm.value);
   }
 
-  submitForm(): void {
-    const formValue = this.profileForm.value;
-    console.log(formValue);
+  updateUserProfile(): void {
+    if (this.profileForm.valid) {
+      const formValue = this.profileForm.value;
+      this.updateEditAndFormState();
+      this.updateUserProfileData.emit(formValue);
+    }
   }
 
   private initForm(): void {
     this.profileForm = new FormGroup({
-      gameEmail: new FormControl(''),
-      googleAvatarURL: new FormControl(''),
-      charecterAvatarURL: new FormControl(''),
-      mainCharecters: new FormControl('')
+      userNickname: new FormControl({value: '', disabled: !this.isEdit}, Validators.required),
+      userEmail: new FormControl({value: '', disabled: !this.isEdit}, Validators.required),
+      userAvatarURL: new FormControl({value: '', disabled: !this.isEdit}),
     });
   }
+
+  editProfileData() {
+    this.updateEditAndFormState();
+  }
+
+  cencelEditProfile() {
+    this.updateEditAndFormState();
+    this.updateFormValue();
+  }
+
+  updateEditAndFormState() {
+    this.isEdit = !this.isEdit;
+    const action = this.isEdit ? 'enable' : 'disable';
+    this.profileForm[action]();
+  }
+
 }

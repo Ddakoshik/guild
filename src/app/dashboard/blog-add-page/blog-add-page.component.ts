@@ -5,13 +5,14 @@ import { Blog, ImgFile } from '../../shared/models/blog.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { CoreState, selectGoogleAuthInfo } from '../../Store/reducers';
+import { CoreState } from '../../store/reducers';
 import { GoogleAuthInfo } from '../../shared/models/auth.model';
+import { selectGoogleAuthInfo } from '../../store/selectors';
 
 @Component({
   selector: 'app-blog-add-page',
   templateUrl: './blog-add-page.component.html',
-  styleUrls: ['./blog-add-page.component.css']
+  styleUrls: ['./blog-add-page.component.scss']
 })
 export class BlogAddPageComponent implements OnInit, OnDestroy {
 

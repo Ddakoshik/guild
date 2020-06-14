@@ -1,11 +1,9 @@
 import { PeriodicElement } from './event.model';
 
 export const user = {
-  email: 'roobot@i.ua', // string  используется для авторизации пользователя как уникальный ключ вместо userId
-  gameEmail: 'roobot@i.ua',     // string   используется для рассылки уведомлений
-  googleAvatarURL: 'https://lh5.googleusercontent.com/-TMJU-WItpO0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcBYrbd1nzTgibU02D-6Vo5EOLpTQ/photo.jpg',
-  charecterAvatarURL: '',  // string  если пустой используется googleAvatarURL
-  mainCharecters: 'Aizik', // string  главный игровой персонаж что и будет на аватарке
+  userNickname: 'Drakoshik',
+  userEmail: 'roobot@i.ua',
+  userAvatarURL: 'https://lh5.googleusercontent.com/-TMJU-WItpO0/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcBYrbd1nzTgibU02D-6Vo5EOLpTQ/photo.jpg',
   rolePermissions: ['User', 'RaidLider', 'Admin'],   // string[]  акайнт пользователя может обладать такими ролями
   cherecters: [
     {
@@ -74,226 +72,241 @@ export const reidDataArrey = [
   { tank: 0, heal: 0, dps: 1, gameName: '13'}
 ];
 
-export const raidLocation = [
+export const raidLocationsConstnt = [
   {
     id: 1,
     shortName: 'ГС',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Гробница Саргераса',
+    fullName: 'Гробница Саргераса',
     imgName: 'fp-tomb-of-sargeras.png'
   },
   {
     id: 2,
     shortName: 'ЦН',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Цитадель Ночи',
+    fullName: 'Цитадель Ночи',
     imgName: 'fp-nighthold.png'
   },
   {
     id: 3,
     shortName: 'АПТ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Анторус, Пылающий Трон'
+    fullName: 'Анторус, Пылающий Трон'
   },
   {
     id: 4,
     shortName: 'ИК',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Изумрудный Кошмар',
+    fullName: 'Изумрудный Кошмар',
     imgName: 'fp-emerald-nightmare.png'
   },
   {
     id: 5,
     shortName: 'ИД',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Испытание доблести',
+    fullName: 'Испытание доблести',
     imgName: 'fp-nighthold.png'
   },
   {
     id: 6,
     shortName: 'ВД',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Вечный дворец'
+    fullName: 'Вечный дворец'
   },
   {
     id: 7,
     shortName: 'БД',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Битва за Дазар`алор'
+    fullName: 'Битва за Дазар`алор'
   },
   {
     id: 8,
     shortName: 'У',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Ульдир'
+    fullName: 'Ульдир'
   },
   {
     id: 9,
     shortName: 'ГШ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Горнило Штормов'
+    fullName: 'Горнило Штормов'
   },
   {
     id: 10,
     shortName: 'ВМ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Верховный Молот',
+    fullName: 'Верховный Молот',
     imgName: 'fp-Highmaul.jpg'
   },
   {
     id: 11,
     shortName: 'ЛЧ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Литейная клана Черной горы',
+    fullName: 'Литейная клана Черной горы',
     imgName: 'fp-BlackrockFoundry.jpg'
   },
   {
     id: 12,
     shortName: 'ЦАП',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Цитадель Адского Пламени',
+    fullName: 'Цитадель Адского Пламени',
     imgName: 'fp-hellfire-citadel.png'
   },
   {
     id: 13,
     shortName: 'ОО',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Осада Оргриммара',
+    fullName: 'Осада Оргриммара',
     imgName: 'fp-SiegeOfOrgrimmar.png'
   },
   {
     id: 14,
     shortName: 'ПМ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Подземелья Могу`шан',
+    fullName: 'Подземелья Могу`шан',
     imgName: 'fp-MoguShanVaults.png'
   },
   {
     id: 15,
     shortName: 'ПГ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Престол Гроз',
+    fullName: 'Престол Гроз',
     imgName: 'fp-ThroneOfThunder.png'
   },
   {
     id: 16,
     shortName: 'СС',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Сердце Страха',
+    fullName: 'Сердце Страха',
     imgName: 'fp-HeartOfFear.png'
   },
   {
     id: 17,
     shortName: 'ТВВ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Терраса Вечной Весны',
+    fullName: 'Терраса Вечной Весны',
     imgName: 'fp-TerraceOfEndlessSpring.png'
   },
   {
     id: 18,
     shortName: 'КБ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Крепость Барадин',
+    fullName: 'Крепость Барадин',
     imgName: 'fp-BH.jpg'
   },
   {
     id: 19,
     shortName: 'ДД',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Душа Дракона',
+    fullName: 'Душа Дракона',
     imgName: 'fp-DS.png'
   },
   {
     id: 20,
     shortName: 'ОП',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Огненные Просторы',
+    fullName: 'Огненные Просторы',
     imgName: 'fp-Firelands.png'
   },
   {
     id: 21,
     shortName: 'СБ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Сумеречный бастион',
+    fullName: 'Сумеречный бастион',
     imgName: 'fp-BoT.jpg'
   },
   {
     id: 22,
     shortName: 'ТКТ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Твердыня Крыла Тьмы',
+    fullName: 'Твердыня Крыла Тьмы',
     imgName: 'fp-BWD.jpg'
   },
   {
     id: 23,
     shortName: 'ТЧВ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Трон Четырех Ветров',
+    fullName: 'Трон Четырех Ветров',
     imgName: 'fp-Tot4W.jpg'
   },
   {
     id: 24,
     shortName: 'ЛО',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Логово Ониксии',
+    fullName: 'Логово Ониксии',
     imgName: 'fp-Onyxia.jpg'
   },
   {
     id: 25,
     shortName: 'Н',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Наксрамас',
+    fullName: 'Наксрамас',
     imgName: 'fp-naxxramas.jpg'
   },
   {
     id: 26,
     shortName: 'ОС',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Обсидиановое святилище',
+    fullName: 'Обсидиановое святилище',
     imgName: 'fp-OS.jpg'
   },
   {
     id: 27,
     shortName: 'ОВ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Око Вечности',
+    fullName: 'Око Вечности',
     imgName: 'fp-EoE.jpg'
   },
   {
     id: 28,
     shortName: 'УЛ',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Ульдуар',
+    fullName: 'Ульдуар',
     imgName: 'fp-Ulduar.jpg'
   },
   {
     id: 29,
     shortName: 'ХА',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Хранилище Аркавона',
+    fullName: 'Хранилище Аркавона',
     imgName: 'fp-VoA.jpg'
   },
   {
     id: 30,
     shortName: 'ИК',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Испытание крестоносца',
+    fullName: 'Испытание крестоносца',
     imgName: 'fp-CC.jpg'
   },
   {
     id: 31,
     shortName: 'РС',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Рубиновое святилище',
+    fullName: 'Рубиновое святилище',
     imgName: 'fp-RS.jpg'
   },
   {
     id: 32,
     shortName: 'ЦЛК',
     reidDifficult: ['об', 'гер', 'миф'],
-    fullname: 'Цитадель Ледяной Короны',
+    fullName: 'Цитадель Ледяной Короны',
     imgName: 'fp-ICC.jpg'
   }
+];
+
+export const reidDifficultsArreyConstnt = [
+  {
+    id: 1,
+    name: 'об'
+  },
+  {
+    id: 2,
+    name: 'гер'
+  },
+  {
+    id: 3,
+    name: 'миф'
+  },
 ];
 
 
@@ -306,11 +319,11 @@ export const dataelEments: PeriodicElement[] = [
       nikName: 'Aizik',
       name: 'Andrii'
     },
-    raidName: {
+    raidLocetionData: {
       id: 2,
       shortName: 'ГС',
       reidDifficult: 'гер',
-      fullname: 'Гробница Саргераса'
+      fullName: 'Гробница Саргераса'
     },
     raidComposition: {
       tankNeed: 2,
@@ -330,11 +343,11 @@ export const dataelEments: PeriodicElement[] = [
       nikName: 'Losik',
       name: 'Andrii'
     },
-    raidName: {
+    raidLocetionData: {
       id: 2,
       shortName: 'ГС',
       reidDifficult: 'гер',
-      fullname: 'Гробница Саргераса'
+      fullName: 'Гробница Саргераса'
     },
     raidComposition: {
       tankNeed: 2,
@@ -354,11 +367,11 @@ export const dataelEments: PeriodicElement[] = [
       nikName: 'Aizik',
       name: 'Andrii'
     },
-    raidName: {
+    raidLocetionData: {
       id: 2,
       shortName: 'АПТ',
       reidDifficult: 'об',
-      fullname: 'Гробница Саргераса'
+      fullName: 'Гробница Саргераса'
     },
     raidComposition: {
       tankNeed: 2,
@@ -374,53 +387,139 @@ export const dataelEments: PeriodicElement[] = [
 ];
 
 
-export const classOfCharacters = [
+export const classOfCharactersConstnt = [
   {
-    className: 'Воин',
-    imgName: 'class_warrior.jpg'
+    id: 1,
+    name: 'Воин',
+    icon: 'class_warrior.jpg'
   },
   {
-    className: 'Друид',
-    imgName: 'class_druid.jpg'
+    id: 2,
+    name: 'Друид',
+    icon: 'class_druid.jpg'
   },
   {
-    className: 'Жрец',
-    imgName: 'class_priest.jpg'
+    id: 3,
+    name: 'Жрец',
+    icon: 'class_priest.jpg'
   },
   {
-    className: 'Маг',
-    imgName: 'class_mage.jpg'
+    id: 4,
+    name: 'Маг',
+    icon: 'class_mage.jpg'
   },
   {
-    className: 'Охотник',
-    imgName: 'class_hunter.jpg'
+    id: 5,
+    name: 'Охотник',
+    icon: 'class_hunter.jpg'
   },
   {
-    className: 'Паладин',
-    imgName: 'class_paladin.jpg'
+    id: 6,
+    name: 'Паладин',
+    icon: 'class_paladin.jpg'
   },
   {
-    className: 'Разбойник',
-    imgName: 'class_rogue.jpg'
+    id: 7,
+    name: 'Разбойник',
+    icon: 'class_rogue.jpg'
   },
   {
-    className: 'Рыцарь смерти',
-    imgName: 'class_deathknight.jpg'
+    id: 8,
+    name: 'Рыцарь смерти',
+    icon: 'class_deathknight.jpg'
   },
   {
-    className: 'Чернокнижник',
-    imgName: 'class_warlock.jpg'
+    id: 9,
+    name: 'Чернокнижник',
+    icon: 'class_warlock.jpg'
   },
   {
-    className: 'Шаман',
-    imgName: 'class_shaman.jpg'
+    id: 10,
+    name: 'Шаман',
+    icon: 'class_shaman.jpg'
   },
   {
-    className: 'Монах',
-    imgName: 'classicon_monk.jpg'
+    id: 11,
+    name: 'Монах',
+    icon: 'classicon_monk.jpg'
   },
   {
-    className: 'Охотник на демонов',
-    imgName: 'achievement_boss_illidan.jpg'
+    id: 12,
+    name: 'Охотник на демонов',
+    icon: 'achievement_boss_illidan.jpg'
+  },
+];
+
+export const raceOfCharactersConstnt = [
+  {
+    id: 1,
+    name: 'Дворфы',
+    icon: 'race_dwarf.png'
+  },
+  {
+    id: 2,
+    name: 'Гномы',
+    icon: 'race_gnome.png'
+  },
+  {
+    id: 3,
+    name: 'Люди',
+    icon: 'race_human.png'
+  },
+  {
+    id: 4,
+    name: 'Ночные ельфы',
+    icon: 'race_nelf.png'
+  },
+  {
+    id: 5,
+    name: 'Орки',
+    icon: 'race_orc.png'
+  },
+  {
+    id: 6,
+    name: 'Таурены',
+    icon: 'race_tauren.png'
+  },
+  {
+    id: 7,
+    name: 'Троли',
+    icon: 'race_troll.png'
+  },
+  {
+    id: 8,
+    name: 'Нежить',
+    icon: 'race_undead.png'
+  }
+// TODO add feamale icon
+// race_femaledwarf.png
+// race_femalegnome.png
+// race_femalehuman.png
+// race_femalenelf.png
+];
+
+export const fractionOfCharactersConstnt = [
+  {
+    id: 1,
+    name: 'Орда',
+    icon: 'fraction_horde.png'
+  },
+  {
+    id: 2,
+    name: 'Альянс',
+    icon: 'fraction_alliance.png'
+  },
+];
+
+export const sexOfCharactersConstnt = [
+  {
+    id: 1,
+    name: 'Мужчина',
+    icon: 'fraction_horde.png'
+  },
+  {
+    id: 2,
+    name: 'Женщина',
+    icon: 'fraction_alliance.png'
   },
 ];

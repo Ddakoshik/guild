@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MaterialModule } from './shared/material.module';
+import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +10,7 @@ import { QuillModule } from 'ngx-quill';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { CoreStoreModule } from './Store/core-store.module';
+import { CoreStoreModule } from './store/core-store.module';
 import { LuxonModule } from 'luxon-angular';
 
 // angular - Firebase
@@ -31,8 +31,6 @@ import { PipesModule } from './shared/pipes';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '../../node_modules/@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { effects } from './Store/effects';
-
 
 // components
 import { AppComponent } from './app.component';
@@ -56,7 +54,6 @@ import { EditorQuillComponent } from './core/editor-quill/editor-quill.component
 import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
-import { reducers } from './Store/reducers';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
 import { CoreModule } from './core/core.module';
 
@@ -68,6 +65,8 @@ import { EventsTableComponent } from './dashboard/components/events-table/events
 import { EventPopupJoinComponent } from './dashboard/components/event-popup-join/event-popup-join.component';
 import { EventPopupAddComponent } from './dashboard/components/event-popup-add/event-popup-add.component';
 import { EventPopupEditComponent } from './dashboard/components/event-popup-edit/event-popup-edit.component';
+import { GameCharactersTileComponent } from './dashboard/components/game-characters-tile/game-characters-tile.component';
+import { CharacterModalComponent } from './dashboard/components/character-modal/character-modal.component';
 
 
 @NgModule({
@@ -98,11 +97,12 @@ import { EventPopupEditComponent } from './dashboard/components/event-popup-edit
     EventsTableComponent,
     EventPopupAddComponent,
     EventPopupEditComponent,
-    EventPopupJoinComponent
+    EventPopupJoinComponent,
+    GameCharactersTileComponent,
+    CharacterModalComponent
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
     CoreModule,
     CoreStoreModule,
     LuxonModule,
@@ -116,6 +116,7 @@ import { EventPopupEditComponent } from './dashboard/components/event-popup-edit
     HttpClientModule,
     QuillModule,
     PipesModule,
+    SharedModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     StoreModule.forRoot({}),
@@ -131,11 +132,14 @@ import { EventPopupEditComponent } from './dashboard/components/event-popup-edit
 
   ],
   providers: [
-    { provide: FirestoreSettingsToken, useValue: {} },
-    AuthService,
-    AuthGuard,
-    UserDataService],
-  entryComponents: [EventPopupAddComponent, EventPopupEditComponent, EventPopupJoinComponent],
+    { provide: FirestoreSettingsToken, useValue: {} }
+  ],
+  entryComponents: [
+    EventPopupAddComponent,
+    EventPopupEditComponent,
+    EventPopupJoinComponent,
+    CharacterModalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

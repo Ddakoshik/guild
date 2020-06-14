@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatComponent } from './chat.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MaterialModule } from '../../shared/material.module';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -8,7 +10,11 @@ describe('ChatComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChatComponent ]
+      declarations: [ ChatComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [
+        MaterialModule
+      ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable()
@@ -10,19 +9,8 @@ export class UserDataService {
   endpoint = 'https://hnpwa.com/api/v0/news.json';
   userdata;
 
-  constructor(private http: HttpClient,
-              private userauth: AngularFireAuth) { }
+  constructor(private http: HttpClient) { }
 
-
-  // getUserdata() {
-  //   const user = this.userauth.authState;
-  //   // console.log(user);
-  //   user.subscribe(
-  //     (data) => {
-  //         this.userdata = data;
-  //     });
-  //     return this.userdata;
-  // }
   getTopPosts() {
     return this.http.get(this.endpoint);
   }

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditorQuillComponent } from './editor-quill.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('EditorQuillComponent', () => {
   let component: EditorQuillComponent;
@@ -8,7 +9,8 @@ describe('EditorQuillComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditorQuillComponent ]
+      declarations: [ EditorQuillComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     })
     .compileComponents();
   }));

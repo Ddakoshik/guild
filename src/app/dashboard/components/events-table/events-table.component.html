@@ -4,9 +4,11 @@
     </mat-form-field>
 </div>
 
-<mat-spinner *ngIf="!dataSource"></mat-spinner>
+<div *ngIf="!isShowTable" class="not-found">
+    <p>Events not found. Change search parameters or filters</p>
+</div>
 
-<div *ngIf="dataSource">
+<div *ngIf="isShowTable">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!-- Id Column -->
@@ -30,7 +32,11 @@
         <!-- RaidName Column -->
         <ng-container matColumnDef="raidName">
         <th mat-header-cell *matHeaderCellDef> Рейд </th>
-        <td mat-cell *matCellDef="let element"> {{element.raidName.shortName}} - {{element.raidName.reidDifficult}} </td>
+        <td mat-cell *matCellDef="let element">
+            <span matTooltipPosition="above" matTooltip="Рейд: {{element.raidLocetionData.fullName}} ({{reidDifficult(element.reidDifficultId)}})">
+                {{element.raidLocetionData.shortName}} - {{reidDifficult(element.reidDifficultId)}}
+            </span>  
+        </td>
         </ng-container>
 
         <!-- Symbol Column -->

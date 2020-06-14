@@ -1,3 +1,9 @@
 <app-user-profile
-    
-></app-user-profile>
+    [userData]='userProfileData$ | async'
+    (updateUserProfileData)="updateUserProfileData($event)"></app-user-profile>
+
+<app-game-characters-tile 
+    [characters]='charactersList$ | async'
+    (addNewCharacter)="openAddNewCharacterModal()"
+    (editCharacter)="openEditCharacterModal($event)"
+    (deleteCherecer)="deleteCherecer($event)"></app-game-characters-tile>

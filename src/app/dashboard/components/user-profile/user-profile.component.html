@@ -1,67 +1,57 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="profileData">
     <div class="header">
         <h1>Профиль пользователя</h1>
-        <button mat-fab color="primary" (click)="submitForm()">
-            <mat-icon  aria-label="Add new post">save</mat-icon>
+        <button *ngIf="!isEdit" mat-fab color="primary" (click)="editProfileData()">
+            <mat-icon  aria-label="Edit">edit</mat-icon>
         </button>
+
+        
+        <div *ngIf="isEdit">
+            <button mat-fab color="primary" (click)="updateUserProfile()">
+                <mat-icon  aria-label="Save">save</mat-icon>
+            </button>
+            <button mat-fab color="primary" class="ml-3" (click)="cencelEditProfile()">
+                <mat-icon  aria-label="Cancel">close</mat-icon>
+            </button>
+        </div>
+       
     </div>
-    <p>Профиль Email: {{profileData.email}}</p>
-    <p>Роль: {{profileData.rolePermissions.join(', ')}}</p>
+
+    <div class="role-box mt-4">
+        <p class="mr-2">Роль:</p>
+        <mat-chip-list aria-label="User Roles">
+            <mat-chip *ngFor="let role of profileData?.rolePermissions">{{role}}</mat-chip>
+        </mat-chip-list>
+    </div>
+
     <form [formGroup]="profileForm">
+
+        <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
+            <mat-label>Никнейм</mat-label>
+            <input matInput
+                    maxlength="200"
+                    placeholder="Введите ваш никнейм"
+                    autocomplete="off"
+                    formControlName="userNickname">
+        </mat-form-field>
+
         <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
             <mat-label>Email</mat-label>
             <input matInput
                     maxlength="75"
-                    placeholder="Введите Мыло"
+                    placeholder="Введите Email"
                     autocomplete="off"
-                    formControlName="gameEmail">
-          </mat-form-field>
-          <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
-            <mat-label>Ссылка на гугл аватар</mat-label>
+                    formControlName="userEmail">
+        </mat-form-field>
+
+        <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
+            <mat-label>Аватар пользователя</mat-label>
             <input matInput
-                    maxlength="75"
-                    placeholder="Введите ссылку на ваш аватар"
+                    maxlength="200"
+                    placeholder="Встатвте ссылку на аватар"
                     autocomplete="off"
-                    formControlName="googleAvatarURL">
-          </mat-form-field>
-          <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
-            <mat-label>Аватар персонажа</mat-label>
-            <input matInput
-                    maxlength="75"
-                    placeholder="Введите ссылку на аватар"
-                    autocomplete="off"
-                    formControlName="charecterAvatarURL">
-          </mat-form-field>
-          <mat-form-field class="col-5 mr-3 p-0 pt-3" [floatLabel]="'always'">
-            <mat-label>Главный персонаж</mat-label>
-            <input matInput
-                    maxlength="75"
-                    placeholder="Введите никнейм"
-                    autocomplete="off"
-                    formControlName="mainCharecters">
-          </mat-form-field>
+                    formControlName="userAvatarURL">
+        </mat-form-field>
+
     </form>
-    <hr>
-    <mat-card class="characters" *ngFor="let char of profileData.cherecters">
-        <div class="char-container">
-            <div class="img-container">
-                <img src="http://speaker05.ru/_bd/98/07056050.jpg" alt="">
-            </div>
-            <div class="char-data">
-                <div>{{char.gameName}}</div>
-                <div>{{char.calassName}}</div>
-                <div>{{char.equipmentLevel}}</div>
-            </div>
-            <div class="char-spec">
-                <div *ngFor="let role of char.roles">{{role.roleName}} - {{role.prioity}}</div>
-            </div>
-            <div class="char-description">
-                <h4>{{char.guild}}</h4>
-                <div class="description">
-                    <h6>Description</h6>
-                    <p>{{char.cherecterDescription}}</p>
-                </div>
-            </div>
-        </div>
-    </mat-card>
 </div>

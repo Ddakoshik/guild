@@ -3,15 +3,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DateTime} from 'luxon';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
-import { CoreState, selectGoogleAuthInfo } from '../../../Store/reducers';
+import { CoreState } from '../../../store/reducers';
+import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
+import { EventModel, EventModelId } from '../../../shared/models/event.model';
+import { selectGoogleAuthInfo } from '../../../store/selectors';
 
 @Component({
   selector: 'app-event-popup-add',
   templateUrl: './event-popup-add.component.html',
-  styleUrls: ['./event-popup-add.component.css']
+  styleUrls: ['./event-popup-add.component.scss']
 })
 export class EventPopupAddComponent implements OnInit, OnDestroy {
 
@@ -22,26 +25,15 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
   user: GoogleAuthInfo;
   subscriptions: Subscription[] = [];
 
-  // allowedFileExtensions = AllowedFileExtensions;
-  // uploadedAll = true;
-  // categoriesList: Array<InsightCategory>;
-  // files: FileUploaderFile[];
-  // categoriesSelect: InsightCategory[];
-  // deletedFiles: number[] = [];
+  private eventCollection: AngularFirestoreCollection<EventModel>;
+  event$: Observable<EventModel>;
+  initialEventState: EventModelId;
 
-  // @Input() currentUser: User;
-  // @Input() clientId: User;
-  // @Input() startUpload: User;
-  // @Input() settings: AppSettings;
-  @Input() initialState: any;
-  // @Output() action: EventEmitter<any> = new EventEmitter();
+  raidLocations = raidLocationsConstnt;
+  reidDifficultsArrey = reidDifficultsArreyConstnt;
 
-  // get tags(): Tag[] {
-  //   return this.categoriesSelect.map(item => new Tag({
-  //     id: item.Id,
-  //     name: item.Name
-  //   }));
-  // }
+
+
 
   minDate = new Date();
 
@@ -50,6 +42,10 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
               public dialogRef: MatDialogRef<EventPopupAddComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {    }
 
+  get raidLocetionId() {
+    return this.insightForm.get('raidLocetionId');
+  }
+
 
   ngOnInit() {
     this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
@@ -57,26 +53,29 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
       this.user = val;
     }));
     this.initForm();
+    if (this.data) {
+      this.eventCollection = this.afs.collection<EventModel>('event');
+      this.event$ = this.eventCollection.doc<EventModel>(this.data).valueChanges();
+      this.subscriptions.push(this.event$.subscribe(val => {
+        this.initialEventState = {...val, id: this.data};
+        this.initForm();
+      }));
+    }
   }
 
   submit(): void {
     const utcFormat = DateTime.fromJSDate(this.insightForm.value.date).toUTC().toISO();
-    // const utcFormat2 = DateTime.fromISO(utcFormat).toLocaleString(DateTime.DATETIME_FULL);
+    const raidLocetionData = raidLocationsConstnt.find(obj => obj.id === this.raidLocetionId.value);
 
     this.afs.collection('event').add(
       {
         ...this.insightForm.value,
         date: utcFormat,
+        raidLocetionData: raidLocetionData,
         reidLider: {
           email: this.user.email,
           nikName: 'Aizik',
           name: this.user.displayName
-        },
-        raidName: {
-          id: 2,
-          shortName: 'ГС',
-          reidDifficult: 'гер',
-          fullname: 'Гробница Саргераса'
         },
         raidComposition: {
           tankNeed: 2,
@@ -91,6 +90,32 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
     // this.dialogRef.close({...this.insightForm.value, date: utcFormat });
   }
 
+  update() {
+    const utcFormat = DateTime.fromJSDate(this.insightForm.value.date).toUTC().toISO();
+    const raidLocetionData = raidLocationsConstnt.find(obj => obj.id === this.raidLocetionId.value);
+
+    this.afs.collection('event').doc(this.initialEventState.id).update(
+      {
+        ...this.insightForm.value,
+        date: utcFormat,
+        raidLocetionData: raidLocetionData,
+        reidLider: {
+          email: this.user.email,
+          nikName: 'Aizik',
+          name: this.user.displayName
+        },
+        raidComposition: {
+          tankNeed: 2,
+          tankHave: 2,
+          healNeed: 5,
+          healHave: 2,
+          dpsNeed: 10,
+          dpsHave: 3,
+        },
+      });
+    this.dialogRef.close();
+  }
+
 
 
 
@@ -98,14 +123,14 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.insightForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      date: new FormControl('', [Validators.required]),
-      startTime: new FormControl('', [Validators.required]),
-      endTime: new FormControl(''),
-      description: new FormControl(''),
-      location: new FormControl(''),
-      raidName: new FormControl(''),
-      raidLiderName: new FormControl(''),
+      title: new FormControl(this.initialEventState ? this.initialEventState.title : '' , [Validators.required]),
+      date: new FormControl(this.initialEventState ? DateTime.fromISO(this.initialEventState.date).toJSDate() : '', [Validators.required]),
+      timeStart: new FormControl(this.initialEventState ? this.initialEventState.timeStart : '', [Validators.required]),
+      timeEnd: new FormControl(this.initialEventState ? this.initialEventState.timeEnd : ''),
+      description: new FormControl(this.initialEventState ? this.initialEventState.description : ''),
+      reidLider: new FormControl(this.initialEventState ? this.initialEventState.reidLider : null),
+      raidLocetionId: new FormControl(this.initialEventState ? this.initialEventState.raidLocetionId : null),
+      reidDifficultId: new FormControl(this.initialEventState ? this.initialEventState.reidDifficultId : ''),
     });
   }
 

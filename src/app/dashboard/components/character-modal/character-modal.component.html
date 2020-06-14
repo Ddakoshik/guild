@@ -1,0 +1,88 @@
+<div mat-dialog-title class="dilog-title">
+    <h1 *ngIf="!isEditMod" class="pr-5 m-0">Add new cherecter</h1>
+    <h1 *ngIf="isEditMod" class="pr-5 m-0">Edit cherecter</h1>
+    <button mat-icon-button aria-label="close button" class="close-button" mat-dialog-close>
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content>
+    <form [formGroup]="characterForm">
+
+        <div class="row">
+            <mat-form-field class="col-6" [floatLabel]="'always'">
+                <mat-label>Игровой никнейм</mat-label>
+                <input matInput
+                        maxlength="75"
+                        placeholder="Ваш игровой никнейм"
+                        autocomplete="off"
+                        formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field class="col-6" [floatLabel]="'always'">
+                <mat-label>Уровень предметов</mat-label>
+                <input matInput
+                        maxlength="75"
+                        placeholder="Уровень предметов"
+                        autocomplete="off"
+                        formControlName="equipmentLevel">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="col-6">
+                <mat-label>Фракция(Орда/Альянс)</mat-label>
+                <mat-select formControlName="fractionId">
+                    <mat-option *ngFor="let fraction of fractionOfCharacters" [value]="fraction.id">
+                        <img matSuffix class="select-icon mr-2" [src]="getUrl('fraction', fraction.icon)" [alt]="fraction.name">
+                        {{fraction.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-6">
+                <mat-label>Пол игрового персонажа</mat-label>
+                <mat-select formControlName="sexId">
+                    <mat-option *ngFor="let sex of sexOfCharacters" [value]="sex.id">
+                        <!-- <img matSuffix class="select-icon mr-2" [src]="getUrl('class', class.icon)" [alt]="class.name"> -->
+                        {{sex.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="col-6">
+                <mat-label>Игровой клас</mat-label>
+                <mat-select formControlName="classId">
+                    <mat-option *ngFor="let class of classOfCharacters" [value]="class.id">
+                        <img matSuffix class="select-icon mr-2" [src]="getUrl('class', class.icon)" [alt]="class.name">
+                        {{class.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field class="col-6">
+                <mat-label>Игровая раса</mat-label>
+                <mat-select formControlName="raceId">
+                    <mat-option *ngFor="let race of raceOfCharacters" [value]="race.id">
+                        <img matSuffix class="select-icon mr-2" [src]="getUrl('race', race.icon)" [alt]="race.name">
+                        {{race.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="classControlValue">
+            <app-character-role-order 
+                [characterRoleOrder]="[]" 
+                [classId]="classControlValue"
+                (changeRoleOrder)="updateRoleOrder($event)"></app-character-role-order>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button type="button" class="btn" mat-dialog-close>Cancel</button>
+    <button mat-button *ngIf="!isEditMod" type="button" class="btn" (click)="addNewCharacter()" cdkFocusInitial>Add</button>
+    <button mat-button *ngIf="isEditMod" type="button" class="btn" (click)="updateCharacter()" cdkFocusInitial>Update</button>
+</div>
