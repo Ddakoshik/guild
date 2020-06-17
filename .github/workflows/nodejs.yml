@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ release/1.0 ]
   pull_request:
-    branches: [ master ]
+    branches: [ release/1.0 ]
 
 jobs:
   build:
@@ -26,6 +26,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm i
     - run: npm run build
-    - run: npm test
       env:
         CI: true
