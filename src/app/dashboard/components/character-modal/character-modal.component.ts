@@ -9,7 +9,11 @@ import {
 } from '../../../shared/models/constants';
 import { Character } from '../../../shared/models/blog.model';
 import { map } from 'rxjs/internal/operators/map';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { merge } from 'rxjs-compat/operator/merge';
+import { tap, withLatestFrom } from 'rxjs/operators';
+import { startWith } from 'rxjs-compat/operator/startWith';
+import { combineLatest } from 'rxjs-compat/operator/combineLatest';
 
 @Component({
   selector: 'app-character-modal',
@@ -19,6 +23,8 @@ import { Subscription } from 'rxjs';
 })
 export class CharacterModalComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
+  //raceOfCharacters$: Observable<any>;
+  //constStream$ = of(raceOfCharactersConstnt);
 
   characterForm: FormGroup;
   characterData: Character = null;
@@ -60,18 +66,28 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
 
   // TODO: not work on update existing character
   updateFormParams () {
+        // const fraction$ = this.characterForm.get('fractionId').valueChanges;
+        // const classId$  = this.characterForm.get('classId').valueChanges;
+
+    // this.subscription.add(
+    //   merge(fraction$, classId$, this.constStream$).pipe().subscribe(x => console.log(x))
+    //   combineLatest(fraction$, classId$).pipe().subscribe( x => console.log(x))
+     //);
+    // this.raceOfCharacters$ = combineLatest(fraction$, classId$);
+
+
     this.subscription.add(
       this.characterForm.get('fractionId').valueChanges.pipe(
         map(val => {
-          console.log(val);
+
           this.raceOfCharacters = [...raceOfCharactersConstnt].filter(char => char.fraction.includes(val));
           console.log(this.raceOfCharacters);
           return val;
         })
       ).subscribe(x => console.log('sub', x))
     );
-
-    /// TODO: fix if user select class and then change
+    //
+    // /// TODO: fix if user select class and then change
     this.subscription.add(
       this.characterForm.get('classId').valueChanges.pipe().subscribe(x => {
         const classOfChar = Array.from([...classOfCharactersConstnt].filter(classid => classid.id === x)[0].parent);
