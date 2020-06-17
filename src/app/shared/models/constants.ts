@@ -386,67 +386,83 @@ export const dataelEments: PeriodicElement[] = [
   }
 ];
 
-
+// TODO: corect parent ralation by raceOfCharactersConstnt
 export const classOfCharactersConstnt = [
   {
     id: 1,
     name: 'Воин',
-    icon: 'class_warrior.jpg'
+    icon: 'class_warrior.jpg',
+    parent: [1, 2, 3, 4, 5, 6, 7, 8]
+    // parentClassic
+    // parentWod
+    // parentCat
+    // ...
   },
   {
     id: 2,
     name: 'Друид',
-    icon: 'class_druid.jpg'
+    icon: 'class_druid.jpg',
+    parent: [4, 6]
   },
   {
     id: 3,
     name: 'Жрец',
-    icon: 'class_priest.jpg'
+    icon: 'class_priest.jpg',
+    parent: [1, 2, 3, 4, 6, 7, 8]
   },
   {
     id: 4,
     name: 'Маг',
-    icon: 'class_mage.jpg'
+    icon: 'class_mage.jpg',
+    parent: [1, 2, 3, 4, 5, 6, 7, 8]
   },
   {
     id: 5,
     name: 'Охотник',
-    icon: 'class_hunter.jpg'
+    icon: 'class_hunter.jpg',
+    parent: [1, 2, 3, 4, 5, 6, 7]
   },
   {
     id: 6,
     name: 'Паладин',
-    icon: 'class_paladin.jpg'
+    icon: 'class_paladin.jpg',
+    parent: [1, 2]
   },
   {
     id: 7,
     name: 'Разбойник',
-    icon: 'class_rogue.jpg'
+    icon: 'class_rogue.jpg',
+    parent: [1, 2]
   },
   {
     id: 8,
     name: 'Рыцарь смерти',
-    icon: 'class_deathknight.jpg'
+    icon: 'class_deathknight.jpg',
+    parent: [1, 2]
   },
   {
     id: 9,
     name: 'Чернокнижник',
-    icon: 'class_warlock.jpg'
+    icon: 'class_warlock.jpg',
+    parent: [1, 2]
   },
   {
     id: 10,
     name: 'Шаман',
-    icon: 'class_shaman.jpg'
+    icon: 'class_shaman.jpg',
+    parent: [1, 2]
   },
   {
     id: 11,
     name: 'Монах',
-    icon: 'classicon_monk.jpg'
+    icon: 'classicon_monk.jpg',
+    parent: [1, 2]
   },
   {
     id: 12,
     name: 'Охотник на демонов',
-    icon: 'achievement_boss_illidan.jpg'
+    icon: 'achievement_boss_illidan.jpg',
+    parent: [1, 2]
   },
 ];
 
@@ -454,42 +470,50 @@ export const raceOfCharactersConstnt = [
   {
     id: 1,
     name: 'Дворфы',
-    icon: 'race_dwarf.png'
+    icon: 'race_dwarf.png',
+    fraction: [1]
   },
   {
     id: 2,
     name: 'Гномы',
-    icon: 'race_gnome.png'
+    icon: 'race_gnome.png',
+    fraction: [1]
   },
   {
     id: 3,
     name: 'Люди',
-    icon: 'race_human.png'
+    icon: 'race_human.png',
+    fraction: [1]
   },
   {
     id: 4,
     name: 'Ночные ельфы',
-    icon: 'race_nelf.png'
+    icon: 'race_nelf.png',
+    fraction: [1]
   },
   {
     id: 5,
     name: 'Орки',
-    icon: 'race_orc.png'
+    icon: 'race_orc.png',
+    fraction: [2]
   },
   {
     id: 6,
     name: 'Таурены',
-    icon: 'race_tauren.png'
+    icon: 'race_tauren.png',
+    fraction: [2]
   },
   {
     id: 7,
     name: 'Троли',
-    icon: 'race_troll.png'
+    icon: 'race_troll.png',
+    fraction: [2]
   },
   {
     id: 8,
     name: 'Нежить',
-    icon: 'race_undead.png'
+    icon: 'race_undead.png',
+    fraction: [2],
   }
 // TODO add feamale icon
 // race_femaledwarf.png
@@ -501,14 +525,14 @@ export const raceOfCharactersConstnt = [
 export const fractionOfCharactersConstnt = [
   {
     id: 1,
-    name: 'Орда',
-    icon: 'fraction_horde.png'
-  },
-  {
-    id: 2,
     name: 'Альянс',
     icon: 'fraction_alliance.png'
   },
+  {
+    id: 2,
+    name: 'Орда',
+    icon: 'fraction_horde.png'
+  }
 ];
 
 export const sexOfCharactersConstnt = [
