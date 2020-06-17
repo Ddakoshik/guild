@@ -8,6 +8,7 @@ import {
   sexOfCharactersConstnt
 } from '../../../shared/models/constants';
 import { Character } from '../../../shared/models/blog.model';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-character-modal',
@@ -33,6 +34,7 @@ export class CharacterModalComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.updateFormParams();
   }
 
   get isEditMod () {
@@ -52,6 +54,18 @@ export class CharacterModalComponent implements OnInit {
       classId: [this.characterData ? this.characterData.classId : '' , [Validators.required]],
       raceId: [this.characterData ? this.characterData.raceId : '' , [Validators.required]]
     });
+  }
+
+  // TODO: not work on update existing character
+  updateFormParams () {
+    this.characterForm.get('fractionId').valueChanges.pipe(
+      map(val => {
+        console.log(val);
+        this.raceOfCharacters = [...raceOfCharactersConstnt].filter(char => char.fraction.includes(val));
+        console.log(this.raceOfCharacters);
+        return val;
+      })
+    ).subscribe(x => console.log('sub', x));
   }
 
   getUrl(iconType: string, iconName: string) {
