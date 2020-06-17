@@ -1,4 +1,5 @@
 import { PeriodicElement } from './event.model';
+import { RaceOfCharacterModel, ClassOfCharacterModel, FractionOfCharacterModel, SexOfCharactersModel } from './profile.model';
 
 export const user = {
   userNickname: 'Drakoshik',
@@ -387,7 +388,7 @@ export const dataelEments: PeriodicElement[] = [
 ];
 
 // TODO: corect parent ralation by raceOfCharactersConstnt
-export const classOfCharactersConstnt = [
+export const classOfCharactersConstnt: ClassOfCharacterModel[] = [
   {
     id: 1,
     name: 'Воин',
@@ -466,46 +467,46 @@ export const classOfCharactersConstnt = [
   },
 ];
 
-export const raceOfCharactersConstnt = [
+export const raceOfCharactersConstnt: RaceOfCharacterModel[] = [
   {
     id: 1,
-    name: 'Дворфы',
+    name: 'Дворф',
     icon: 'race_dwarf.png',
     fraction: [1]
   },
   {
     id: 2,
-    name: 'Гномы',
+    name: 'Гном',
     icon: 'race_gnome.png',
     fraction: [1]
   },
   {
     id: 3,
-    name: 'Люди',
+    name: 'Человек',
     icon: 'race_human.png',
     fraction: [1]
   },
   {
     id: 4,
-    name: 'Ночные ельфы',
+    name: 'Ночной ельф',
     icon: 'race_nelf.png',
     fraction: [1]
   },
   {
     id: 5,
-    name: 'Орки',
+    name: 'Орк',
     icon: 'race_orc.png',
     fraction: [2]
   },
   {
     id: 6,
-    name: 'Таурены',
+    name: 'Таурен',
     icon: 'race_tauren.png',
     fraction: [2]
   },
   {
     id: 7,
-    name: 'Троли',
+    name: 'Троль',
     icon: 'race_troll.png',
     fraction: [2]
   },
@@ -522,20 +523,22 @@ export const raceOfCharactersConstnt = [
 // race_femalenelf.png
 ];
 
-export const fractionOfCharactersConstnt = [
+export const fractionOfCharactersConstnt: FractionOfCharacterModel[] = [
   {
     id: 1,
     name: 'Альянс',
-    icon: 'fraction_alliance.png'
+    icon: 'fraction_alliance.png',
+    flag: 'fraction_alliance_flag.jpg'
   },
   {
     id: 2,
     name: 'Орда',
-    icon: 'fraction_horde.png'
+    icon: 'fraction_horde.png',
+    flag: 'fraction_horde_flag.jpg'
   }
 ];
 
-export const sexOfCharactersConstnt = [
+export const sexOfCharactersConstnt: SexOfCharactersModel[] = [
   {
     id: 1,
     name: 'Мужчина',
