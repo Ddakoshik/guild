@@ -1,16 +1,44 @@
 <h3>Персонажи</h3>
-<div class="tile-box">
-    <ng-container *ngIf="characters.length">
-        <mat-card *ngFor="let item of characters" class="tile">
-            <div class="class">{{item.class}}</div>
-            <div class="class">{{item.race}}</div>
-            <div class="name">{{item.name}}</div>
-            <button mat-icon-button (click)="openEditCharacterModal(item)" aria-label="Edit charecter">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="openDeleteCherecerConfirmation(item)" aria-label="Delete charecter">
-                <mat-icon>delete</mat-icon>
-            </button>
+<div class="tile-group-box">
+    <ng-container *ngIf="charactersList.length">
+        <mat-card *ngFor="let item of charactersList" class="tile p-0">
+            <div class="tile-box">
+                <div class="fraction">
+                    <img [src]="getUrl('fraction', item.fraction.flag)" alt="fraction">
+                </div>
+                <div class="character-info">
+                    <div class="name p-3 ">
+                        <div>{{item.name}}</div>
+                    </div>
+                    <div class="line px-3">
+                        <div>
+                            <img [src]="getUrl('class', item.class.icon)" alt="class">
+                        </div>
+                        <div class="ml-2">{{item.class.name}}</div>
+                    </div>
+                    <div class="line px-3 mt-2">
+                        <div>
+                            <img [src]="getUrl('race', item.race.icon)" alt="class">
+                        </div>
+                        <div class="ml-2">{{item.race.name}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-box">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item (click)="openEditCharacterModal(item)" aria-label="Edit charecter">
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit</span>
+                </button>
+                <button mat-menu-item (click)="openDeleteCherecerConfirmation(item)" aria-label="Delete charecter">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                </button>
+            </mat-menu>
         </mat-card>
     </ng-container>
     
