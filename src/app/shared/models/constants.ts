@@ -403,7 +403,7 @@ export const classOfCharactersConstnt: ClassOfCharacterModel[] = [
     id: 2,
     name: 'Друид',
     icon: 'class_druid.jpg',
-    parent: [4, 6]
+    parent: [4, 6, 7]
   },
   {
     id: 3,
@@ -415,7 +415,7 @@ export const classOfCharactersConstnt: ClassOfCharacterModel[] = [
     id: 4,
     name: 'Маг',
     icon: 'class_mage.jpg',
-    parent: [1, 2, 3, 4, 5, 6, 7, 8]
+    parent: [1, 2, 3, 7, 8]
   },
   {
     id: 5,

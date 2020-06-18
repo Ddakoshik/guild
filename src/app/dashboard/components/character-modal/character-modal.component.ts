@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
@@ -8,7 +8,9 @@ import {
   sexOfCharactersConstnt
 } from '../../../shared/models/constants';
 import { Character } from '../../../shared/models/blog.model';
-import { map } from 'rxjs/internal/operators/map';
+
+import { Observable, of, Subscription, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-character-modal',
@@ -16,12 +18,13 @@ import { map } from 'rxjs/internal/operators/map';
   styleUrls: ['./character-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CharacterModalComponent implements OnInit {
+export class CharacterModalComponent implements OnInit, OnDestroy {
+  private subscription: Subscription = new Subscription();
+  raceOfCharacters$: Observable<any>;
 
   characterForm: FormGroup;
   characterData: Character = null;
   classOfCharacters = classOfCharactersConstnt;
-  raceOfCharacters = raceOfCharactersConstnt;
   fractionOfCharacters = fractionOfCharactersConstnt;
   sexOfCharacters = sexOfCharactersConstnt;
 
@@ -34,7 +37,6 @@ export class CharacterModalComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.updateFormParams();
   }
 
   get isEditMod () {
@@ -52,20 +54,34 @@ export class CharacterModalComponent implements OnInit {
       sexId: [this.characterData ? this.characterData.sexId : '' , [Validators.required]],
       fractionId: [this.characterData ? this.characterData.fractionId : '' , [Validators.required]],
       classId: [this.characterData ? this.characterData.classId : '' , [Validators.required]],
-      raceId: [this.characterData ? this.characterData.raceId : '' , [Validators.required]]
+      raceId: [{ value: null, disabled: true } , [Validators.required]],
     });
+
+    if (this.characterData) {
+      this.characterForm.get('raceId').enable({onlySelf: true});
+      const value = [...raceOfCharactersConstnt].find(c => c.id == this.characterData.raceId);
+      this.raceOfCharacters$ = of( [value]);
+      this.characterForm.get('raceId').setValue(value, {onlySelf: true});
+
+    } else {
+      this.updateFormParams();
+    }
   }
 
-  // TODO: not work on update existing character
   updateFormParams () {
-    this.characterForm.get('fractionId').valueChanges.pipe(
-      map(val => {
-        console.log(val);
-        this.raceOfCharacters = [...raceOfCharactersConstnt].filter(char => char.fraction.includes(val));
-        console.log(this.raceOfCharacters);
-        return val;
-      })
-    ).subscribe(x => console.log('sub', x));
+
+    const fraction$ = this.characterForm.get('fractionId').valueChanges;
+    const classId$  = this.characterForm.get('classId').valueChanges;
+
+    this.raceOfCharacters$ = combineLatest([fraction$, classId$])
+      .pipe(
+        map(i => {
+          this.characterForm.get('raceId').enable({onlySelf: true});
+          const sortbyRace = [...raceOfCharactersConstnt].filter(char => char.fraction.includes(i[0]));
+          const sortbyClass = [...classOfCharactersConstnt].filter(classid => classid.id === i[1])[0].parent;
+          return sortbyRace.filter(char => sortbyClass.some(a => char.id === a));
+        })
+      );
   }
 
   getUrl(iconType: string, iconName: string) {
@@ -75,6 +91,9 @@ export class CharacterModalComponent implements OnInit {
   addNewCharacter() {
     if (this.characterForm.valid) {
       const formValue = this.characterForm.value;
+      const {raceId} = this.characterForm.value;
+      this.characterForm.value.raceId = raceId.id;
+
       this.dialogRef.close(formValue);
     } else {
       this.characterForm.markAllAsTouched();
@@ -84,6 +103,9 @@ export class CharacterModalComponent implements OnInit {
   updateCharacter(): void {
     if (this.characterForm.valid) {
       const formValue = this.characterForm.value;
+      const {raceId} = this.characterForm.value;
+      this.characterForm.value.raceId = raceId.id;
+
       this.dialogRef.close({...formValue, docId: this.characterData.docId});
     } else {
       this.characterForm.markAllAsTouched();
@@ -92,5 +114,11 @@ export class CharacterModalComponent implements OnInit {
 
   updateRoleOrder(data) {
     console.log(data);
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

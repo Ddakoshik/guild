@@ -61,11 +61,11 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-    
+
             <mat-form-field class="col-6">
                 <mat-label>Раса персонажа</mat-label>
                 <mat-select formControlName="raceId">
-                    <mat-option *ngFor="let race of raceOfCharacters" [value]="race.id">
+                    <mat-option *ngFor="let race of  raceOfCharacters$ | async" [value]="race">
                         <img matSuffix class="select-icon mr-2" [src]="getUrl('race', race.icon)" [alt]="race.name">
                         {{race.name}}
                     </mat-option>
@@ -73,8 +73,8 @@
             </mat-form-field>
         </div>
         <div *ngIf="classControlValue">
-            <app-character-role-order 
-                [characterRoleOrder]="[]" 
+            <app-character-role-order
+                [characterRoleOrder]="[]"
                 [classId]="classControlValue"
                 (changeRoleOrder)="updateRoleOrder($event)"></app-character-role-order>
         </div>
