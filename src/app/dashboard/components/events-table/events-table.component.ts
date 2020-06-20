@@ -34,7 +34,7 @@ export class EventsTableComponent implements OnInit {
   }
 
   acceptEvent(element) {
-    this.isAcceptEvent.emit(element.id);
+    this.isAcceptEvent.emit(element);
     // TODO nead add (user accept event) mechanism
   }
 

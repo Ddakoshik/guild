@@ -1,1 +1,92 @@
-<p>event-popup-join works!</p>
+<div mat-dialog-title class="dilog-title">
+  <h1 *ngIf="!initialEventState" class="pr-5" >Добавить себя к этому событию</h1>
+  <h1 *ngIf="initialEventState" class="pr-5" >Edit event</h1>
+  <button mat-icon-button aria-label="close button" class="close-button" mat-dialog-close>
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<div mat-dialog-content>
+  <form [formGroup]="insightForm">
+    <p>Лидер: {{data.reidLider.nikName}} ({{data.reidLider.name.split(' ')[0]}})</p>
+    <mat-form-field class="col-12 p-0 pt-3" [floatLabel]="'always'">
+      <mat-label>Title</mat-label>
+      <input matInput
+             maxlength="75"
+             placeholder="Event name"
+             autocomplete="off"
+             formControlName="title">
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field class="col-6">
+        <input matInput
+               [min]="minDate"
+               [matDatepicker]="picker"
+               placeholder="Choose a date"
+               formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="col-6">
+        <div class="row">
+          <mat-form-field class="col-6" [floatLabel]="'always'">
+            <mat-label>Start Time</mat-label>
+            <input matInput
+                   type="time"
+                   formControlName="timeStart">
+          </mat-form-field>
+
+          <mat-form-field class="col-6" [floatLabel]="'always'">
+            <mat-label>End Time</mat-label>
+            <input matInput
+                   type="time"
+                   formControlName="timeEnd">
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-form-field class="col-6">
+        <mat-label>Выберите (Подземелие/Рейд)</mat-label>
+        <mat-select formControlName="raidLocetionId">
+          <mat-option *ngFor="let raid of raidLocations" [value]="raid.id">
+            {{raid.fullName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-4">
+        <mat-label>Сложность (Подземелия/Рейда)</mat-label>
+        <mat-select formControlName="reidDifficultId">
+          <mat-option *ngFor="let reidDifficult of reidDifficultsArrey" [value]="reidDifficult.id">
+            {{reidDifficult.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <p class="p-0 quill-editor">
+        {{data.description}}
+    </p>
+    <h3>Количество сбободных слотов</h3>
+    <div>
+      <span>Tank</span> <span class="count-count">{{data.raidComposition.tankHave}}/{{data.raidComposition.tankNeed}}</span>
+      <button *ngIf="(data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
+    </div>
+
+    <div>
+      <span>heal</span> <span class="count-count">{{data.raidComposition.healHave}}/{{data.raidComposition.healNeed}}</span>
+      <button *ngIf="(data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
+    </div>
+
+    <div>
+      <span>Dps</span> <span class="count-count">{{data.raidComposition.dpsHave}}/{{data.raidComposition.dpsNeed}}</span>
+      <button *ngIf="(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" class="btn" mat-dialog-close>Cancel</button>
+  <button mat-button *ngIf="!initialEventState" type="button" class="btn" (click)="submit()" cdkFocusInitial>Submit</button>
+  <button mat-button *ngIf="initialEventState" type="button" class="btn" (click)="update()" cdkFocusInitial>Save</button>
+</div>
