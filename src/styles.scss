@@ -39,3 +39,22 @@ p{
     outline-style: none;
     outline-width: initial;
 }
+
+*::-webkit-scrollbar {
+  width: rem(6px);
+  height: rem(6px);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .2);
+  border-radius: rem(6px);
+
+  &:hover {
+    background: rgba(0, 0, 0, .3);
+  }
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}
