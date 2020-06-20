@@ -5,6 +5,7 @@ import { DateTime } from 'luxon';
 import { Observable, Subscription } from 'rxjs';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
+import { EventModelId } from '../../../shared/models/event.model';
 
 @Component({
   selector: 'app-event-popup-join',
@@ -17,6 +18,7 @@ export class EventPopupJoinComponent implements OnInit {
   raidLocations = raidLocationsConstnt;
   reidDifficultsArrey = reidDifficultsArreyConstnt;
   subscriptions: Subscription[] = [];
+  initialEventState: EventModelId;
 
   constructor(
     // private store$: Store<CoreState>,
