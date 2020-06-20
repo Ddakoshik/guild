@@ -55,11 +55,11 @@ export class EventsContainerComponent implements OnInit {
     console.log('date', date);
   }
 
-  isAcceptEvent(eventId: string) {
+  isAcceptEvent(event: any) {
     const dialogRef = this.dialog.open(EventPopupJoinComponent, {
       width: '800px',
       disableClose: true,
-      data: eventId
+      data: event
     });
   }
 

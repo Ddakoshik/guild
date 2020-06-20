@@ -1,0 +1,37 @@
+.time-row{
+  display: flex;
+}
+.dilog-title {
+  position: relative;
+  .close-button{
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+:host ::ng-deep {
+  .mat-dialog-actions{
+    justify-content: flex-end;
+    padding: 24px 0;
+  }
+}
+
+.fill-role {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  .role {
+    padding-right: 25px;
+  }
+
+  div {
+    height: 60px;
+  }
+   button {
+    position: relative;
+    bottom: -26px;
+    right: 26px;
+  }
+}
