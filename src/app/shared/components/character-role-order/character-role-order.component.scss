@@ -1,52 +1,87 @@
+.spec-group {
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    flex-basis: 45%;
+    flex-direction: column;
+  }
+}
+
 .example-list {
-    width: 1000px;
-    max-width: 100%;
-    border: solid 1px #ccc;
-    min-height: 60px;
-    display: flex;
-    flex-direction: row;
+  flex-basis: 100%;
+  border: solid 1px #ccc;
+  display: flex;
+  flex-direction: row;
+  background: white;
+  border-radius: 4px;
+  margin-top: 10px;
+  justify-content: space-evenly;
+  padding: 15px 0;
+
+  &.deprecated {
+    background: rgba(0, 0, 0, 0.14);
+  }
+
+
+  &.active {
+    background: rgba(40, 167, 69, 0.34);
+  }
+}
+
+.example-box {
+  display: flex;
+  cursor: move;
+  position: relative;
+
+  ins {
+    position: absolute;
+    background-image: url(../../../../assets/img/specIcons/round_icon_border.png);
+    left: -8px;
+    top: -9px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .role-position {
+    position: absolute;
+    width: 20px;
+    height: 20px;
     background: white;
-    border-radius: 4px;
-    overflow: hidden;
+    border: 2px solid rgba(255,255,255, .4);
+    bottom: -5px;
+    right: -5px;
+
+    img {
+      border-radius: 50%;
+    }
   }
   
-  .example-box {
-    padding: 20px 10px;
-    border-right: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    cursor: move;
-    background: white;
-    font-size: 14px;
-    flex-grow: 1;
-    flex-basis: 0;
+  img {
+    border-radius: 50%;
   }
-  
-  .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
-  
-  .cdk-drag-placeholder {
-    opacity: 0;
-  }
-  
-  .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
-  .example-box:last-child {
-    border: none;
-  }
-  
-  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

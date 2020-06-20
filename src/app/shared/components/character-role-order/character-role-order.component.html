@@ -1,7 +1,26 @@
-<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let timePeriod of timePeriods" cdkDrag>{{timePeriod}}</div>
-</div>
-
-<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let timePeriod of timePeriods" cdkDrag>{{timePeriod}}</div>
+<div cdkDropListGroup>
+    <div class="flex spec-group">
+        <div>
+            Используемые специализации
+            <div cdkDropList cdkDropListOrientation="horizontal" class="example-list active" [cdkDropListData]="active"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of active" cdkDrag>
+                    <img [src]="getUrl('specIcons', item.icon)" alt="spec">
+                    <ins></ins>
+                    <img class="role-position" [src]="getUrl('roles', item.roleIcon)" alt="role">
+                </div>
+            </div>
+        </div>
+        <div>
+            Не используемые специализации
+            <div cdkDropList class="example-list deprecated" [cdkDropListData]="deprecated"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of deprecated" cdkDrag>
+                    <img [src]="getUrl('specIcons', item.icon)" alt="spec">
+                    <ins></ins>
+                    <img class="role-position" [src]="getUrl('roles', item.roleIcon)" alt="role">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
