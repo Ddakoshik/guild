@@ -550,3 +550,16 @@ export const sexOfCharactersConstnt: SexOfCharactersModel[] = [
     icon: 'fraction_alliance.png'
   },
 ];
+
+export const charactersSpecs = {
+  3: [
+    { id: 'shadow', icon: '', roleIcon: 'ej-dps.png' },
+    { id: 'holy', icon: '', roleIcon: 'ej-healer.png' },
+    { id: 'discipline', icon: '', roleIcon: 'ej-healer.png' }
+  ],
+  4: [
+    { id: 'frost', icon: 'Spell_Frost_FrostBolt02.png', roleIcon: 'ej-dps.png' },
+    { id: 'fire', icon: 'Spell_Fire_FireBolt02.png', roleIcon: 'ej-dps.png' },
+    { id: 'arcane', icon: 'Spell_Holy_MagicalSentry.png', roleIcon: 'ej-dps.png' }
+  ]
+}

@@ -68,7 +68,7 @@
             </mat-form-field>
         </div>
         <div *ngIf="classControlValue">
-            <app-character-role-order [characterRoleOrder]="[]" [classId]="classControlValue"
+            <app-character-role-order [characterRoleOrder]="specCollection" [classId]="classControlValue"
                 (changeRoleOrder)="updateRoleOrder($event)"></app-character-role-order>
         </div>
 

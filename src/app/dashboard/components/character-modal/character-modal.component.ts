@@ -27,6 +27,10 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   classOfCharacters = classOfCharactersConstnt;
   fractionOfCharacters = fractionOfCharactersConstnt;
   sexOfCharacters = sexOfCharactersConstnt;
+  specCollection = {
+    active: [],
+    deprecated: []
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -55,6 +59,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       fractionId: [this.characterData ? this.characterData.fractionId : '', [Validators.required]],
       classId: [this.characterData ? this.characterData.classId : '', [Validators.required]],
       raceId: [{ value: null, disabled: true }, [Validators.required]],
+      specs: [this.characterData ? this.characterData.specs : '']
     });
 
     if (this.characterData) {
@@ -62,6 +67,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       const value = [...raceOfCharactersConstnt].find(c => c.id == this.characterData.raceId);
       this.raceOfCharacters$ = of([value]);
       this.characterForm.get('raceId').setValue(value, { onlySelf: true });
+      this.specCollection = this.characterData.specs;
 
     } else {
       this.updateFormParams();
@@ -93,6 +99,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       const formValue = this.characterForm.value;
       const { raceId } = this.characterForm.value;
       this.characterForm.value.raceId = raceId.id;
+      this.characterForm.value.specs = this.specCollection;
 
       this.dialogRef.close(formValue);
     } else {
@@ -105,6 +112,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       const formValue = this.characterForm.value;
       const { raceId } = this.characterForm.value;
       this.characterForm.value.raceId = raceId.id;
+      this.characterForm.value.specs = this.specCollection;
 
       this.dialogRef.close({ ...formValue, docId: this.characterData.docId });
     } else {
@@ -113,7 +121,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   }
 
   updateRoleOrder(data) {
-    console.log(data);
+    this.specCollection = data;
   }
 
   ngOnDestroy() {

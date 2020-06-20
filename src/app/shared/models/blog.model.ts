@@ -29,4 +29,10 @@ export interface Character {
     classId: number;
     raceId: number;
     docId?: string;
+    specs: SpecCollection
+}
+
+export interface SpecCollection {
+    active: string[];
+    deprecated: string[];
 }
