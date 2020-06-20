@@ -66,21 +66,22 @@
         {{data.description}}
     </p>
     <h3>Количество сбободных слотов</h3>
-    <div>
-      <span>Tank</span> <span class="count-count">{{data.raidComposition.tankHave}}/{{data.raidComposition.tankNeed}}</span>
-      <button *ngIf="(data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
-    </div>
+    <div class="fill-role">
+      <div>
+        <span class="role">Tank</span> <span class="count-count">{{data.raidComposition.tankNeed}}/{{data.raidComposition.tankHave}}</span>
+        <button *ngIf="(data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
+      </div>
 
-    <div>
-      <span>heal</span> <span class="count-count">{{data.raidComposition.healHave}}/{{data.raidComposition.healNeed}}</span>
-      <button *ngIf="(data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
-    </div>
+      <div>
+        <span class="role">heal</span> <span class="count-count">{{data.raidComposition.healNeed}}/{{data.raidComposition.healHave}}</span>
+        <button *ngIf="(data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
+      </div>
 
-    <div>
-      <span>Dps</span> <span class="count-count">{{data.raidComposition.dpsHave}}/{{data.raidComposition.dpsNeed}}</span>
-      <button *ngIf="(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
+      <div>
+        <span class="role">Dps</span> <span class="count-count">{{data.raidComposition.dpsNeed}}/{{data.raidComposition.dpsHave}}</span>
+        <button *ngIf="(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
+      </div>
     </div>
-
   </form>
 </div>
 <div mat-dialog-actions>
