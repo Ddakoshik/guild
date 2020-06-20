@@ -6,6 +6,9 @@ import { Observable, Subscription } from 'rxjs';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 import { EventModelId } from '../../../shared/models/event.model';
+import { select, Store } from '@ngrx/store';
+import { selectGoogleAuthInfo } from '../../../store/selectors';
+import { CoreState } from '../../../store/reducers';
 
 @Component({
   selector: 'app-event-popup-join',
@@ -20,14 +23,17 @@ export class EventPopupJoinComponent implements OnInit {
   subscriptions: Subscription[] = [];
   initialEventState: EventModelId;
 
+  user$: Observable<GoogleAuthInfo>;
+
   constructor(
-    // private store$: Store<CoreState>,
+     private store$: Store<CoreState>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.initForm();
   }
 
   ngOnInit() {
-    // this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
+     this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
+
   }
 
   private initForm(): void {
@@ -52,4 +58,11 @@ export class EventPopupJoinComponent implements OnInit {
     this.insightForm.get('reidDifficultId').disable();
   }
 
+  submit() {
+
+  }
+
+  update() {
+
+  }
 }
