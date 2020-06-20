@@ -73,7 +73,10 @@
           <span>Танки</span>
           <span class="count-count">{{data.raidComposition.tankNeed}}/{{data.raidComposition.tankHave}}</span>
         </span>
-        <button *ngIf="(data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
+        <button mat-button [matMenuTriggerFor]="tank" *ngIf="(data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
+        <mat-menu #tank="matMenu">
+          <button mat-menu-item *ngFor="let tank of tanks$ | async">{{tank.name}}({{tank.className}})</button>
+        </mat-menu>
       </div>
 
       <div>
@@ -82,7 +85,10 @@
           <span>Хилы</span>
           <span class="count-count">{{data.raidComposition.healNeed}}/{{data.raidComposition.healHave}}</span>
         </span>
-        <button *ngIf="(data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
+        <button mat-button [matMenuTriggerFor]="heal" *ngIf="(data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
+        <mat-menu #heal="matMenu">
+          <button mat-menu-item *ngFor="let char of heals$ | async">{{char.name}}({{char.className}})</button>
+        </mat-menu>
       </div>
 
       <div>
@@ -91,7 +97,10 @@
           <span>ДПС</span>
           <span class="count-count">{{data.raidComposition.dpsNeed}}/{{data.raidComposition.dpsHave}}</span>
         </span>
-        <button *ngIf="(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
+        <button mat-button [matMenuTriggerFor]="dps" *ngIf="(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
+        <mat-menu #dps="matMenu">
+          <button mat-menu-item *ngFor="let char of dps$ | async">{{char.name}}({{char.className}})</button>
+        </mat-menu>
       </div>
     </div>
   </form>

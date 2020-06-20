@@ -393,7 +393,7 @@ export const classOfCharactersConstnt: ClassOfCharacterModel[] = [
     id: 1,
     name: 'Воин',
     icon: 'class_warrior.jpg',
-    parent: [1, 2, 3, 4, 5, 6, 7, 8]
+    parent: [1, 2, 3, 4, 5, 6, 7, 8],
     // parentClassic
     // parentWod
     // parentCat
@@ -427,7 +427,7 @@ export const classOfCharactersConstnt: ClassOfCharacterModel[] = [
     id: 6,
     name: 'Паладин',
     icon: 'class_paladin.jpg',
-    parent: [1, 2]
+    parent: [1, 3, 6]
   },
   {
     id: 7,
@@ -553,54 +553,54 @@ export const sexOfCharactersConstnt: SexOfCharactersModel[] = [
 
 export const charactersSpecs = {
   1: [
-    { id: 'fury', icon: 'warrior_fury.png', roleIcon: 'ej-dps.png' },
-    { id: 'arms', icon: 'warrior_arms.png', roleIcon: 'ej-dps.png' },
-    { id: 'protection', icon: 'warrior_protection.png', roleIcon: 'ej-dps.png' }
+    { id: 'fury', icon: 'warrior_fury.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'arms', icon: 'warrior_arms.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'protection', icon: 'warrior_protection.png', roleIcon: 'ej-dps.png', spec: 'tank' }
   ],
   2: [
-    { id: 'restoration', icon: 'druid_restoration.png', roleIcon: 'ej-dps.png' },
-    { id: 'feral', icon: 'druid_feral.png', roleIcon: 'ej-dps.png' },
-    { id: 'balance', icon: 'druid_balance.png', roleIcon: 'ej-dps.png' }
+    { id: 'restoration', icon: 'druid_restoration.png', roleIcon: 'ej-dps.png', spec: 'heal' },
+    { id: 'feral', icon: 'druid_feral.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'balance', icon: 'druid_balance.png', roleIcon: 'ej-dps.png', spec: 'dps'}
   ],
   3: [
-    { id: 'discipline', icon: 'prist_discipline.png', roleIcon: 'ej-dps.png' },
-    { id: 'holy', icon: 'prist_holy.png', roleIcon: 'ej-dps.png' },
-    { id: 'shadow', icon: 'prist_shadow.png', roleIcon: 'ej-dps.png' }
+    { id: 'discipline', icon: 'prist_discipline.png', roleIcon: 'ej-dps.png', spec: 'heal' },
+    { id: 'holy', icon: 'prist_holy.png', roleIcon: 'ej-dps.png', spec: 'heal'},
+    { id: 'shadow', icon: 'prist_shadow.png', roleIcon: 'ej-dps.png', spec: 'dps' }
   ],
   4: [
-    { id: 'frost', icon: 'mag_frost.png', roleIcon: 'ej-dps.png' },
-    { id: 'fire', icon: 'mag_fire.png', roleIcon: 'ej-dps.png' },
-    { id: 'arcane', icon: 'mag_arcane.png', roleIcon: 'ej-dps.png' }
+    { id: 'frost', icon: 'mag_frost.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'fire', icon: 'mag_fire.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'arcane', icon: 'mag_arcane.png', roleIcon: 'ej-dps.png', spec: 'dps' }
   ],
   5: [
-    { id: 'survival', icon: 'hunter_survival.png', roleIcon: 'ej-dps.png' },
-    { id: 'marksmanship', icon: 'hunter_marksmanship.png', roleIcon: 'ej-dps.png' },
-    { id: 'beast_mastery', icon: 'hunter_beast_mastery.png', roleIcon: 'ej-dps.png' }
+    { id: 'survival', icon: 'hunter_survival.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'marksmanship', icon: 'hunter_marksmanship.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'beast_mastery', icon: 'hunter_beast_mastery.png', roleIcon: 'ej-dps.png', spec: 'dps' }
   ],
   6: [
-    { id: 'retribution', icon: 'paladin_retribution.png', roleIcon: 'ej-dps.png' },
-    { id: 'protection', icon: 'paladin_protection.png', roleIcon: 'ej-dps.png' },
-    { id: 'holy', icon: 'paladin_holy.png', roleIcon: 'ej-dps.png' }
+    { id: 'retribution', icon: 'paladin_retribution.png', roleIcon: 'ej-dps.png', spec: 'dps'},
+    { id: 'protection', icon: 'paladin_protection.png', roleIcon: 'ej-dps.png', spec: 'tank' },
+    { id: 'holy', icon: 'paladin_holy.png', roleIcon: 'ej-dps.png', spec: 'heal' }
   ],
   7: [
-    { id: 'subtlety', icon: 'rogue_subtlety.png', roleIcon: 'ej-dps.png' },
-    { id: 'combat', icon: 'rogue_combat.png', roleIcon: 'ej-dps.png' },
-    { id: 'assassination', icon: 'rogue_assassination.png', roleIcon: 'ej-dps.png' }
+    { id: 'subtlety', icon: 'rogue_subtlety.png', roleIcon: 'ej-dps.png', spec: 'dps'},
+    { id: 'combat', icon: 'rogue_combat.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'assassination', icon: 'rogue_assassination.png', roleIcon: 'ej-dps.png', spec: 'dps' }
   ],
   8: [
-    { id: 'unholy', icon: 'death_knight_unholy.png', roleIcon: 'ej-dps.png' },
-    { id: 'frost', icon: 'death_knight_frost.png', roleIcon: 'ej-dps.png' },
-    { id: 'blood', icon: 'death_knight_blood.png', roleIcon: 'ej-dps.png' }
+    { id: 'unholy', icon: 'death_knight_unholy.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'frost', icon: 'death_knight_frost.png', roleIcon: 'ej-dps.png' , spec: 'dps'},
+    { id: 'blood', icon: 'death_knight_blood.png', roleIcon: 'ej-dps.png', spec: 'tank'}
   ],
   9: [
-    { id: 'destruction', icon: 'warlock_destruction.png', roleIcon: 'ej-dps.png' },
-    { id: 'demonology', icon: 'warlock_demonology.png', roleIcon: 'ej-dps.png' },
-    { id: 'affliction', icon: 'warlock_affliction.png', roleIcon: 'ej-dps.png' }
+    { id: 'destruction', icon: 'warlock_destruction.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'demonology', icon: 'warlock_demonology.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'affliction', icon: 'warlock_affliction.png', roleIcon: 'ej-dps.png', spec: 'dps' }
   ],
   10: [
-    { id: 'restoration', icon: 'shaman_restoration.png', roleIcon: 'ej-dps.png' },
-    { id: 'enchancement', icon: 'shaman_enchancement.png', roleIcon: 'ej-dps.png' },
-    { id: 'elemental', icon: 'shaman_elemental.png', roleIcon: 'ej-dps.png' }
+    { id: 'restoration', icon: 'shaman_restoration.png', roleIcon: 'ej-dps.png', spec: 'heal' },
+    { id: 'enchancement', icon: 'shaman_enchancement.png', roleIcon: 'ej-dps.png', spec: 'dps' },
+    { id: 'elemental', icon: 'shaman_elemental.png', roleIcon: 'ej-dps.png', spec: 'dps' }
   ],
   // 11: [
   //   { id: 'discipline', icon: 'prist_discipline.png', roleIcon: 'ej-dps.png' },
