@@ -1,6 +1,6 @@
 <div mat-dialog-title class="dilog-title">
-    <h1 *ngIf="!initialEventState" class="pr-5" >Add new event</h1>
-    <h1 *ngIf="initialEventState" class="pr-5" >Edit event</h1>
+    <h1 *ngIf="!initialEventState" class="pr-5">Add new event</h1>
+    <h1 *ngIf="initialEventState" class="pr-5">Edit event</h1>
     <button mat-icon-button aria-label="close button" class="close-button" mat-dialog-close>
         <mat-icon>clear</mat-icon>
     </button>
@@ -11,18 +11,11 @@
 
         <mat-form-field class="col-12 p-0 pt-3" [floatLabel]="'always'">
             <mat-label>Title</mat-label>
-            <input matInput
-                    maxlength="75"
-                    placeholder="Event name"
-                    autocomplete="off"
-                    formControlName="title">
+            <input matInput maxlength="75" placeholder="Event name" autocomplete="off" formControlName="title">
         </mat-form-field>
         <div class="row">
             <mat-form-field class="col-6">
-                <input matInput 
-                    [min]="minDate" 
-                    [matDatepicker]="picker" 
-                    placeholder="Choose a date"
+                <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Choose a date"
                     formControlName="date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -31,16 +24,12 @@
                 <div class="row">
                     <mat-form-field class="col-6" [floatLabel]="'always'">
                         <mat-label>Start Time</mat-label>
-                        <input matInput 
-                        type="time"
-                        formControlName="timeStart">
+                        <input matInput type="time" formControlName="timeStart">
                     </mat-form-field>
-                    
+
                     <mat-form-field class="col-6" [floatLabel]="'always'">
                         <mat-label>End Time</mat-label>
-                        <input matInput
-                        type="time"
-                        formControlName="timeEnd">
+                        <input matInput type="time" formControlName="timeEnd">
                     </mat-form-field>
                 </div>
             </div>
@@ -48,46 +37,105 @@
                 <mat-label>Выберите (Подземелие/Рейд)</mat-label>
                 <mat-select formControlName="raidLocetionId">
                     <mat-option *ngFor="let raid of raidLocations" [value]="raid.id">
-                    {{raid.fullName}}
+                        {{raid.fullName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-    
+
             <mat-form-field class="col-4">
                 <mat-label>Сложность (Подземелия/Рейда)</mat-label>
                 <mat-select formControlName="reidDifficultId">
                     <mat-option *ngFor="let reidDifficult of reidDifficultsArrey" [value]="reidDifficult.id">
-                    {{reidDifficult.name}}
+                        {{reidDifficult.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <mat-form-field class="col-4">
+                <mat-label>Персонаж которым собираю рейд</mat-label>
+                <mat-select formControlName="character">
+                    <mat-option *ngFor="let character of charactersList$ | async" [value]="character.name">
+                        {{character.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2">
+                <mat-label>Роль</mat-label>
+                <mat-select formControlName="role">
+                    <mat-option value="tank">
+                        <span class="flex flex-icons-center">
+                            <span class="icon tank-icon mr-1"></span>
+                            <span>Танк</span>
+                        </span>
+                    </mat-option>
+                    <mat-option value="heal">
+                        <span class="flex flex-icons-center">
+                            <span class="icon heal-icon mr-1"></span>
+                            <span>Хил</span>
+                        </span>
+                    </mat-option>
+                    <mat-option value="dps">
+                        <span class="flex flex-icons-center">
+                            <span class="icon dps-icon mr-1"></span>
+                            <span>ДПС</span>
+                        </span>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-2" [floatLabel]="'always'">
+                <mat-label>
+                    <span class="flex flex-icons-center">
+                        <span value="tank" class="icon tank-icon mr-1"></span>
+                        <span>Танки</span>
+                    </span>
+                </mat-label>
+                <input matInput type="number" formControlName="totalTanks">
+            </mat-form-field>
+            <mat-form-field class="col-2" [floatLabel]="'always'">
+                <mat-label>
+                    <span class="flex flex-icons-center">
+                        <span value="heal" class="icon heal-icon mr-1"></span>
+                        <span>Хилы</span>
+                    </span>
+                </mat-label>
+                <input matInput type="number" formControlName="totalHealers">
+            </mat-form-field>
+            <mat-form-field class="col-2" [floatLabel]="'always'">
+                <mat-label>
+                    <span class="flex flex-icons-center">
+                        <span value="dps" class="icon dps-icon mr-1"></span>
+                        <span>ДПС</span>
+                    </span>
+                </mat-label>
+                <input matInput type="number" formControlName="totalDpsers">
+            </mat-form-field>
         </div>
-        
+
         <h6 class="mat-form-field-label custom-form-label pt-3">Details Title</h6>
-        <quill-editor class="p-0 quill-editor"
-                        [style]="{height: '188px'}"
-                        [maxLength]="editorLimit"
-                        placeholder="Details Placeholder"
-                        [formControl]="insightForm.get('description')"
-                        (onContentChanged)="onTextAreaChanged($event)">
+        <quill-editor class="p-0 quill-editor" [style]="{height: '188px'}" [maxLength]="editorLimit"
+            placeholder="Details Placeholder" [formControl]="insightForm.get('description')"
+            (onContentChanged)="onTextAreaChanged($event)">
             <div quill-editor-toolbar>
-            <span class="ql-formats">
-                <button class="ql-bold ql-icons icon-bold p-0 font-size-xl" [title]="'Bold'"></button>
-                <button class="ql-italic ql-icons icon-italic p-0 font-size-xl" [title]="'Italic'"></button>
-                <button class="ql-underline ql-icons icon-undeline p-0 font-size-xl" [title]="'Underline'"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-list ql-icons icon-number_list p-0 font-size-xl" value="ordered" [title]="'Bold'"></button>
-                <button class="ql-list ql-icons icon-bullet p-0 font-size-xl" value="bullet" [title]="'Italic'"></button>
-            </span>
+                <span class="ql-formats">
+                    <button class="ql-bold ql-icons icon-bold p-0 font-size-xl" [title]="'Bold'"></button>
+                    <button class="ql-italic ql-icons icon-italic p-0 font-size-xl" [title]="'Italic'"></button>
+                    <button class="ql-underline ql-icons icon-undeline p-0 font-size-xl" [title]="'Underline'"></button>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-list ql-icons icon-number_list p-0 font-size-xl" value="ordered"
+                        [title]="'Bold'"></button>
+                    <button class="ql-list ql-icons icon-bullet p-0 font-size-xl" value="bullet"
+                        [title]="'Italic'"></button>
+                </span>
             </div>
         </quill-editor>
         <span class="character-count mt-1">{{ insightDetailsCleanText | count: editorLimit }}</span>
-    
+
     </form>
 </div>
 <div mat-dialog-actions>
     <button mat-button type="button" class="btn" mat-dialog-close>Cancel</button>
-    <button mat-button *ngIf="!initialEventState" type="button" class="btn" (click)="submit()" cdkFocusInitial>Submit</button>
-    <button mat-button *ngIf="initialEventState" type="button" class="btn" (click)="update()" cdkFocusInitial>Save</button>
+    <button mat-button *ngIf="!initialEventState" type="button" class="btn" (click)="submit()"
+        cdkFocusInitial>Submit</button>
+    <button mat-button *ngIf="initialEventState" type="button" class="btn" (click)="update()"
+        cdkFocusInitial>Save</button>
 </div>

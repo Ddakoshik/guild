@@ -58,19 +58,19 @@ export const user = {
 
 
 export const reidDataArrey = [
-  { tank: 1, heal: 2, dps: 3, gameName: '1'},
-  { tank: 1, heal: 2, dps: 3, gameName: '2'},
-  { tank: 2, heal: 1, dps: 3, gameName: '3'},
-  { tank: 2, heal: 1, dps: 3, gameName: '4'},
-  { tank: 2, heal: 1, dps: 3, gameName: '5'},
-  { tank: 2, heal: 1, dps: 3, gameName: '6'},
-  { tank: 2, heal: 1, dps: 3, gameName: '7'},
-  { tank: 2, heal: 1, dps: 3, gameName: '8'},
-  { tank: 2, heal: 1, dps: 3, gameName: '9'},
-  { tank: 2, heal: 1, dps: 3, gameName: '10'},
-  { tank: 0, heal: 0, dps: 1, gameName: '11'},
-  { tank: 0, heal: 0, dps: 1, gameName: '12'},
-  { tank: 0, heal: 0, dps: 1, gameName: '13'}
+  { tank: 1, heal: 2, dps: 3, gameName: '1' },
+  { tank: 1, heal: 2, dps: 3, gameName: '2' },
+  { tank: 2, heal: 1, dps: 3, gameName: '3' },
+  { tank: 2, heal: 1, dps: 3, gameName: '4' },
+  { tank: 2, heal: 1, dps: 3, gameName: '5' },
+  { tank: 2, heal: 1, dps: 3, gameName: '6' },
+  { tank: 2, heal: 1, dps: 3, gameName: '7' },
+  { tank: 2, heal: 1, dps: 3, gameName: '8' },
+  { tank: 2, heal: 1, dps: 3, gameName: '9' },
+  { tank: 2, heal: 1, dps: 3, gameName: '10' },
+  { tank: 0, heal: 0, dps: 1, gameName: '11' },
+  { tank: 0, heal: 0, dps: 1, gameName: '12' },
+  { tank: 0, heal: 0, dps: 1, gameName: '13' }
 ];
 
 export const raidLocationsConstnt = [
@@ -516,11 +516,11 @@ export const raceOfCharactersConstnt: RaceOfCharacterModel[] = [
     icon: 'race_undead.png',
     fraction: [2],
   }
-// TODO add feamale icon
-// race_femaledwarf.png
-// race_femalegnome.png
-// race_femalehuman.png
-// race_femalenelf.png
+  // TODO add feamale icon
+  // race_femaledwarf.png
+  // race_femalegnome.png
+  // race_femalehuman.png
+  // race_femalenelf.png
 ];
 
 export const fractionOfCharactersConstnt: FractionOfCharacterModel[] = [
