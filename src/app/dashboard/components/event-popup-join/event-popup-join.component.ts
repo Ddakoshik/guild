@@ -1,13 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { select, Store } from '@ngrx/store';
-import { CoreState } from '../../../Store/reducers';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { Observable, Subscription } from 'rxjs';
-import { EventModel, EventModelId } from '../../../shared/models/event.model';
-import { selectGoogleAuthInfo } from '../../../Store/selectors';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 
