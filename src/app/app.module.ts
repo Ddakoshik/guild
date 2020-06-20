@@ -64,7 +64,6 @@ import { EventsContainerComponent } from './dashboard/containers/events-containe
 import { EventsTableComponent } from './dashboard/components/events-table/events-table.component';
 import { EventPopupJoinComponent } from './dashboard/components/event-popup-join/event-popup-join.component';
 import { EventPopupAddComponent } from './dashboard/components/event-popup-add/event-popup-add.component';
-import { EventPopupEditComponent } from './dashboard/components/event-popup-edit/event-popup-edit.component';
 import { GameCharactersTileComponent } from './dashboard/components/game-characters-tile/game-characters-tile.component';
 import { CharacterModalComponent } from './dashboard/components/character-modal/character-modal.component';
 
@@ -96,7 +95,6 @@ import { CharacterModalComponent } from './dashboard/components/character-modal/
     EventsContainerComponent,
     EventsTableComponent,
     EventPopupAddComponent,
-    EventPopupEditComponent,
     EventPopupJoinComponent,
     GameCharactersTileComponent,
     CharacterModalComponent
@@ -136,7 +134,6 @@ import { CharacterModalComponent } from './dashboard/components/character-modal/
   ],
   entryComponents: [
     EventPopupAddComponent,
-    EventPopupEditComponent,
     EventPopupJoinComponent,
     CharacterModalComponent
   ],
