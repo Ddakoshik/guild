@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { Observable, Subscription } from 'rxjs';
@@ -14,14 +13,12 @@ import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../share
 })
 export class EventPopupJoinComponent implements OnInit {
   insightForm: FormGroup;
-  user$: Observable<GoogleAuthInfo>;
   user: GoogleAuthInfo;
   raidLocations = raidLocationsConstnt;
   reidDifficultsArrey = reidDifficultsArreyConstnt;
   subscriptions: Subscription[] = [];
 
   constructor(
-    private afs: AngularFirestore,
     // private store$: Store<CoreState>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.initForm();
