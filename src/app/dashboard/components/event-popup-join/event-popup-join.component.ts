@@ -26,14 +26,13 @@ export class EventPopupJoinComponent implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
-    private store$: Store<CoreState>,
+    // private store$: Store<CoreState>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.initForm();
   }
 
   ngOnInit() {
-
-    //this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
+    // this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
   }
 
   private initForm(): void {
