@@ -68,17 +68,29 @@
     <h3>Количество сбободных слотов</h3>
     <div class="fill-role">
       <div>
-        <span class="role">Tank</span> <span class="count-count">{{data.raidComposition.tankNeed}}/{{data.raidComposition.tankHave}}</span>
+        <span class="role">
+          <span class="icon tank-icon mr-1"></span>
+          <span>Танки</span>
+          <span class="count-count">{{data.raidComposition.tankNeed}}/{{data.raidComposition.tankHave}}</span>
+        </span>
         <button *ngIf="(data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
       </div>
 
       <div>
-        <span class="role">heal</span> <span class="count-count">{{data.raidComposition.healNeed}}/{{data.raidComposition.healHave}}</span>
+        <span class="role">
+          <span class="icon heal-icon mr-1"></span>
+          <span>Хилы</span>
+          <span class="count-count">{{data.raidComposition.healNeed}}/{{data.raidComposition.healHave}}</span>
+        </span>
         <button *ngIf="(data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
       </div>
 
       <div>
-        <span class="role">Dps</span> <span class="count-count">{{data.raidComposition.dpsNeed}}/{{data.raidComposition.dpsHave}}</span>
+        <span class="role">
+          <span class="icon dps-icon mr-1"></span>
+          <span>ДПС</span>
+          <span class="count-count">{{data.raidComposition.dpsNeed}}/{{data.raidComposition.dpsHave}}</span>
+        </span>
         <button *ngIf="(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
       </div>
     </div>
