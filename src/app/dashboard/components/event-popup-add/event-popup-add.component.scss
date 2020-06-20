@@ -8,7 +8,11 @@
         right: 0;
         top: 0;
     }
-} 
+}
+
+.flex-icons-center {
+    align-items: center;
+}
 
 :host ::ng-deep {
     .mat-dialog-actions{

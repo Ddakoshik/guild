@@ -41,6 +41,11 @@ export interface EventModel {
     raidComposition: RaidComposition;
     raidLocetionId: number;
     reidDifficultId: string;
+    character: string;
+    role: string;
+    totalTanks: number;
+    totalHealers: number;
+    totalDpsers: number;
 }
 
 export interface EventModelId extends EventModel { id: string; }

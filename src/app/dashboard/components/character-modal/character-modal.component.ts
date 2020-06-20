@@ -31,52 +31,52 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CharacterModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {chracterData: Character}) {
-      this.characterData = data.chracterData;
+    @Inject(MAT_DIALOG_DATA) public data: { chracterData: Character }) {
+    this.characterData = data.chracterData;
   }
 
   ngOnInit() {
     this.initForm();
   }
 
-  get isEditMod () {
+  get isEditMod() {
     return !!this.characterData;
   }
 
-  get classControlValue () {
+  get classControlValue() {
     return this.characterForm.get('classId').value;
   }
 
   private initForm(): void {
     this.characterForm = this.fb.group({
-      name: [this.characterData ? this.characterData.name : '' , [Validators.required]],
-      equipmentLevel: [this.characterData ? this.characterData.equipmentLevel : '' , [Validators.required]],
-      sexId: [this.characterData ? this.characterData.sexId : '' , [Validators.required]],
-      fractionId: [this.characterData ? this.characterData.fractionId : '' , [Validators.required]],
-      classId: [this.characterData ? this.characterData.classId : '' , [Validators.required]],
-      raceId: [{ value: null, disabled: true } , [Validators.required]],
+      name: [this.characterData ? this.characterData.name : '', [Validators.required]],
+      equipmentLevel: [this.characterData ? this.characterData.equipmentLevel : '', [Validators.required]],
+      sexId: [this.characterData ? this.characterData.sexId : '', [Validators.required]],
+      fractionId: [this.characterData ? this.characterData.fractionId : '', [Validators.required]],
+      classId: [this.characterData ? this.characterData.classId : '', [Validators.required]],
+      raceId: [{ value: null, disabled: true }, [Validators.required]],
     });
 
     if (this.characterData) {
-      this.characterForm.get('raceId').enable({onlySelf: true});
+      this.characterForm.get('raceId').enable({ onlySelf: true });
       const value = [...raceOfCharactersConstnt].find(c => c.id == this.characterData.raceId);
-      this.raceOfCharacters$ = of( [value]);
-      this.characterForm.get('raceId').setValue(value, {onlySelf: true});
+      this.raceOfCharacters$ = of([value]);
+      this.characterForm.get('raceId').setValue(value, { onlySelf: true });
 
     } else {
       this.updateFormParams();
     }
   }
 
-  updateFormParams () {
+  updateFormParams() {
 
     const fraction$ = this.characterForm.get('fractionId').valueChanges;
-    const classId$  = this.characterForm.get('classId').valueChanges;
+    const classId$ = this.characterForm.get('classId').valueChanges;
 
     this.raceOfCharacters$ = combineLatest([fraction$, classId$])
       .pipe(
         map(i => {
-          this.characterForm.get('raceId').enable({onlySelf: true});
+          this.characterForm.get('raceId').enable({ onlySelf: true });
           const sortbyRace = [...raceOfCharactersConstnt].filter(char => char.fraction.includes(i[0]));
           const sortbyClass = [...classOfCharactersConstnt].filter(classid => classid.id === i[1])[0].parent;
           return sortbyRace.filter(char => sortbyClass.some(a => char.id === a));
@@ -91,7 +91,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   addNewCharacter() {
     if (this.characterForm.valid) {
       const formValue = this.characterForm.value;
-      const {raceId} = this.characterForm.value;
+      const { raceId } = this.characterForm.value;
       this.characterForm.value.raceId = raceId.id;
 
       this.dialogRef.close(formValue);
@@ -103,10 +103,10 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   updateCharacter(): void {
     if (this.characterForm.valid) {
       const formValue = this.characterForm.value;
-      const {raceId} = this.characterForm.value;
+      const { raceId } = this.characterForm.value;
       this.characterForm.value.raceId = raceId.id;
 
-      this.dialogRef.close({...formValue, docId: this.characterData.docId});
+      this.dialogRef.close({ ...formValue, docId: this.characterData.docId });
     } else {
       this.characterForm.markAllAsTouched();
     }

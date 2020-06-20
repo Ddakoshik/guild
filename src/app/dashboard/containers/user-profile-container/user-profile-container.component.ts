@@ -11,7 +11,7 @@ import {
 } from '../../../store/actions/user-profile.action';
 import { selectUserProfileData, selectCharactersList } from '../../../store/selectors';
 import { User, Character } from '../../../shared/models/blog.model';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile-container',
@@ -33,20 +33,20 @@ export class UserProfileContainerComponent implements OnInit {
     // this.loading$ = this.store$.pipe(select(selectLoadingManagement));
   }
 
-  updateUserProfileData (userData: User): void {
-    this.store$.dispatch(updateUserProfile({profileData: userData}));
+  updateUserProfileData(userData: User): void {
+    this.store$.dispatch(updateUserProfile({ profileData: userData }));
   }
 
-  openAddNewCharacterModal (): void {
+  openAddNewCharacterModal(): void {
     this.store$.dispatch(openAddCharacterModal());
   }
 
-  openEditCharacterModal (item: Character): void {
-    this.store$.dispatch(openEditCharacterModal({characterData: item}));
+  openEditCharacterModal(item: Character): void {
+    this.store$.dispatch(openEditCharacterModal({ characterData: item }));
   }
 
   deleteCherecer(item: Character): void {
-    this.store$.dispatch(openDeleteCharacterConfirmationModal({characterData: item}));
+    this.store$.dispatch(openDeleteCharacterConfirmationModal({ characterData: item }));
   }
 
 }

@@ -70,11 +70,11 @@ export class EventsContainerComponent implements OnInit {
       .doc(eventId)
       .delete()
       .then(function () {
-          console.log('Document successfully deleted!');
+        console.log('Document successfully deleted!');
       }).catch(
-          function(error) {
+        function (error) {
           console.error('Error removing document: ', error);
-      });
+        });
 
   }
 }

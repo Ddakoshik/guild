@@ -2,15 +2,18 @@ import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DateTime} from 'luxon';
+import { DateTime } from 'luxon';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
 import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 import { EventModel, EventModelId } from '../../../shared/models/event.model';
-import { selectGoogleAuthInfo } from '../../../store/selectors';
-
+import { selectGoogleAuthInfo, selectCharactersList } from '../../../store/selectors';
+import {
+  getCharacters
+} from '../../../store/actions/user-profile.action';
+import { Character } from '../../../shared/models/blog.model';
 @Component({
   selector: 'app-event-popup-add',
   templateUrl: './event-popup-add.component.html',
@@ -32,15 +35,14 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
   raidLocations = raidLocationsConstnt;
   reidDifficultsArrey = reidDifficultsArreyConstnt;
 
-
-
+  charactersList$: Observable<Character[]>;
 
   minDate = new Date();
 
   constructor(private afs: AngularFirestore,
-              private store$: Store<CoreState>,
-              public dialogRef: MatDialogRef<EventPopupAddComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {    }
+    private store$: Store<CoreState>,
+    public dialogRef: MatDialogRef<EventPopupAddComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   get raidLocetionId() {
     return this.insightForm.get('raidLocetionId');
@@ -48,6 +50,9 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.store$.dispatch(getCharacters());
+    this.charactersList$ = this.store$.pipe(select(selectCharactersList));
+
     this.user$ = this.store$.pipe(select(selectGoogleAuthInfo));
     this.subscriptions.push(this.user$.subscribe(val => {
       this.user = val;
@@ -57,7 +62,7 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
       this.eventCollection = this.afs.collection<EventModel>('event');
       this.event$ = this.eventCollection.doc<EventModel>(this.data).valueChanges();
       this.subscriptions.push(this.event$.subscribe(val => {
-        this.initialEventState = {...val, id: this.data};
+        this.initialEventState = { ...val, id: this.data };
         this.initForm();
       }));
     }
@@ -74,20 +79,21 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
         raidLocetionData: raidLocetionData,
         reidLider: {
           email: this.user.email,
-          nikName: 'Aizik',
-          name: this.user.displayName
+          nikName: this.insightForm.value.character,
+          name: this.user.displayName,
+          role: this.insightForm.value.role
         },
         raidComposition: {
-          tankNeed: 2,
+          tankNeed: this.insightForm.value.totalTanks,
           tankHave: 2,
-          healNeed: 5,
+          healNeed: this.insightForm.value.totalHealers,
           healHave: 2,
-          dpsNeed: 10,
+          dpsNeed: this.insightForm.value.totalDpsers,
           dpsHave: 3,
         },
       });
     this.dialogRef.close();
-    // this.dialogRef.close({...this.insightForm.value, date: utcFormat });
+    this.dialogRef.close({ ...this.insightForm.value, date: utcFormat });
   }
 
   update() {
@@ -101,29 +107,25 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
         raidLocetionData: raidLocetionData,
         reidLider: {
           email: this.user.email,
-          nikName: 'Aizik',
-          name: this.user.displayName
+          nikName: this.insightForm.value.character,
+          name: this.user.displayName,
+          role: this.insightForm.value.role
         },
         raidComposition: {
-          tankNeed: 2,
+          tankNeed: this.insightForm.value.totalTanks,
           tankHave: 2,
-          healNeed: 5,
+          healNeed: this.insightForm.value.totalHealers,
           healHave: 2,
-          dpsNeed: 10,
+          dpsNeed: this.insightForm.value.totalDpsers,
           dpsHave: 3,
         },
       });
     this.dialogRef.close();
   }
 
-
-
-
-
-
   private initForm(): void {
     this.insightForm = new FormGroup({
-      title: new FormControl(this.initialEventState ? this.initialEventState.title : '' , [Validators.required]),
+      title: new FormControl(this.initialEventState ? this.initialEventState.title : '', [Validators.required]),
       date: new FormControl(this.initialEventState ? DateTime.fromISO(this.initialEventState.date).toJSDate() : '', [Validators.required]),
       timeStart: new FormControl(this.initialEventState ? this.initialEventState.timeStart : '', [Validators.required]),
       timeEnd: new FormControl(this.initialEventState ? this.initialEventState.timeEnd : ''),
@@ -131,6 +133,11 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
       reidLider: new FormControl(this.initialEventState ? this.initialEventState.reidLider : null),
       raidLocetionId: new FormControl(this.initialEventState ? this.initialEventState.raidLocetionId : null),
       reidDifficultId: new FormControl(this.initialEventState ? this.initialEventState.reidDifficultId : ''),
+      character: new FormControl(this.initialEventState ? this.initialEventState.character : ''),
+      role: new FormControl(this.initialEventState ? this.initialEventState.role : ''),
+      totalTanks: new FormControl(this.initialEventState ? this.initialEventState.totalTanks : ''),
+      totalHealers: new FormControl(this.initialEventState ? this.initialEventState.totalHealers : ''),
+      totalDpsers: new FormControl(this.initialEventState ? this.initialEventState.totalDpsers : ''),
     });
   }
 
