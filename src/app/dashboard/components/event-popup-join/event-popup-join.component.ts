@@ -8,8 +8,8 @@ import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../share
 import { EventModelId } from '../../../shared/models/event.model';
 import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import { getCharacters, getUserProfile } from '../../../store/actions/user-profile.action';
-import { selectDPSCharts, selectCharactersList, selectUserProfileData, selectHealCharts, selectTankCharts } from '../../../store/selectors';
+import { getCharacters } from '../../../store/actions/user-profile.action';
+import { selectDPSCharts, selectHealCharts, selectTankCharts } from '../../../store/selectors';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -23,7 +23,6 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   raidLocations = raidLocationsConstnt;
   reidDifficultsArrey = reidDifficultsArreyConstnt;
   subscriptions: Subscription[] = [];
-  initialEventState: EventModelId;
 
   user$: Observable<GoogleAuthInfo>;
   userProfileData$: Observable<any>;
@@ -43,7 +42,7 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
 
     this.heals$ = this.store$.pipe(select(selectHealCharts)).pipe(map(
       char => {
-        let heals = [];
+        const heals = [];
         char.map((c, index) => {
           if (c.builds.length) {
             heals.push({name: char[index].name, className: char[index].className});
@@ -55,7 +54,8 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
 
     this.dps$ = this.store$.pipe(select(selectDPSCharts)).pipe(map(
       char => {
-        let dps = [];
+        console.log(char);
+        const dps = [];
         char.map((c, index) => {
           if (c.builds.length) {
             dps.push({name: char[index].name, className: char[index].className});
@@ -67,7 +67,7 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
 
      this.tanks$ = this.store$.pipe(select(selectTankCharts)).pipe(map(
        char => {
-         let tanks = [];
+         const tanks = [];
          char.map((c, index) => {
            if (c.builds.length) {
              tanks.push({name: char[index].name, className: char[index].className});
@@ -111,4 +111,9 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.forEach(sbs => sbs.unsubscribe());
   }
+
+  addCharacter(char, speck: string) {
+    console.log('addCharacter', speck, char);
+  }
+
 }

@@ -1,6 +1,5 @@
 <div mat-dialog-title class="dilog-title">
-  <h1 *ngIf="!initialEventState" class="pr-5" >Добавить себя к этому событию</h1>
-  <h1 *ngIf="initialEventState" class="pr-5" >Edit event</h1>
+  <h1 class="pr-5" >Подписатся на событие</h1>
   <button mat-icon-button aria-label="close button" class="close-button" mat-dialog-close>
     <mat-icon>clear</mat-icon>
   </button>
@@ -62,9 +61,10 @@
       </mat-form-field>
     </div>
 
-    <p class="p-0 quill-editor">
-        {{data.description}}
-    </p>
+    <div>
+      <p>Краткое описание:</p>
+      <p class="p-0 quill-editor" [innerHtml]="data.description"></p>
+    </div>
     <h3>Количество сбободных слотов</h3>
     <div class="fill-role">
       <div>
@@ -75,7 +75,7 @@
         </span>
         <button mat-button [matMenuTriggerFor]="tank" *ngIf="(data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
         <mat-menu #tank="matMenu">
-          <button mat-menu-item *ngFor="let tank of tanks$ | async">{{tank.name}}({{tank.className}})</button>
+          <button mat-menu-item *ngFor="let tank of tanks$ | async" (click)="addCharacter(char, 'tank')">{{tank.name}}({{tank.className}})</button>
         </mat-menu>
       </div>
 
@@ -87,7 +87,7 @@
         </span>
         <button mat-button [matMenuTriggerFor]="heal" *ngIf="(data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
         <mat-menu #heal="matMenu">
-          <button mat-menu-item *ngFor="let char of heals$ | async">{{char.name}}({{char.className}})</button>
+          <button mat-menu-item *ngFor="let char of heals$ | async" (click)="addCharacter(char, 'heal')">{{char.name}}({{char.className}})</button>
         </mat-menu>
       </div>
 
@@ -99,7 +99,7 @@
         </span>
         <button mat-button [matMenuTriggerFor]="dps" *ngIf="(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
         <mat-menu #dps="matMenu">
-          <button mat-menu-item *ngFor="let char of dps$ | async">{{char.name}}({{char.className}})</button>
+          <button mat-menu-item *ngFor="let char of dps$ | async" (click)="addCharacter(char, 'dps')">{{char.name}}({{char.className}})</button>
         </mat-menu>
       </div>
     </div>
@@ -107,6 +107,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button type="button" class="btn" mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" *ngIf="!initialEventState" type="button" class="btn" (click)="submit()" cdkFocusInitial>Submit</button>
-  <button mat-raised-button color="primary" *ngIf="initialEventState" type="button" class="btn" (click)="update()" cdkFocusInitial>Save</button>
+  <button mat-raised-button color="primary" type="button" class="btn" (click)="submit()" cdkFocusInitial>Записатся</button>
 </div>

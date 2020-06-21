@@ -1,5 +1,4 @@
 import { createSelector } from '@ngrx/store';
-import { GoogleAuthInfo } from '../../shared/models/auth.model';
 import * as fromCoreModule from '../reducers';
 import * as fromUserProfile from '../reducers/user-profile.reducer';
 import { User, Character } from '../../shared/models/blog.model';
@@ -26,7 +25,7 @@ export const selectCharactersList = createSelector(
 
 export const selectActiveCharts = createSelector(
   selectCharactersList,
-  (state: any): any[] => {
+  (state: Character[]): any[] => {
     return state.map(chr => {
       const className = classOfCharactersConstnt.find(i => i.id === chr.classId);
       return {active: chr.specs.active, name: chr.name, className: className.name};
@@ -47,7 +46,6 @@ export const selectTankCharts = createSelector(
   selectActiveCharts,
   (state: any): any => {
     return state.map(chr => {
-    //  console.log("!!!", chr);
       return { name: chr.name, className: chr.className, builds: chr.active.filter(c => c.spec === 'tank')};
     });
   }
@@ -57,7 +55,6 @@ export const selectHealCharts = createSelector(
   selectActiveCharts,
   (state: any): any => {
     return state.map(chr => {
-      //  console.log("!!!", chr);
       return { name: chr.name, className: chr.className, builds: chr.active.filter(c => c.spec === 'heal')};
     });
   }
