@@ -50,37 +50,30 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-4">
-                <mat-label>Персонаж которым собираю рейд</mat-label>
-                <mat-select formControlName="character">
-                    <mat-option *ngFor="let character of charactersList$ | async" [value]="character.name">
-                        {{character.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="col-2">
-                <mat-label>Роль</mat-label>
-                <mat-select formControlName="role">
-                    <mat-option value="tank">
-                        <span class="flex flex-icons-center">
-                            <span class="icon tank-icon mr-1"></span>
-                            <span>Танк</span>
-                        </span>
-                    </mat-option>
-                    <mat-option value="heal">
-                        <span class="flex flex-icons-center">
-                            <span class="icon heal-icon mr-1"></span>
-                            <span>Хил</span>
-                        </span>
-                    </mat-option>
-                    <mat-option value="dps">
-                        <span class="flex flex-icons-center">
-                            <span class="icon dps-icon mr-1"></span>
-                            <span>ДПС</span>
-                        </span>
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+
+            <ng-container *ngIf="charactersList$ | async as charactersList">
+              <mat-form-field class="col-4">
+                  <mat-label>Персонаж которым собираю рейд</mat-label>
+                  <mat-select formControlName="character">
+                      <mat-option *ngFor="let character of charactersList" [value]="character">
+                          {{character.name}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-2">
+                  <mat-label>Роль</mat-label>
+
+                  <mat-select formControlName="role">
+                      <mat-option *ngFor="let r of role" [value]="r.value">
+                          <span class="flex flex-icons-center">
+                              <span class="icon mr-1" [ngClass]="r.icon"></span>
+                              <span>{{r.name}}</span>
+                          </span>
+                      </mat-option>
+                  </mat-select>
+
+              </mat-form-field>
+            </ng-container>
             <mat-form-field class="col-2" [floatLabel]="'always'">
                 <mat-label>
                     <span class="flex flex-icons-center">

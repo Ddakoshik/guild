@@ -28,7 +28,13 @@ export const selectActiveCharts = createSelector(
   (state: Character[]): any[] => {
     return state.map(chr => {
       const className = classOfCharactersConstnt.find(i => i.id === chr.classId);
-      return {active: chr.specs.active, name: chr.name, className: className.name};
+      return {
+        active: chr.specs.active,
+        name: chr.name,
+        className: className.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId
+      };
     });
   }
 );
@@ -37,7 +43,14 @@ export const selectDPSCharts = createSelector(
   selectActiveCharts,
   (state: any): any => {
     return state.map(chr => {
-      return { name: chr.name, className: chr.className, builds: chr.active.filter(c => c.spec === 'dps')};
+      //console.log(">>>>", chr);
+      return {
+        name: chr.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId,
+        className: chr.className,
+        builds: chr.active.filter(c => c.spec === 'dps')
+      };
     });
   }
 );
@@ -46,7 +59,12 @@ export const selectTankCharts = createSelector(
   selectActiveCharts,
   (state: any): any => {
     return state.map(chr => {
-      return { name: chr.name, className: chr.className, builds: chr.active.filter(c => c.spec === 'tank')};
+      return {
+        name: chr.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId,
+        className: chr.className,
+        builds: chr.active.filter(c => c.spec === 'tank')};
     });
   }
 );
@@ -55,7 +73,12 @@ export const selectHealCharts = createSelector(
   selectActiveCharts,
   (state: any): any => {
     return state.map(chr => {
-      return { name: chr.name, className: chr.className, builds: chr.active.filter(c => c.spec === 'heal')};
+      return {
+        name: chr.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId,
+        className: chr.className,
+        builds: chr.active.filter(c => c.spec === 'heal')};
     });
   }
 );

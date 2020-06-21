@@ -1,32 +1,33 @@
 import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
+import { raceOfCharactersConstnt, raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 import { EventModel, EventModelId } from '../../../shared/models/event.model';
 import { selectGoogleAuthInfo, selectCharactersList } from '../../../store/selectors';
 import {
   getCharacters
 } from '../../../store/actions/user-profile.action';
 import { Character } from '../../../shared/models/blog.model';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-event-popup-add',
   templateUrl: './event-popup-add.component.html',
   styleUrls: ['./event-popup-add.component.scss']
 })
 export class EventPopupAddComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
 
   insightForm: FormGroup;
   insightDetailsCleanText: string;
   editorLimit = 4000;
   user$: Observable<GoogleAuthInfo>;
   user: GoogleAuthInfo;
-  subscriptions: Subscription[] = [];
 
   private eventCollection: AngularFirestoreCollection<EventModel>;
   event$: Observable<EventModel>;
@@ -35,8 +36,24 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
   raidLocations = raidLocationsConstnt;
   reidDifficultsArrey = reidDifficultsArreyConstnt;
 
-  charactersList$: Observable<Character[]>;
-
+  charactersList$: Observable<any>;
+  ROLE = [
+    {
+      icon: 'tank-icon',
+      name: 'Танк',
+      value: 'tank'
+    },
+    {
+      icon: 'heal-icon',
+      name: 'Хил',
+      value: 'heal'
+    },
+    {
+      icon: 'dps-icon',
+      name: 'ДПС',
+      value: 'dps'
+    }];
+  role = [];
   minDate = new Date();
 
   constructor(private afs: AngularFirestore,
@@ -64,6 +81,7 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
       this.subscriptions.push(this.event$.subscribe(val => {
         this.initialEventState = { ...val, id: this.data };
         this.initForm();
+        this.onEditForm();
       }));
     }
   }
@@ -79,17 +97,18 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
         raidLocetionData: raidLocetionData,
         reidLider: {
           email: this.user.email,
-          nikName: this.insightForm.value.character,
+          nikName: this.insightForm.value.character.name,
           name: this.user.displayName,
-          role: this.insightForm.value.role
+          role: this.insightForm.value.role,
+          character: this.insightForm.value.character
         },
         raidComposition: {
           tankNeed: this.insightForm.value.totalTanks,
-          tankHave: 2,
+          tankHave: this.insightForm.value.role === 'tank' ? 1 : 0,
           healNeed: this.insightForm.value.totalHealers,
-          healHave: 2,
+          healHave: this.insightForm.value.role === 'heal' ? 1 : 0,
           dpsNeed: this.insightForm.value.totalDpsers,
-          dpsHave: 3,
+          dpsHave: this.insightForm.value.role === 'dps' ? 1 : 0,
         },
       });
     this.dialogRef.close();
@@ -107,9 +126,10 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
         raidLocetionData: raidLocetionData,
         reidLider: {
           email: this.user.email,
-          nikName: this.insightForm.value.character,
+          nikName: this.insightForm.value.character.name,
           name: this.user.displayName,
-          role: this.insightForm.value.role
+          role: this.insightForm.value.role,
+          character: this.insightForm.value.character
         },
         raidComposition: {
           tankNeed: this.insightForm.value.totalTanks,
@@ -134,11 +154,33 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
       raidLocetionId: new FormControl(this.initialEventState ? this.initialEventState.raidLocetionId : null),
       reidDifficultId: new FormControl(this.initialEventState ? this.initialEventState.reidDifficultId : ''),
       character: new FormControl(this.initialEventState ? this.initialEventState.character : ''),
-      role: new FormControl(this.initialEventState ? this.initialEventState.role : ''),
+      role: new FormControl({ value: this.initialEventState ? this.initialEventState.role : '', disabled: true }),
       totalTanks: new FormControl(this.initialEventState ? this.initialEventState.totalTanks : ''),
       totalHealers: new FormControl(this.initialEventState ? this.initialEventState.totalHealers : ''),
       totalDpsers: new FormControl(this.initialEventState ? this.initialEventState.totalDpsers : ''),
     });
+
+
+    this.subscriptions.push(
+      this.insightForm.get('character').valueChanges.pipe(
+        map(chr => {
+          const activeSpecs = chr.specs.active.map(activechar => activechar.spec);
+          this.insightForm.get('role').enable();
+           this.role = [...this.ROLE].filter(role => activeSpecs.includes(role.value));
+          return chr;
+        })
+      ).subscribe()
+    );
+  }
+
+  onEditForm() {
+    this.insightForm.get('role').enable({ onlySelf: true });
+    const value = [...this.ROLE].find(c => c.value === this.initialEventState.role);
+    this.role = [value];
+    this.insightForm.get('role').setValue(value.value, { onlySelf: true });
+
+    this.charactersList$ = of([this.initialEventState.character]);
+    this.insightForm.get('character').setValue(this.initialEventState.character, { onlySelf: true });
   }
 
   onTextAreaChanged(data): void {

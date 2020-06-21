@@ -44,7 +44,7 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
       char => {
         const heals = [];
         char.map((c, index) => {
-          if (c.builds.length) {
+          if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId) {
             heals.push({name: char[index].name, className: char[index].className});
           }
         });
@@ -54,10 +54,9 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
 
     this.dps$ = this.store$.pipe(select(selectDPSCharts)).pipe(map(
       char => {
-        console.log(char);
         const dps = [];
         char.map((c, index) => {
-          if (c.builds.length) {
+          if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId) {
             dps.push({name: char[index].name, className: char[index].className});
           }
         });
@@ -69,7 +68,7 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
        char => {
          const tanks = [];
          char.map((c, index) => {
-           if (c.builds.length) {
+           if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId) {
              tanks.push({name: char[index].name, className: char[index].className});
            }
          });
