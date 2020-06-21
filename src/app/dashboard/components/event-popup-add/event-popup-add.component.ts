@@ -12,7 +12,7 @@ import { EventModel, EventModelId } from '../../../shared/models/event.model';
 import { selectGoogleAuthInfo, selectCharactersList } from '../../../store/selectors';
 import {
   getCharacters
-} from '../../../store/actions/user-profile.action';
+} from '../../../store/actions/user-profile.actions';
 import { Character } from '../../../shared/models/blog.model';
 import { map } from 'rxjs/operators';
 @Component({
