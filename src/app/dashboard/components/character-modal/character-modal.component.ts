@@ -64,7 +64,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
 
     if (this.characterData) {
       this.characterForm.get('raceId').enable({ onlySelf: true });
-      const value = [...raceOfCharactersConstnt].find(c => c.id == this.characterData.raceId);
+      const value = [...raceOfCharactersConstnt].find(c => c.id === this.characterData.raceId);
       this.raceOfCharacters$ = of([value]);
       this.characterForm.get('raceId').setValue(value, { onlySelf: true });
       this.specCollection = this.characterData.specs;

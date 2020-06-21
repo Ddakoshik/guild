@@ -25,7 +25,7 @@ import {
   deleteCharacterFail,
   openDeleteCharacterConfirmationModal,
   closeDeleteCharacterConfirmationModal
-} from '../actions/user-profile.action';
+} from '../actions/user-profile.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterModalComponent } from '../../dashboard/components/character-modal/character-modal.component';
 import { AngularFirestore } from '@angular/fire/firestore';

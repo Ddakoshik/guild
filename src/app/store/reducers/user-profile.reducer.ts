@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as actions from '../actions/user-profile.action';
+import * as actions from '../actions';
 import { User, Character } from '../../shared/models/blog.model';
 
 
@@ -25,13 +25,6 @@ const userProfileReducer = createReducer(
     ...state,
     charactersList: [...action.charactersList]
   })),
-
-  // on(actions.updateWbsCodeEngagementsManage, (state, action) => {
-  //   return {
-  //     ...state,
-  //     UpdateWbsCode: action.data
-  //   };
-  // }),
 );
 
 export function reducer(state: State | undefined, action: Action) {

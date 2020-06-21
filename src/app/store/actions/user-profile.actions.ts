@@ -49,7 +49,6 @@ export const closeDeleteCharacterConfirmationModal = createAction(
 );
 
 
-
 export const addNewCharacter = createAction(
   '[UserProfile Api] Add New Character',
   props<{characterData: Character}>()
@@ -92,6 +91,3 @@ export const deleteCharacterSuccess = createAction(
 export const deleteCharacterFail = createAction(
   '[UserProfile] Delete Character Fail'
 );
-
-
-

@@ -43,7 +43,6 @@ export const selectDPSCharts = createSelector(
   selectActiveCharts,
   (state: any): any => {
     return state.map(chr => {
-      //console.log(">>>>", chr);
       return {
         name: chr.name,
         docId: chr.docId,
@@ -82,18 +81,3 @@ export const selectHealCharts = createSelector(
     });
   }
 );
-
-// export const selectUserProfileDataId = createSelector(
-//     selectUserProfileData,
-//     (state: User): string => state.docId
-// );
-
-// export const selectUserEmail = createSelector(
-//     selectGoogleAuthInfo,
-//     (state: GoogleAuthInfo): string => state.email
-// );
-
-// export const getUserInfo = createSelector(
-//     selectAuthState,
-//     (state: fromAuth.AuthState) => state.userInfo
-// );

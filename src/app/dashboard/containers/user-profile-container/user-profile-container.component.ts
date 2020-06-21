@@ -8,7 +8,7 @@ import {
   updateUserProfile,
   getCharacters,
   openDeleteCharacterConfirmationModal
-} from '../../../store/actions/user-profile.action';
+} from '../../../store/actions/user-profile.actions';
 import { selectUserProfileData, selectCharactersList } from '../../../store/selectors';
 import { User, Character } from '../../../shared/models/blog.model';
 import { Observable } from 'rxjs';

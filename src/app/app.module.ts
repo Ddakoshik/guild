@@ -51,7 +51,6 @@ import { EditorComponent } from './core/editor/editor.component';
 import { EditorQuillComponent } from './core/editor-quill/editor-quill.component';
 import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
-import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
 import { CoreModule } from './core/core.module';
 
@@ -65,6 +64,7 @@ import { EventPopupAddComponent } from './dashboard/components/event-popup-add/e
 import { GameCharactersTileComponent } from './dashboard/components/game-characters-tile/game-characters-tile.component';
 import { CharacterModalComponent } from './dashboard/components/character-modal/character-modal.component';
 import { MainPageContainerComponent } from './dashboard/containers/main-page-container/main-page-container.component';
+import { BlogPageContainerComponent } from './dashboard/containers/blog-page-container/blog-page-container.component';
 
 
 @NgModule({
@@ -86,7 +86,6 @@ import { MainPageContainerComponent } from './dashboard/containers/main-page-con
     EditorQuillComponent,
     BlogEditPageComponent,
     BlogAddPageComponent,
-    BlogShowPostsComponent,
     TimeTableLuxonContainerComponent,
     UserProfileContainerComponent,
     UserProfileComponent,
@@ -96,7 +95,8 @@ import { MainPageContainerComponent } from './dashboard/containers/main-page-con
     EventPopupJoinComponent,
     GameCharactersTileComponent,
     CharacterModalComponent,
-    MainPageContainerComponent
+    MainPageContainerComponent,
+    BlogPageContainerComponent
   ],
   imports: [
     BrowserModule,

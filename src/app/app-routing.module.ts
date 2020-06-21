@@ -11,10 +11,10 @@ import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 
 import { UserDataResolver } from './shared/resolvers/user-data.resolver';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
-import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 import { UserProfileContainerComponent } from './dashboard/containers/user-profile-container/user-profile-container.component';
 import { EventsContainerComponent } from './dashboard/containers/events-container/events-container.component';
 import { MainPageContainerComponent } from './dashboard/containers/main-page-container/main-page-container.component';
+import { BlogPageContainerComponent } from './dashboard/containers/blog-page-container/blog-page-container.component';
 
 
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     { path: 'profile', component: UserProfileContainerComponent },
     { path: 'blog', component: BlogComponent,
     children: [
-      { path: '', component: BlogShowPostsComponent},
+      { path: '', component: BlogPageContainerComponent},
       { path: 'add', component: BlogAddPageComponent},
       { path: ':id', component: BlogPageComponent },
       { path: ':id/edit', component: BlogAddPageComponent },

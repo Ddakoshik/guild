@@ -5,10 +5,9 @@ import { DateTime } from 'luxon';
 import { Observable, Subscription } from 'rxjs';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
-import { EventModelId } from '../../../shared/models/event.model';
 import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import { getCharacters } from '../../../store/actions/user-profile.action';
+import { getCharacters } from '../../../store/actions/user-profile.actions';
 import { selectDPSCharts, selectHealCharts, selectTankCharts } from '../../../store/selectors';
 import { map } from 'rxjs/operators';
 
