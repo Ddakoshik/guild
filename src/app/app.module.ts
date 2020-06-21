@@ -38,13 +38,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { MainComponent } from './dashboard/main/main.component';
 import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
 import { TimetableComponent } from './dashboard/timetable/timetable.component';
 import { BlogComponent } from './dashboard/blog/blog.component';
 import { ChatComponent } from './core/chat/chat.component';
-import { UserDataService } from './shared/services/user-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageComponent } from './core/chat/message/message.component';
 import { UploadImgComponent } from './core/upload-img/upload-img.component';
@@ -66,6 +64,7 @@ import { EventPopupJoinComponent } from './dashboard/components/event-popup-join
 import { EventPopupAddComponent } from './dashboard/components/event-popup-add/event-popup-add.component';
 import { GameCharactersTileComponent } from './dashboard/components/game-characters-tile/game-characters-tile.component';
 import { CharacterModalComponent } from './dashboard/components/character-modal/character-modal.component';
+import { MainPageContainerComponent } from './dashboard/containers/main-page-container/main-page-container.component';
 
 
 @NgModule({
@@ -75,7 +74,6 @@ import { CharacterModalComponent } from './dashboard/components/character-modal/
     AuthComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent,
     RulesComponent,
     CompositionComponent,
     TimetableComponent,
@@ -97,7 +95,8 @@ import { CharacterModalComponent } from './dashboard/components/character-modal/
     EventPopupAddComponent,
     EventPopupJoinComponent,
     GameCharactersTileComponent,
-    CharacterModalComponent
+    CharacterModalComponent,
+    MainPageContainerComponent
   ],
   imports: [
     BrowserModule,

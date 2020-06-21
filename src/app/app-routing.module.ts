@@ -4,10 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { MainComponent } from './dashboard/main/main.component';
 import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
-import { TimetableComponent } from './dashboard/timetable/timetable.component';
 import { BlogComponent } from './dashboard/blog/blog.component';
 import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 
@@ -16,6 +14,7 @@ import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.co
 import { BlogShowPostsComponent } from './dashboard/blog-show-posts/blog-show-posts.component';
 import { UserProfileContainerComponent } from './dashboard/containers/user-profile-container/user-profile-container.component';
 import { EventsContainerComponent } from './dashboard/containers/events-container/events-container.component';
+import { MainPageContainerComponent } from './dashboard/containers/main-page-container/main-page-container.component';
 
 
 
@@ -24,7 +23,7 @@ const routes: Routes = [
 
   { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard],
   children: [
-    { path: '', component: MainComponent },
+    { path: '', component: MainPageContainerComponent },
     { path: 'rules', component: RulesComponent },
     { path: 'composition', component: CompositionComponent },
     { path: 'timeanons', component: EventsContainerComponent },
