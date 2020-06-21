@@ -29,7 +29,7 @@ export interface Character {
     classId: number;
     raceId: number;
     docId?: string;
-    specs: SpecCollection
+    specs: SpecCollection;
 }
 
 export interface SpecCollection {

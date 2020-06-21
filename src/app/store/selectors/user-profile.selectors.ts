@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
-import { GoogleAuthInfo } from '../../shared/models/auth.model';
 import * as fromCoreModule from '../reducers';
 import * as fromUserProfile from '../reducers/user-profile.reducer';
 import { User, Character } from '../../shared/models/blog.model';
+import { classOfCharactersConstnt } from '../../shared/models/constants';
 
 
 
@@ -21,6 +21,66 @@ export const selectUserProfileData = createSelector(
 export const selectCharactersList = createSelector(
     selectUserProfile,
     (state: fromUserProfile.State): Character[] => state.charactersList
+);
+
+export const selectActiveCharts = createSelector(
+  selectCharactersList,
+  (state: Character[]): any[] => {
+    return state.map(chr => {
+      const className = classOfCharactersConstnt.find(i => i.id === chr.classId);
+      return {
+        active: chr.specs.active,
+        name: chr.name,
+        className: className.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId
+      };
+    });
+  }
+);
+
+export const selectDPSCharts = createSelector(
+  selectActiveCharts,
+  (state: any): any => {
+    return state.map(chr => {
+      //console.log(">>>>", chr);
+      return {
+        name: chr.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId,
+        className: chr.className,
+        builds: chr.active.filter(c => c.spec === 'dps')
+      };
+    });
+  }
+);
+
+export const selectTankCharts = createSelector(
+  selectActiveCharts,
+  (state: any): any => {
+    return state.map(chr => {
+      return {
+        name: chr.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId,
+        className: chr.className,
+        builds: chr.active.filter(c => c.spec === 'tank')};
+    });
+  }
+);
+
+export const selectHealCharts = createSelector(
+  selectActiveCharts,
+  (state: any): any => {
+    return state.map(chr => {
+      return {
+        name: chr.name,
+        docId: chr.docId,
+        fractionId: chr.fractionId,
+        className: chr.className,
+        builds: chr.active.filter(c => c.spec === 'heal')};
+    });
+  }
 );
 
 // export const selectUserProfileDataId = createSelector(
