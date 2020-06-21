@@ -1,6 +1,6 @@
 <div mat-dialog-title class="dilog-title">
-    <h1 *ngIf="!initialEventState" class="pr-5">Add new event</h1>
-    <h1 *ngIf="initialEventState" class="pr-5">Edit event</h1>
+    <h1 *ngIf="!initialEventState" class="pr-5">Добавить событие</h1>
+    <h1 *ngIf="initialEventState" class="pr-5">Редактировать событие</h1>
     <button mat-icon-button aria-label="close button" class="close-button" mat-dialog-close>
         <mat-icon>clear</mat-icon>
     </button>
@@ -10,7 +10,7 @@
     <form [formGroup]="insightForm">
 
         <mat-form-field class="col-12 p-0 pt-3" [floatLabel]="'always'">
-            <mat-label>Title</mat-label>
+            <mat-label>Заголовок</mat-label>
             <input matInput maxlength="75" placeholder="Event name" autocomplete="off" formControlName="title">
         </mat-form-field>
         <div class="row">
@@ -103,7 +103,7 @@
             </mat-form-field>
         </div>
 
-        <h6 class="mat-form-field-label custom-form-label pt-3">Details Title</h6>
+        <h6 class="mat-form-field-label custom-form-label pt-3">Подробности</h6>
         <quill-editor class="p-0 quill-editor" [style]="{height: '188px'}" [maxLength]="editorLimit"
             placeholder="Details Placeholder" [formControl]="insightForm.get('description')"
             (onContentChanged)="onTextAreaChanged($event)">
