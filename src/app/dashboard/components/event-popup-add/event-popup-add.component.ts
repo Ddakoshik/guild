@@ -100,7 +100,7 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
           nikName: this.insightForm.value.character.name,
           name: this.user.displayName,
           role: this.insightForm.value.role,
-          character: this.insightForm.value.character
+          character: {...this.insightForm.value.character, role: this.insightForm.get('role').value}
         },
         raidComposition: {
           tankNeed: this.insightForm.value.totalTanks,
@@ -111,7 +111,7 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
           dpsHave: this.insightForm.value.role === 'dps' ? 1 : 0,
         },
         raidGroup: [
-          this.insightForm.value.character
+          {...this.insightForm.value.character, role: this.insightForm.get('role').value}
         ],
       });
     this.dialogRef.close();
@@ -132,18 +132,18 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
           nikName: this.insightForm.value.character.name,
           name: this.user.displayName,
           role: this.insightForm.value.role,
-          character: this.insightForm.value.character
+          character: {...this.insightForm.value.character, role: this.insightForm.get('role').value}
         },
         raidComposition: {
           tankNeed: this.insightForm.value.totalTanks,
-          tankHave: 2,
+          tankHave: this.insightForm.value.role === 'tank' ? 1 : 0,
           healNeed: this.insightForm.value.totalHealers,
-          healHave: 2,
+          healHave: this.insightForm.value.role === 'heal' ? 1 : 0,
           dpsNeed: this.insightForm.value.totalDpsers,
-          dpsHave: 3,
+          dpsHave: this.insightForm.value.role === 'dps' ? 1 : 0,
         },
         raidGroup: [
-          this.insightForm.value.character
+          {...this.insightForm.value.character, role: this.insightForm.get('role').value}
         ],
       });
     this.dialogRef.close();

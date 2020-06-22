@@ -10,6 +10,8 @@ import { CoreState } from '../../../store/reducers';
 import { getCharacters } from '../../../store/actions/user-profile.actions';
 import { selectDPSCharts, selectHealCharts, selectTankCharts } from '../../../store/selectors';
 import { map } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { EventModel } from '../../../shared/models/event.model';
 
 @Component({
   selector: 'app-event-popup-join',
@@ -30,15 +32,21 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   dps$: Observable<any>;
   heals$: Observable<any>;
 
+  private eventCollection: AngularFirestoreCollection<EventModel>;
+  event$: Observable<EventModel>;
+
   constructor(
      private store$: Store<CoreState>,
+     private afs: AngularFirestore,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.initForm();
   }
 
   ngOnInit() {
     this.store$.dispatch(getCharacters());
-    //console.log('DTA', this.data.raidGroup);
+   // console.log('DTA', this.data);
+    this.eventCollection = this.afs.collection<EventModel>('event');
+   // this.event$ = this.eventCollection.doc<EventModel>(this.data.id).valueChanges();
 
     this.heals$ = this.store$.pipe(select(selectHealCharts)).pipe(map(
       char => {
@@ -116,6 +124,9 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   addCharacter(char, speck: string) {
+    // this.afs.collection('event').doc(this.data.id).update(
+    // );
+   // this.afs.collection('event').doc(this.data.id).get().then(x => console.log('{{',x));
     console.log('addCharacter', speck, char);
   }
 
