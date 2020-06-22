@@ -38,12 +38,15 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store$.dispatch(getCharacters());
+    //console.log('DTA', this.data.raidGroup);
 
     this.heals$ = this.store$.pipe(select(selectHealCharts)).pipe(map(
       char => {
         const heals = [];
         char.map((c, index) => {
-          if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId) {
+
+          if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId
+            && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
             heals.push({name: char[index].name, className: char[index].className});
           }
         });
@@ -55,7 +58,8 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
       char => {
         const dps = [];
         char.map((c, index) => {
-          if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId) {
+          if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId
+            && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
             dps.push({name: char[index].name, className: char[index].className});
           }
         });
@@ -67,7 +71,8 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
        char => {
          const tanks = [];
          char.map((c, index) => {
-           if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId) {
+           if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId
+             && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
              tanks.push({name: char[index].name, className: char[index].className});
            }
          });

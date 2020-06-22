@@ -110,6 +110,9 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
           dpsNeed: this.insightForm.value.totalDpsers,
           dpsHave: this.insightForm.value.role === 'dps' ? 1 : 0,
         },
+        raidGroup: [
+          this.insightForm.value.character
+        ],
       });
     this.dialogRef.close();
     this.dialogRef.close({ ...this.insightForm.value, date: utcFormat });
@@ -139,6 +142,9 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
           dpsNeed: this.insightForm.value.totalDpsers,
           dpsHave: 3,
         },
+        raidGroup: [
+          this.insightForm.value.character
+        ],
       });
     this.dialogRef.close();
   }
