@@ -6,7 +6,6 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
-import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 
 import { UserDataResolver } from './shared/resolvers/user-data.resolver';
 import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.component';
@@ -24,15 +23,15 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard],
   children: [
     { path: '', component: MainPageContainerComponent },
-    { path: 'rules', component: RulesComponent },
-    { path: 'composition', component: CompositionComponent },
+    // { path: 'rules', component: RulesComponent },
+    // { path: 'composition', component: CompositionComponent },
     { path: 'timeanons', component: EventsContainerComponent },
     { path: 'profile', component: UserProfileContainerComponent },
     { path: 'blog', component: BlogContainerComponent,
     children: [
       { path: '', component: BlogPageContainerComponent},
       { path: 'add', component: BlogAddPageComponent},
-      { path: ':id', component: BlogPageComponent },
+      // { path: ':id', component: BlogPageComponent },
       { path: ':id/edit', component: BlogAddPageComponent },
     ] },
   ]},

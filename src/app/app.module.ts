@@ -42,7 +42,6 @@ import { ChatComponent } from './core/chat/chat.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageComponent } from './core/chat/message/message.component';
 import { UploadImgComponent } from './core/upload-img/upload-img.component';
-import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 import { EditorComponent } from './core/editor/editor.component';
 import { EditorQuillComponent } from './core/editor-quill/editor-quill.component';
 import { BlogEditPageComponent } from './dashboard/blog-edit-page/blog-edit-page.component';
@@ -80,7 +79,6 @@ import { EventInfoTableComponent } from './dashboard/components/event-info-table
     ChatComponent,
     MessageComponent,
     UploadImgComponent,
-    BlogPageComponent,
     EditorComponent,
     EditorQuillComponent,
     BlogEditPageComponent,

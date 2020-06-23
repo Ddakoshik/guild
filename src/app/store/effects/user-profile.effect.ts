@@ -2,30 +2,30 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, tap, switchMap, withLatestFrom, catchError } from 'rxjs/operators';
 import {
-  openAddCharacterModal,
-  openEditCharacterModal,
-  getUserProfile,
-  getUserProfileSuccess,
-  getUserProfileFail,
-  updateUserProfile,
-  updateProfileSuccess,
-  updateProfileFail,
-  addNewCharacter,
-  closeAddCharacterModal,
-  addNewCharacterSuccess,
-  getCharactersFail,
-  getCharactersSuccess,
-  getCharacters,
-  updateCharacter,
-  updateCharacterFail,
-  updateCharacterSuccess,
-  closeEditCharacterModal,
-  deleteCharacter,
-  deleteCharacterSuccess,
-  deleteCharacterFail,
-  openDeleteCharacterConfirmationModal,
-  closeDeleteCharacterConfirmationModal
-} from '../actions/user-profile.actions';
+    openAddCharacterModal,
+    openEditCharacterModal,
+    getUserProfile,
+    getUserProfileSuccess,
+    getUserProfileFail,
+    updateUserProfile,
+    updateProfileSuccess,
+    updateProfileFail,
+    addNewCharacter,
+    closeAddCharacterModal,
+    addNewCharacterSuccess,
+    getCharactersFail,
+    getCharactersSuccess,
+    getCharacters,
+    updateCharacter,
+    updateCharacterFail,
+    updateCharacterSuccess,
+    closeEditCharacterModal,
+    deleteCharacter,
+    deleteCharacterSuccess,
+    deleteCharacterFail,
+    openDeleteCharacterConfirmationModal,
+    closeDeleteCharacterConfirmationModal, addNewCharacterFail
+} from '../actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterModalComponent } from '../../dashboard/components/character-modal/character-modal.component';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -36,11 +36,7 @@ import { selectUserEmail, selectUserProfileData } from '../selectors';
 import { of } from 'rxjs';
 import { ModalService } from '../../shared/modals/modal.service';
 import { ConfirmDialogModel } from '../../shared/models/modal.model';
-
-export const modalConfig = {
-    width: '800px',
-    disableClose: true
-};
+import { modalConfig } from '../../shared/models/constants';
 
 
 @Injectable()
@@ -51,7 +47,7 @@ export class UserProfileEffects {
       mergeMap((action) => {
         const dialogRef = this.dialog.open(CharacterModalComponent, {
           ...modalConfig,
-          data: {chracterData: null}
+          data: {characterData: null}
         });
         return dialogRef.afterClosed();
       }),
@@ -68,7 +64,7 @@ export class UserProfileEffects {
       mergeMap((action) => {
         const dialogRef = this.dialog.open(CharacterModalComponent, {
           ...modalConfig,
-          data: {chracterData: action.characterData}
+          data: {characterData: action.characterData}
         });
         return dialogRef.afterClosed();
       }),
@@ -132,7 +128,7 @@ export class UserProfileEffects {
           map((data) => {
             return addNewCharacterSuccess();
           }),
-          catchError(() => of(getUserProfileFail()))
+          catchError(() => of(addNewCharacterFail()))
         );
       })
     ));
@@ -163,7 +159,7 @@ export class UserProfileEffects {
       })
     ));
 
-    engagementManageRemoveEngagementConfirm$ = createEffect(() => this.actions$.pipe(
+    openDeleteCharacterConfirmationModal$ = createEffect(() => this.actions$.pipe(
       ofType(openDeleteCharacterConfirmationModal),
       tap((action) => {
         const modalData: ConfirmDialogModel = {

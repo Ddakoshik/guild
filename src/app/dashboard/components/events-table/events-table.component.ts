@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { PeriodicElement } from '../../../shared/models/event.model';
-import { reidDifficultsArreyConstnt } from '../../../shared/models/constants';
+import {EventModel, PeriodicElement} from '../../../shared/models/event.model';
+import { reidDifficultyArrayConst } from '../../../shared/models/constants';
 
 @Component({
   selector: 'app-events-table',
@@ -10,15 +10,15 @@ import { reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 })
 export class EventsTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'dataTime', 'reidLider', 'raidName', 'raidComposition', 'info', 'action'];
-  dataSource: MatTableDataSource<PeriodicElement>;
+  displayedColumns: string[] = ['id', 'dataTime', 'reidLeader', 'raidName', 'raidComposition', 'info', 'action'];
+  dataSource: MatTableDataSource<EventModel>;
 
-  @Input() set data(data: PeriodicElement[]) {
+  @Input() set data(data: EventModel[]) {
     this.dataSource = new MatTableDataSource(data);
   }
-  @Output() isAcceptEvent: EventEmitter<string> = new EventEmitter<string>();
-  @Output() isEditEvent: EventEmitter<string> = new EventEmitter<string>();
-  @Output() isDeleteEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() isAcceptEvent: EventEmitter<EventModel> = new EventEmitter<EventModel>();
+  @Output() isEditEvent: EventEmitter<EventModel> = new EventEmitter<EventModel>();
+  @Output() isDeleteEvent: EventEmitter<EventModel> = new EventEmitter<EventModel>();
 
   get isShowTable() {
     return this.dataSource.data ? !!this.dataSource.data.length : false;
@@ -35,19 +35,18 @@ export class EventsTableComponent implements OnInit {
 
   acceptEvent(element) {
     this.isAcceptEvent.emit(element);
-    // TODO nead add (user accept event) mechanism
   }
 
   editEvent(element) {
-    this.isEditEvent.emit(element.id);
+    this.isEditEvent.emit(element);
   }
 
   deleteEvent(element) {
-    this.isDeleteEvent.emit(element.id);
+    this.isDeleteEvent.emit(element);
   }
 
   reidDifficult(reidDifficultId: number) {
-    return reidDifficultsArreyConstnt.find(obj => obj.id === reidDifficultId).name;
+    return reidDifficultyArrayConst.find(obj => obj.id === reidDifficultId).name;
   }
 
 }

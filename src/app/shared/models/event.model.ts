@@ -1,13 +1,13 @@
 export interface PeriodicElement {
     id: number;
-    reidLider: ReidLider;
-    raidLocetionData: RaidLocetionData;
+    reidLeader: ReidLeader;
+    raidLocationData: RaidLocationData;
     info: string;
     dataTime: string;
     raidComposition: RaidComposition;
 }
 
-export interface ReidLider {
+export interface ReidLeader {
     email: string;
     nikName: string;
     name: string;
@@ -22,7 +22,7 @@ export interface RaidComposition {
     dpsHave: number;
 }
 
-export interface RaidLocetionData {
+export interface RaidLocationData {
     id: number;
     reidDifficult: string;
     shortName: string;
@@ -36,16 +36,17 @@ export interface EventModel {
     timeStart: string;
     timeEnd: string;
     description: string;
-    reidLider: ReidLider;
-    raidLocetionData: RaidLocetionData;
+    reidLeader: ReidLeader;
+    raidLocationData: RaidLocationData;
     raidComposition: RaidComposition;
-    raidLocetionId: number;
+    raidLocationId: number;
     reidDifficultId: string;
     character: string;
     role: string;
     totalTanks: number;
     totalHealers: number;
     totalDpsers: number;
+    docId?: string;
 }
 
 export interface EventModelId extends EventModel { id: string; }

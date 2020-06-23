@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError } from 'rxjs/operators';
-import { getBlogs, getBlogsFail, getBlogsSuccess } from '../actions/blog.actions';
+import { getBlogs, getBlogsFail, getBlogsSuccess } from '../actions';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Blog } from '../../shared/models/blog.model';
 import { CoreState } from '../reducers';

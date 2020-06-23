@@ -35,8 +35,8 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CharacterModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { chracterData: Character }) {
-    this.characterData = data.chracterData;
+    @Inject(MAT_DIALOG_DATA) public data: { characterData: Character }) {
+    this.characterData = data.characterData;
   }
 
   ngOnInit() {

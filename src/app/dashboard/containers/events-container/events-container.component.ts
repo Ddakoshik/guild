@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { EventModel, EventModelId } from '../../../shared/models/event.model';
+import { EventModel } from '../../../shared/models/event.model';
 import { DateTime } from 'luxon';
 import { EventPopupAddComponent } from '../../components/event-popup-add/event-popup-add.component';
 import { EventPopupJoinComponent } from '../../components/event-popup-join/event-popup-join.component';
+import {getEvents, openAddEventModal, openDeleteEventConfirmationModal, openEditEventModal} from '../../../store/actions';
+import { select, Store } from '@ngrx/store';
+import { CoreState } from '../../../store/reducers';
+import { selectEventsList } from '../../../store/selectors';
 
 @Component({
   selector: 'app-events-container',
@@ -14,37 +18,39 @@ import { EventPopupJoinComponent } from '../../components/event-popup-join/event
 })
 export class EventsContainerComponent implements OnInit {
 
-  private eventCollection: AngularFirestoreCollection<EventModel>;
-  events: Observable<EventModelId[]>;
-
   showWeek = false;
+  eventsList$: Observable<EventModel[]>;
 
-  constructor(private afs: AngularFirestore, public dialog: MatDialog) { }
+  constructor(private afs: AngularFirestore,
+              public dialog: MatDialog,
+              private store$: Store<CoreState>) { }
 
   ngOnInit() {
-    this.eventCollection = this.afs.collection<EventModel>('event');
-    this.events = this.eventCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const dataObj = a.payload.doc.data() as EventModel;
-        const id = a.payload.doc.id;
-        return { id, ...dataObj };
-      });
-    });
+    this.store$.dispatch(getEvents());
+    this.eventsList$ = this.store$.pipe(select(selectEventsList));
+
+
+    // this.eventCollection = this.afs.collection<EventModel>('event');
+    // this.events = this.eventCollection.snapshotChanges().map(actions => {
+    //   return actions.map(a => {
+    //     const dataObj = a.payload.doc.data() as EventModel;
+    //     const id = a.payload.doc.id;
+    //     return { id, ...dataObj };
+    //   });
+    // });
   }
 
   addEvent() {
-    const dialogRef = this.dialog.open(EventPopupAddComponent, {
-      width: '800px',
-      disableClose: true
-    });
+    this.store$.dispatch(openAddEventModal());
   }
 
-  isEditEvent(eventId: string) {
-    const dialogRef = this.dialog.open(EventPopupAddComponent, {
-      width: '800px',
-      disableClose: true,
-      data: eventId
-    });
+  isEditEvent(event: EventModel) {
+    // const dialogRef = this.dialog.open(EventPopupAddComponent, {
+    //   width: '800px',
+    //   disableClose: true,
+    //   data: event.docId
+    // });
+    this.store$.dispatch(openEditEventModal({eventData: event}));
   }
 
   changeViev() {
@@ -55,7 +61,7 @@ export class EventsContainerComponent implements OnInit {
     console.log('date', date);
   }
 
-  isAcceptEvent(event: any) {
+  isAcceptEvent(event: EventModel) {
     const dialogRef = this.dialog.open(EventPopupJoinComponent, {
       width: '800px',
       disableClose: true,
@@ -65,16 +71,7 @@ export class EventsContainerComponent implements OnInit {
 
 
 
-  isDeleteEvent(eventId: string) {
-    this.afs.collection('event')
-      .doc(eventId)
-      .delete()
-      .then(function () {
-        console.log('Document successfully deleted!');
-      }).catch(
-        function (error) {
-          console.error('Error removing document: ', error);
-        });
-
+  isDeleteEvent(element: EventModel): void {
+    this.store$.dispatch(openDeleteEventConfirmationModal({eventData: element}));
   }
 }
