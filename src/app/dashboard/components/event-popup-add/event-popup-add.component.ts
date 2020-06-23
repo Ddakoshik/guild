@@ -7,13 +7,12 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import { raceOfCharactersConstnt, raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
+import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 import { EventModel, EventModelId } from '../../../shared/models/event.model';
 import { selectGoogleAuthInfo, selectCharactersList } from '../../../store/selectors';
 import {
   getCharacters
 } from '../../../store/actions/user-profile.actions';
-import { Character } from '../../../shared/models/blog.model';
 import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-event-popup-add',

@@ -7,19 +7,29 @@
 main {
     width: 57%;
 }
+.first_raid, .second_raid {
+    background-size: cover;
+    height: 170px;
+    margin-bottom: 35px;
+    h5 {
+        color: rgb(216, 216, 216);
+        padding-left: 30px;
+        padding-top: 50px;
+        text-shadow: red 0 0 5px;
+    }
+}
+
 .first_raid {
     background: url('../../../../assets/img/raid_first.jpg');
     background-size: cover;
-    height: 170px;
-    margin-bottom: 35px;
 }
+
 .second_raid {
     background: url('../../../../assets/img/raid_second.jpg');
     background-size: cover;
-    height: 170px;
-    margin-bottom: 35px;
 }
-input[class="input1"], input[class="input2"] {
+
+.raid-nav-button {
     background-color: rgb(31, 30, 30);
     font-weight: 650;
     color: rgb(216, 216, 216);
@@ -29,22 +39,19 @@ input[class="input1"], input[class="input2"] {
     margin-top: 30px;
     cursor: pointer;
     border-radius: 5px;
+    outline: none;
+    text-transform: uppercase;
 }
-.second_raid > h5, .first_raid > h5 {
-    color: rgb(216, 216, 216);
-    padding-left: 30px;
-    padding-top: 50px;
-    text-shadow: red 0 0 5px;
-}
+
+
+
+
 h4 {
     font-size: 18px;
     font-weight: bold;
     margin-top: 10px;
 }
-.article_all {
-    display: flex;
-    justify-content: space-between;
-}
+
 .left {
     width: 320px;
 }
@@ -62,7 +69,7 @@ img {
     height: 180px;
     margin-left: -5px;
 }
-aside {
+.event-inf-box {
     width: 41%;
 }
 .button_aside > h5 {
@@ -94,18 +101,15 @@ li > .icon.tank-icon, .icon.heal-icon, .icon.dps-icon {
     margin-right: 5px;
 }
 .aside_list {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    height: 233px;
+    height: 240px;
     
 }
 .events {
-    background-color: rgb(250, 240, 240);
-    width: 94%;
-    margin-left: 3%;
-    margin-top: 2%;
+    background-color: #fff;
+    width: calc(100% - 32px);
     display: flex;
-    // justify-content: space-between;
     flex-direction: row;
 }
 .scroll {
@@ -134,4 +138,10 @@ li > .icon.tank-icon, .icon.heal-icon, .icon.dps-icon {
     border-bottom: 2px #000 solid;
     padding-bottom: 2%;
     padding-top: 2%;
+}
+
+
+.article_all {
+    display: flex;
+    justify-content: space-between;
 }

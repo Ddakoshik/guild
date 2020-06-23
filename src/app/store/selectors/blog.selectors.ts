@@ -13,3 +13,10 @@ export const selectBlogList = createSelector(
     selectBlog,
     (state: fromBlog.State): Blog[] => state.blogList
 );
+
+export const selectShortBlogList = createSelector(
+    selectBlog,
+    (state: fromBlog.State): Blog[] => {
+        return state.blogList.slice(0, 2);
+    }
+);
