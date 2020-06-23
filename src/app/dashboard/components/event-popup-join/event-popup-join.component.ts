@@ -7,11 +7,12 @@ import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { raidLocationsConstnt, reidDifficultsArreyConstnt } from '../../../shared/models/constants';
 import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import { getCharacters } from '../../../store/actions/user-profile.actions';
+import { getCharacters } from '../../../store/actions';
 import { selectDPSCharts, selectHealCharts, selectTankCharts } from '../../../store/selectors';
-import { map } from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { EventModel } from '../../../shared/models/event.model';
+import {User} from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-event-popup-join',
@@ -124,9 +125,12 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   addCharacter(char, speck: string) {
-    // this.afs.collection('event').doc(this.data.id).update(
-    // );
-   // this.afs.collection('event').doc(this.data.id).get().then(x => console.log('{{',x));
+    // this.afs.collection<Event>('event').doc(this.data.id).valueChanges().pipe(
+    //     tap((val: any) => {
+    //       return this.afs.collection('event').doc(this.data.id).update({...val, raidGroup: [...val.raidGroup, {...char, role: speck}] }
+    //       );
+    //     })
+    // ).subscribe();
     console.log('addCharacter', speck, char);
   }
 
