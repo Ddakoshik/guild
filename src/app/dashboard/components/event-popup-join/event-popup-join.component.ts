@@ -9,10 +9,9 @@ import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
 import { getCharacters } from '../../../store/actions';
 import { selectDPSCharts, selectHealCharts, selectTankCharts } from '../../../store/selectors';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, switchMap, take, tap} from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { EventModel } from '../../../shared/models/event.model';
-import {User} from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-event-popup-join',
@@ -45,18 +44,22 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store$.dispatch(getCharacters());
-   // console.log('DTA', this.data);
     this.eventCollection = this.afs.collection<EventModel>('event');
-   // this.event$ = this.eventCollection.doc<EventModel>(this.data.id).valueChanges();
 
     this.heals$ = this.store$.pipe(select(selectHealCharts)).pipe(map(
       char => {
+        console.log('char', char);
         const heals = [];
         char.map((c, index) => {
 
           if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId
             && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
-            heals.push({name: char[index].name, className: char[index].className});
+            heals.push({
+                name: char[index].name,
+                className: char[index].className,
+                docId: char[index].docId,
+                authUserEmail: char[index].authUserEmail
+            });
           }
         });
         return heals;
@@ -69,7 +72,12 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
         char.map((c, index) => {
           if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId
             && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
-            dps.push({name: char[index].name, className: char[index].className});
+            dps.push({
+                name: char[index].name,
+                className: char[index].className,
+                docId: char[index].docId,
+                authUserEmail: char[index].authUserEmail
+            });
           }
         });
         return dps;
@@ -82,7 +90,12 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
          char.map((c, index) => {
            if (c.builds.length && char[index].fractionId === this.data.reidLider.character.fractionId
              && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
-             tanks.push({name: char[index].name, className: char[index].className});
+             tanks.push({
+                 name: char[index].name,
+                 className: char[index].className,
+                 docId: char[index].docId,
+                 authUserEmail: char[index].authUserEmail
+             });
            }
          });
           return tanks;
@@ -125,13 +138,16 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   addCharacter(char, speck: string) {
-    // this.afs.collection<Event>('event').doc(this.data.id).valueChanges().pipe(
-    //     tap((val: any) => {
-    //       return this.afs.collection('event').doc(this.data.id).update({...val, raidGroup: [...val.raidGroup, {...char, role: speck}] }
-    //       );
-    //     })
-    // ).subscribe();
+    let flag = false;
+    this.afs.collection<Event>('event').doc(this.data.docId).valueChanges().pipe(
+        take(1),
+        switchMap((val: any) => {
+          if (!flag) {
+            flag = !flag;
+            return this.afs.collection('event').doc(this.data.docId).update({...val, raidGroup: [...val.raidGroup, {...char, role: speck}] });
+          }
+        })
+    ).subscribe();
     console.log('addCharacter', speck, char);
   }
-
 }
