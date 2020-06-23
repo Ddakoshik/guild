@@ -1,0 +1,8 @@
+<mat-card class="blog-card">
+    <div [ngStyle]="{'background-image': 'url(' + blog.url + ')'}" class="img-box"></div>
+    <div class="p-3 card-body">
+        <p class="title mb-1">{{blog.title}}</p>
+        <div innerHTML="{{blog.body | htmlTextLength: {maxLength: 150, html: true} }}" class="blog-body"></div>
+    </div>
+</mat-card>
+

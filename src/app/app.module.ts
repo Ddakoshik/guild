@@ -21,9 +21,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 
-import { AuthService } from './shared/services/auth.service';
-import { AuthGuard } from './shared/guards/auth.guard';
-
 // pipes
 import { PipesModule } from './shared/pipes';
 
@@ -41,7 +38,6 @@ import { FooterComponent } from './core/footer/footer.component';
 import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
 import { TimetableComponent } from './dashboard/timetable/timetable.component';
-import { BlogComponent } from './dashboard/blog/blog.component';
 import { ChatComponent } from './core/chat/chat.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageComponent } from './core/chat/message/message.component';
@@ -65,6 +61,10 @@ import { GameCharactersTileComponent } from './dashboard/components/game-charact
 import { CharacterModalComponent } from './dashboard/components/character-modal/character-modal.component';
 import { MainPageContainerComponent } from './dashboard/containers/main-page-container/main-page-container.component';
 import { BlogPageContainerComponent } from './dashboard/containers/blog-page-container/blog-page-container.component';
+import { BlogSmallCardComponent } from './dashboard/components/blog-small-card/blog-small-card.component';
+import { BlogBigCardComponent } from './dashboard/components/blog-big-card/blog-big-card.component';
+import { BlogContainerComponent } from './dashboard/containers/blog-container/blog-container.component';
+import { EventInfoTableComponent } from './dashboard/components/event-info-table/event-info-table.component';
 
 
 @NgModule({
@@ -77,7 +77,6 @@ import { BlogPageContainerComponent } from './dashboard/containers/blog-page-con
     RulesComponent,
     CompositionComponent,
     TimetableComponent,
-    BlogComponent,
     ChatComponent,
     MessageComponent,
     UploadImgComponent,
@@ -96,7 +95,11 @@ import { BlogPageContainerComponent } from './dashboard/containers/blog-page-con
     GameCharactersTileComponent,
     CharacterModalComponent,
     MainPageContainerComponent,
-    BlogPageContainerComponent
+    BlogPageContainerComponent,
+    BlogSmallCardComponent,
+    BlogBigCardComponent,
+    BlogContainerComponent,
+    EventInfoTableComponent
   ],
   imports: [
     BrowserModule,

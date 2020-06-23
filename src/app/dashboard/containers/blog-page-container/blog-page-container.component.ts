@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Blog } from '../../../shared/models/blog.model';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -16,12 +15,10 @@ import { selectBlogList } from '../../../store/selectors/blog.selectors';
 })
 export class BlogPageContainerComponent implements OnInit {
 
-  private blogCollection: AngularFirestoreCollection<Blog>;
   blogList$: Observable<Blog[]>;
 
   constructor(private store$: Store<CoreState>, private router: Router) {
   }
-
 
   ngOnInit() {
     this.store$.dispatch(getBlogs());

@@ -6,7 +6,6 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { RulesComponent } from './dashboard/rules/rules.component';
 import { CompositionComponent } from './dashboard/composition/composition.component';
-import { BlogComponent } from './dashboard/blog/blog.component';
 import { BlogPageComponent } from './dashboard/blog-page/blog-page.component';
 
 import { UserDataResolver } from './shared/resolvers/user-data.resolver';
@@ -15,6 +14,7 @@ import { UserProfileContainerComponent } from './dashboard/containers/user-profi
 import { EventsContainerComponent } from './dashboard/containers/events-container/events-container.component';
 import { MainPageContainerComponent } from './dashboard/containers/main-page-container/main-page-container.component';
 import { BlogPageContainerComponent } from './dashboard/containers/blog-page-container/blog-page-container.component';
+import { BlogContainerComponent } from './dashboard/containers/blog-container/blog-container.component';
 
 
 
@@ -28,7 +28,7 @@ const routes: Routes = [
     { path: 'composition', component: CompositionComponent },
     { path: 'timeanons', component: EventsContainerComponent },
     { path: 'profile', component: UserProfileContainerComponent },
-    { path: 'blog', component: BlogComponent,
+    { path: 'blog', component: BlogContainerComponent,
     children: [
       { path: '', component: BlogPageContainerComponent},
       { path: 'add', component: BlogAddPageComponent},
