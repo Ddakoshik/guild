@@ -1,6 +1,11 @@
 import { PeriodicElement } from './event.model';
 import { RaceOfCharacterModel, ClassOfCharacterModel, FractionOfCharacterModel, SexOfCharactersModel } from './profile.model';
 
+export const modalConfig = {
+  width: '800px',
+  disableClose: true
+};
+
 export const user = {
   userNickname: 'Drakoshik',
   userEmail: 'roobot@i.ua',
@@ -295,7 +300,7 @@ export const raidLocationsConstnt = [
   }
 ];
 
-export const reidDifficultsArreyConstnt = [
+export const reidDifficultyArrayConst = [
   {
     id: 1,
     name: 'об'
@@ -315,12 +320,12 @@ export const reidDifficultsArreyConstnt = [
 export const dataelEments: PeriodicElement[] = [
   {
     id: 1,
-    reidLider: {
+    reidLeader: {
       email: 'roobot@i.ua',
       nikName: 'Aizik',
       name: 'Andrii'
     },
-    raidLocetionData: {
+    raidLocationData: {
       id: 2,
       shortName: 'ГС',
       reidDifficult: 'гер',
@@ -339,12 +344,12 @@ export const dataelEments: PeriodicElement[] = [
   },
   {
     id: 100001,
-    reidLider: {
+    reidLeader: {
       email: 'roobot@i.ua',
       nikName: 'Losik',
       name: 'Andrii'
     },
-    raidLocetionData: {
+    raidLocationData: {
       id: 2,
       shortName: 'ГС',
       reidDifficult: 'гер',
@@ -363,12 +368,12 @@ export const dataelEments: PeriodicElement[] = [
   },
   {
     id: 444000,
-    reidLider: {
+    reidLeader: {
       email: 'roobot@i.ua',
       nikName: 'Aizik',
       name: 'Andrii'
     },
-    raidLocetionData: {
+    raidLocationData: {
       id: 2,
       shortName: 'АПТ',
       reidDifficult: 'об',
@@ -613,3 +618,20 @@ export const charactersSpecs = {
   //   { id: 'shadow', icon: 'prist_shadow.png', roleIcon: 'ej-dps.png' }
   // ],
 };
+
+export const characterRolesConst = [
+  {
+    icon: 'tank-icon',
+    name: 'Танк',
+    value: 'tank'
+  },
+  {
+    icon: 'heal-icon',
+    name: 'Хил',
+    value: 'heal'
+  },
+  {
+    icon: 'dps-icon',
+    name: 'ДПС',
+    value: 'dps'
+  }];

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlogPageComponent } from './blog-page.component';
+import { RaidGroupListComponent } from './raid-group-list.component';
 
-describe('BlogPageComponent', () => {
-  let component: BlogPageComponent;
-  let fixture: ComponentFixture<BlogPageComponent>;
+describe('RaidGroupListComponent', () => {
+  let component: RaidGroupListComponent;
+  let fixture: ComponentFixture<RaidGroupListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlogPageComponent ]
+      declarations: [ RaidGroupListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlogPageComponent);
+    fixture = TestBed.createComponent(RaidGroupListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

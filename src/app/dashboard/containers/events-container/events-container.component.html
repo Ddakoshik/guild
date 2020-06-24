@@ -12,7 +12,7 @@
     (filterByDate)="isFilterByDate($event)"></app-time-table-luxon-container>
 
 <app-events-table 
-    [data]='events | async'
+    [data]='eventsList$ | async'
     (isAcceptEvent)="isAcceptEvent($event)"
     (isEditEvent)="isEditEvent($event)"
     (isDeleteEvent)="isDeleteEvent($event)"></app-events-table>

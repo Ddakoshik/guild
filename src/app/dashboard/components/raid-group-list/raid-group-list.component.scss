@@ -1,0 +1,29 @@
+.raid-list {
+  display: flex;
+  flex-direction: row;
+  border: 1px dashed;
+
+  ul {
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 35%;
+  }
+
+  ul,ul li {
+    list-style: none;
+  }
+
+  li {
+    padding-left: 10px;
+    border-bottom: 1px dashed;
+    display: flex;
+    justify-content: space-between;
+  }
+  span {
+    width: 90%;
+  }
+  button {
+    position: relative;
+    right: 0px;
+  }
+}

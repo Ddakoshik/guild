@@ -29,6 +29,7 @@ export const selectActiveCharts = createSelector(
     return state.map(chr => {
       const className = classOfCharactersConstnt.find(i => i.id === chr.classId);
       return {
+        authUserEmail: chr.authUserEmail,
         active: chr.specs.active,
         name: chr.name,
         className: className.name,
@@ -44,6 +45,7 @@ export const selectDPSCharts = createSelector(
   (state: any): any => {
     return state.map(chr => {
       return {
+        authUserEmail: chr.authUserEmail,
         name: chr.name,
         docId: chr.docId,
         fractionId: chr.fractionId,
@@ -59,6 +61,7 @@ export const selectTankCharts = createSelector(
   (state: any): any => {
     return state.map(chr => {
       return {
+        authUserEmail: chr.authUserEmail,
         name: chr.name,
         docId: chr.docId,
         fractionId: chr.fractionId,
@@ -73,6 +76,7 @@ export const selectHealCharts = createSelector(
   (state: any): any => {
     return state.map(chr => {
       return {
+        authUserEmail: chr.authUserEmail,
         name: chr.name,
         docId: chr.docId,
         fractionId: chr.fractionId,

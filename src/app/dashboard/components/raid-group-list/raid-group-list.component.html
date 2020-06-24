@@ -1,0 +1,25 @@
+<div class="raid-list">
+  <ul>
+    <li><span class="icon tank-icon mr-1"></span></li>
+    <li *ngFor="let char of tanks">
+      {{char.name}}
+      <button *ngIf="char.authUserEmail == user || event.email == user" mat-raised-button color="warn" (click)="delete(char)">x</button>
+    </li>
+  </ul>
+
+  <ul>
+    <li><span class="icon heal-icon mr-1"></span></li>
+    <li *ngFor="let char of heals">
+      {{char.name}}
+      <button *ngIf="char.authUserEmail == user || event.email == user" mat-raised-button color="warn" (click)="delete(char)">x</button>
+    </li>
+  </ul>
+
+  <ul>
+    <li><span class="icon dps-icon mr-1"></span></li>
+    <li *ngFor="let char of dps">
+      {{char.name}}
+      <button *ngIf="char.authUserEmail == user || event.email == user" mat-raised-button color="warn" (click)="delete(char)">x</button>
+    </li>
+  </ul>
+</div>

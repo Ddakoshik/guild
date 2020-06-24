@@ -35,7 +35,7 @@
             </div>
             <mat-form-field class="col-6">
                 <mat-label>Выберите (Подземелие/Рейд)</mat-label>
-                <mat-select formControlName="raidLocetionId">
+                <mat-select formControlName="raidLocationId">
                     <mat-option *ngFor="let raid of raidLocations" [value]="raid.id">
                         {{raid.fullName}}
                     </mat-option>
@@ -45,7 +45,7 @@
             <mat-form-field class="col-4">
                 <mat-label>Сложность (Подземелия/Рейда)</mat-label>
                 <mat-select formControlName="reidDifficultId">
-                    <mat-option *ngFor="let reidDifficult of reidDifficultsArrey" [value]="reidDifficult.id">
+                    <mat-option *ngFor="let reidDifficult of reidDifficultyArray" [value]="reidDifficult.id">
                         {{reidDifficult.name}}
                     </mat-option>
                 </mat-select>

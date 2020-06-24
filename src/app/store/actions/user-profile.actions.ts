@@ -26,14 +26,14 @@ export const updateProfileFail = createAction(
 
 
 export const openAddCharacterModal = createAction(
-  '[UserProfile] Open Add Cgarecter Modal'
+  '[UserProfile] Open Add Character Modal'
 );
 export const closeAddCharacterModal = createAction(
-  '[UserProfile] Close Add Cgarecter Modal'
+  '[UserProfile] Close Add Character Modal'
 );
 
 export const openEditCharacterModal = createAction(
-  '[UserProfile] Open Edit Cgarecter Modal',
+  '[UserProfile] Open Edit Character Modal',
   props<{characterData: Character}>()
 );
 export const closeEditCharacterModal = createAction(
@@ -55,6 +55,9 @@ export const addNewCharacter = createAction(
 );
 export const addNewCharacterSuccess = createAction(
   '[UserProfile] Add New Character Success',
+);
+export const addNewCharacterFail = createAction(
+    '[UserProfile] Add New Character Fail',
 );
 
 export const updateCharacter = createAction(

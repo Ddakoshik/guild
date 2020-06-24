@@ -36,7 +36,7 @@ export class GameCharactersTileComponent implements OnInit {
   }
   @Output() addNewCharacter: EventEmitter<null> = new EventEmitter<null>();
   @Output() editCharacter: EventEmitter<Character> = new EventEmitter<Character>();
-  @Output() deleteCherecer: EventEmitter<Character> = new EventEmitter<null>();
+  @Output() deleteCharacter: EventEmitter<Character> = new EventEmitter<null>();
 
   constructor() { }
 
@@ -51,8 +51,8 @@ export class GameCharactersTileComponent implements OnInit {
     this.editCharacter.emit(item);
   }
 
-  openDeleteCherecerConfirmation(item: Character) {
-    this.deleteCherecer.emit(item);
+  openDeleteCharacterConfirmation(item: Character) {
+    this.deleteCharacter.emit(item);
   }
 
   getUrl(iconType: string, iconName: string) {
