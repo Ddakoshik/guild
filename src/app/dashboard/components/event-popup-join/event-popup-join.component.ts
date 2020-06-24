@@ -3,13 +3,18 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { Observable, Subscription } from 'rxjs';
-import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { raidLocationsConstnt, reidDifficultyArrayConst } from '../../../shared/models/constants';
 import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
 import { getCharacters } from '../../../store/actions';
-import { selectDPSCharts, selectHealCharts, selectTankCharts } from '../../../store/selectors';
-import {map, switchMap, take, tap} from 'rxjs/operators';
+import {
+  selectDPSCharts,
+  selectEventbyId, selectEventbyIdDps,
+  selectEventbyIdHeal, selectEventbyIdTank,
+  selectHealCharts,
+  selectTankCharts, selectUserEmail
+} from '../../../store/selectors';
+import { map, switchMap, take } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { EventModel } from '../../../shared/models/event.model';
 
@@ -20,7 +25,7 @@ import { EventModel } from '../../../shared/models/event.model';
 })
 export class EventPopupJoinComponent implements OnInit, OnDestroy {
   insightForm: FormGroup;
-  user: GoogleAuthInfo;
+  user$: Observable<any>;
   raidLocations = raidLocationsConstnt;
   reidDifficultyArray = reidDifficultyArrayConst;
   subscriptions: Subscription[] = [];
@@ -28,6 +33,11 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   tanks$: Observable<any>;
   dps$: Observable<any>;
   heals$: Observable<any>;
+
+  eventTanks$: Observable<any>;
+  eventHeals$: Observable<any>;
+  eventDps$: Observable<any>;
+  raidGroup$: Observable<any>;
 
   private eventCollection: AngularFirestoreCollection<EventModel>;
 
@@ -39,12 +49,13 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.user$ = this.store$.pipe(select(selectUserEmail));
+
     this.store$.dispatch(getCharacters());
     this.eventCollection = this.afs.collection<EventModel>('event');
 
     this.heals$ = this.store$.pipe(select(selectHealCharts)).pipe(map(
       char => {
-        console.log('char', char);
         const heals = [];
         char.map((c, index) => {
 
@@ -97,6 +108,12 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
           return tanks;
        }
      ));
+     this.eventHeals$ = this.store$.pipe(select(selectEventbyIdHeal, this.data.docId)).pipe();
+     this.eventTanks$ = this.store$.pipe(select(selectEventbyIdTank, this.data.docId)).pipe();
+     this.eventDps$   = this.store$.pipe(select(selectEventbyIdDps, this.data.docId)).pipe();
+     this.raidGroup$  = this.store$.pipe(select(selectEventbyId, this.data.docId)).pipe(
+       map((Event: EventModel) => Event.raidGroup)
+     );
   }
 
   private initForm(): void {
@@ -121,10 +138,7 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
     this.insightForm.get('reidDifficultId').disable();
   }
 
-  submit() {
-
-  }
-
+  // TODO: do we need this ?
   update() {
 
   }
@@ -134,7 +148,10 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   addCharacter(char, speck: string) {
+
+    //TODO: need update STATE
     let flag = false;
+    this.subscriptions.push(
     this.afs.collection<Event>('event').doc(this.data.docId).valueChanges().pipe(
         take(1),
         switchMap((val: any) => {
@@ -145,7 +162,10 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
                 .update({...val, raidGroup: [...val.raidGroup, {...char, role: speck}] });
           }
         })
-    ).subscribe();
-    console.log('addCharacter', speck, char); // TODO: remove console.log
+    ).subscribe());
+  }
+
+  deleteFromEvent(char) {
+    console.log('DELETE', char);
   }
 }

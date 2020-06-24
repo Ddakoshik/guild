@@ -64,6 +64,7 @@ import { BlogSmallCardComponent } from './dashboard/components/blog-small-card/b
 import { BlogBigCardComponent } from './dashboard/components/blog-big-card/blog-big-card.component';
 import { BlogContainerComponent } from './dashboard/containers/blog-container/blog-container.component';
 import { EventInfoTableComponent } from './dashboard/components/event-info-table/event-info-table.component';
+import { RaidGroupListComponent } from './dashboard/components/raid-group-list/raid-group-list.component';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import { EventInfoTableComponent } from './dashboard/components/event-info-table
     BlogSmallCardComponent,
     BlogBigCardComponent,
     BlogContainerComponent,
-    EventInfoTableComponent
+    EventInfoTableComponent,
+    RaidGroupListComponent
   ],
   imports: [
     BrowserModule,

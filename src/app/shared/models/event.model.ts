@@ -30,6 +30,7 @@ export interface RaidLocationData {
     imgName?: string;
 }
 
+//TODO: aff interface to raidGroup
 export interface EventModel {
     title: string;
     date: string;
@@ -37,6 +38,7 @@ export interface EventModel {
     timeEnd: string;
     description: string;
     reidLeader: ReidLeader;
+    raidGroup: any;
     raidLocationData: RaidLocationData;
     raidComposition: RaidComposition;
     raidLocationId: number;
