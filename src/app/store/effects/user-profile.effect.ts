@@ -111,7 +111,7 @@ export class UserProfileEffects {
         .valueChanges({ idField: 'docId'})
         .pipe(
           map((data) => {
-            console.log(data);
+          //  console.log(data);
             return getCharactersSuccess({charactersList: data});
           }),
           catchError(() => of(getCharactersFail()))
