@@ -32,16 +32,16 @@
             <mat-menu #menu="matMenu" xPosition="before">
                 <button mat-menu-item (click)="openEditCharacterModal(item)" aria-label="Edit charecter">
                     <mat-icon>edit</mat-icon>
-                    <span>Edit</span>
+                    <span>Редактировать</span>
                 </button>
                 <button mat-menu-item (click)="openDeleteCharacterConfirmation(item)" aria-label="Delete charecter">
                     <mat-icon>delete</mat-icon>
-                    <span>Delete</span>
+                    <span>Удалить</span>
                 </button>
             </mat-menu>
         </mat-card>
     </ng-container>
-    
+
     <mat-card class="add-new-character tile">
         <button mat-fab color="primary" (click)="openAddNewCharacterModal()" >
             <mat-icon  aria-label="Add new character">add</mat-icon>
