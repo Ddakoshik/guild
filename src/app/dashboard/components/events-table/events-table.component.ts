@@ -1,17 +1,23 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {EventModel, PeriodicElement} from '../../../shared/models/event.model';
 import { reidDifficultyArrayConst } from '../../../shared/models/constants';
+import { Subscription } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { selectUserEmail } from '../../../store/selectors';
+import { CoreState } from '../../../store/reducers';
 
 @Component({
   selector: 'app-events-table',
   templateUrl: './events-table.component.html',
   styleUrls: ['./events-table.component.scss']
 })
-export class EventsTableComponent implements OnInit {
+export class EventsTableComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['id', 'dataTime', 'reidLeader', 'raidName', 'raidComposition', 'info', 'action'];
+  displayedColumns: string[] = ['race', 'id', 'dataTime', 'reidLeader', 'raidName', 'raidComposition', 'info', 'action'];
   dataSource: MatTableDataSource<EventModel>;
+  subscriptions: Subscription[] = [];
+  useremail: string;
 
   @Input() set data(data: EventModel[]) {
     this.dataSource = new MatTableDataSource(data);
@@ -24,9 +30,12 @@ export class EventsTableComponent implements OnInit {
     return this.dataSource.data ? !!this.dataSource.data.length : false;
   }
 
-  constructor() { }
+  constructor(private store$: Store<CoreState>) { }
 
   ngOnInit() {
+    this.subscriptions.push(
+      this.store$.pipe(select(selectUserEmail)).subscribe(user => this.useremail = user)
+    );
   }
 
   applyFilter(filterValue: string) {
@@ -49,4 +58,7 @@ export class EventsTableComponent implements OnInit {
     return reidDifficultyArrayConst.find(obj => obj.id === reidDifficultId).name;
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(sbs => sbs.unsubscribe());
+  }
 }
