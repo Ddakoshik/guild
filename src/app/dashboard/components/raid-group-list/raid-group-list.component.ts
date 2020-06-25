@@ -18,9 +18,9 @@ export class RaidGroupListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('>', this.chars);
-    console.log('U', this.user);
-    console.log('##', this.event);
+    // console.log('>', this.chars);
+    // console.log('U', this.user);
+    // console.log('##', this.event);
 
     this.tanks  = this.chars.filter(x => x.role === 'tank');
     this.heals  = this.chars.filter(x => x.role === 'heal');
