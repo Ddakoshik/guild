@@ -69,6 +69,7 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
     const utcFormat = DateTime.fromJSDate(this.insightForm.value.date).toUTC().toISO();
     const raidLocationData = raidLocationsConstnt.find(obj => obj.id === this.raidLocationId.value);
 
+    console.log(this.insightForm.value);
     const addNewEvent =  {
         ...this.insightForm.value,
         date: utcFormat,

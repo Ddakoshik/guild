@@ -8,23 +8,27 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RaidGroupListComponent implements OnInit {
-  @Input('chars') chars: any[];
-  @Input('user') user: string;
-  @Input('event') event;
+
+  tanks: any[] = [];
+  heals: any[] = [];
+  dps: any[] = [];
+
+  @Input() set chars(data: any[]) {
+    this.tanks  = data.filter(x => x.role === 'tank');
+    this.heals  = data.filter(x => x.role === 'heal');
+    this.dps  = data.filter(x => x.role === 'dps');
+
+  }
+  @Input() user: string;
+  @Input() event;
   @Output() deletedChar = new EventEmitter();
-  tanks = [];
-  heals = [];
-  dps = [];
+
   constructor() { }
 
-  ngOnInit() {
-    console.log('>', this.chars);
-    console.log('U', this.user);
-    console.log('##', this.event);
+  ngOnInit() {  }
 
-    this.tanks  = this.chars.filter(x => x.role === 'tank');
-    this.heals  = this.chars.filter(x => x.role === 'heal');
-    this.dps  = this.chars.filter(x => x.role === 'dps');
+  isCanRemoveCharFromEvent(char: any) {
+    return (char.authUserEmail === this.user || this.event.email === this.user);
   }
 
   delete(char) {
