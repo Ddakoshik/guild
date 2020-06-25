@@ -1,6 +1,6 @@
 <div mat-dialog-title class="dilog-title">
-    <h1 *ngIf="!initialEventState" class="pr-5">Add new event</h1>
-    <h1 *ngIf="initialEventState" class="pr-5">Edit event</h1>
+    <h1 *ngIf="!initialEventState" class="pr-5">Добавить событие</h1>
+    <h1 *ngIf="initialEventState" class="pr-5">Редактировать событие</h1>
     <button mat-icon-button aria-label="close button" class="close-button" mat-dialog-close>
         <mat-icon>clear</mat-icon>
     </button>
@@ -126,7 +126,7 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button type="button" class="btn" mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="primary" *ngIf="!initialEventState" type="button" class="btn" (click)="submit()" cdkFocusInitial>Submit</button>
-    <button mat-raised-button color="primary" *ngIf="initialEventState" type="button" class="btn" (click)="update()" cdkFocusInitial>Save</button>
+    <button mat-raised-button type="button" class="btn" mat-dialog-close>Отмена</button>
+    <button mat-raised-button color="primary" *ngIf="!initialEventState" type="button" class="btn" (click)="submit()" cdkFocusInitial>Отправить</button>
+    <button mat-raised-button color="primary" *ngIf="initialEventState" type="button" class="btn" (click)="update()" cdkFocusInitial>Сохранить</button>
 </div>

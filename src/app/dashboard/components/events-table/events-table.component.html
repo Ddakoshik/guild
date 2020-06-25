@@ -11,6 +11,19 @@
 <div *ngIf="isShowTable">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
+        <ng-container matColumnDef="race">
+          <th mat-header-cell *matHeaderCellDef> Фракция</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="element.reidLeader.character.fractionId == 2">
+              <img class="select-icon mr-2" src="./assets/img/fraction/fraction_horde.png" alt="Орда">
+            </ng-container>
+
+            <ng-container *ngIf="element.reidLeader.character.fractionId == 1">
+              <img class="select-icon mr-2" src="./assets/img/fraction/fraction_alliance.png" alt="Альянс">
+            </ng-container>
+          </td>
+        </ng-container>
+
         <!-- Id Column -->
         <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Заголовок </th>
@@ -44,9 +57,9 @@
         <th mat-header-cell *matHeaderCellDef> Состав </th>
         <td mat-cell *matCellDef="let element">
             <div class="role-box py-2">
-                <span class="flex"><span class="icon tank-icon mr-1"></span> Танки</span> <span>{{element.raidComposition.tankNeed}}/{{element.raidComposition.tankHave}} </span>
-                <span class="flex"><span class="icon heal-icon mr-1"></span>Хилы</span> <span>{{element.raidComposition.healNeed}}/{{element.raidComposition.healHave}} </span>
-                <span class="flex"><span class="icon dps-icon mr-1"></span>Дд/Рдд</span> <span>{{element.raidComposition.dpsNeed}}/{{element.raidComposition.dpsHave}}</span>
+                <span class="flex"><span class="icon tank-icon mr-1"></span> Танки</span> <span>{{element.raidComposition.tankHave}}/{{element.raidComposition.tankNeed}} </span>
+                <span class="flex"><span class="icon heal-icon mr-1"></span>Хилы</span> <span>{{element.raidComposition.healHave}}/{{element.raidComposition.healNeed}} </span>
+                <span class="flex"><span class="icon dps-icon mr-1"></span>Дд/Рдд</span> <span>{{element.raidComposition.dpsHave}}/{{element.raidComposition.dpsNeed}}</span>
             </div>
         </td>
         </ng-container>
@@ -63,12 +76,14 @@
                 <button mat-icon-button (click)="acceptEvent(element)" aria-label="Join event button">
                     <mat-icon>person_add</mat-icon>
                 </button>
+              <ng-container *ngIf="element.reidLeader.email == useremail">
                 <button mat-icon-button (click)="editEvent(element)" aria-label="Edit event button">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button (click)="deleteEvent(element)" aria-label="Delete event button">
                     <mat-icon>delete</mat-icon>
                 </button>
+              </ng-container>
             </td>
         </ng-container>
 
