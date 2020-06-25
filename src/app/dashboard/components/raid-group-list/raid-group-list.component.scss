@@ -1,29 +1,16 @@
-.raid-list {
-  display: flex;
-  flex-direction: row;
-  border: 1px dashed;
 
-  ul {
-    padding-top: 10px;
-    padding-left: 10px;
-    width: 35%;
-  }
-
-  ul,ul li {
-    list-style: none;
-  }
-
-  li {
-    padding-left: 10px;
-    border-bottom: 1px dashed;
+.raid-list-box{
+  .character-list{
     display: flex;
-    justify-content: space-between;
-  }
-  span {
-    width: 90%;
-  }
-  button {
-    position: relative;
-    right: 0px;
+    flex-direction: column;
+    width: 100%;
+    .item{
+      height: 40px;
+      border-bottom: 1px solid #000;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 }

@@ -42,7 +42,7 @@ export interface EventModel {
     raidLocationData: RaidLocationData;
     raidComposition: RaidComposition;
     raidLocationId: number;
-    reidDifficultId: string;
+    reidDifficultId: number;
     character: string;
     role: string;
     totalTanks: number;
@@ -50,5 +50,3 @@ export interface EventModel {
     totalDpsers: number;
     docId?: string;
 }
-
-export interface EventModelId extends EventModel { id: string; }

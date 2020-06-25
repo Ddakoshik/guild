@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
-import { Observable, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { raidLocationsConstnt, reidDifficultyArrayConst } from '../../../shared/models/constants';
 import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
@@ -38,6 +38,7 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   eventHeals$: Observable<any>;
   eventDps$: Observable<any>;
   raidGroup$: Observable<any>;
+  useremail: string;
 
   private eventCollection: AngularFirestoreCollection<EventModel>;
 
@@ -49,71 +50,56 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.user$ = this.store$.pipe(select(selectUserEmail));
 
     this.store$.dispatch(getCharacters());
+    this.user$ = this.store$.pipe(select(selectUserEmail));
     this.eventCollection = this.afs.collection<EventModel>('event');
+    this.subscriptions.push(
+      this.store$.pipe(select(selectUserEmail)).subscribe(user => this.useremail = user)
+    );
 
-    this.heals$ = this.store$.pipe(select(selectHealCharts)).pipe(map(
-      char => {
-        const heals = [];
-        char.map((c, index) => {
+    this.eventHeals$ = this.store$.pipe(select(selectEventbyIdHeal, this.data.docId)).pipe();
+    this.eventTanks$ = this.store$.pipe(select(selectEventbyIdTank, this.data.docId)).pipe();
+    this.eventDps$   = this.store$.pipe(select(selectEventbyIdDps, this.data.docId)).pipe();
+    this.raidGroup$  = this.store$.pipe(select(selectEventbyId, this.data.docId)).pipe(
+      map((Event: EventModel) => Event.raidGroup)
+    );
 
-          if (c.builds.length && char[index].fractionId === this.data.reidLeader.character.fractionId
-            && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
-            heals.push({
-                name: char[index].name,
-                className: char[index].className,
-                docId: char[index].docId,
-                authUserEmail: char[index].authUserEmail
-            });
-          }
-        });
-        return heals;
-      }
-    ));
-
-    this.dps$ = this.store$.pipe(select(selectDPSCharts)).pipe(map(
-      char => {
-        const dps = [];
-        char.map((c, index) => {
-          if (c.builds.length && char[index].fractionId === this.data.reidLeader.character.fractionId
-            && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
-            dps.push({
-                name: char[index].name,
-                className: char[index].className,
-                docId: char[index].docId,
-                authUserEmail: char[index].authUserEmail
-            });
-          }
-        });
-        return dps;
-      }
-    ));
-
-     this.tanks$ = this.store$.pipe(select(selectTankCharts)).pipe(map(
-       char => {
-         const tanks = [];
-         char.map((c, index) => {
-           if (c.builds.length && char[index].fractionId === this.data.reidLeader.character.fractionId
-             && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
-             tanks.push({
-                 name: char[index].name,
-                 className: char[index].className,
-                 docId: char[index].docId,
-                 authUserEmail: char[index].authUserEmail
-             });
-           }
-         });
-          return tanks;
-       }
+     this.heals$ = combineLatest(this.store$.pipe(select(selectHealCharts)), this.eventHeals$, this.raidGroup$).pipe(map(
+        char => this.getCharStructureArray(char, 'healNeed')
      ));
-     this.eventHeals$ = this.store$.pipe(select(selectEventbyIdHeal, this.data.docId)).pipe();
-     this.eventTanks$ = this.store$.pipe(select(selectEventbyIdTank, this.data.docId)).pipe();
-     this.eventDps$   = this.store$.pipe(select(selectEventbyIdDps, this.data.docId)).pipe();
-     this.raidGroup$  = this.store$.pipe(select(selectEventbyId, this.data.docId)).pipe(
-       map((Event: EventModel) => Event.raidGroup)
-     );
+
+     this.dps$ = combineLatest(this.store$.pipe(select(selectDPSCharts)), this.eventDps$, this.raidGroup$).pipe(map(
+        char => this.getCharStructureArray(char, 'dpsNeed')
+     ));
+
+     this.tanks$ = combineLatest(this.store$.pipe(select(selectTankCharts)), this.eventTanks$, this.raidGroup$).pipe(map(
+         char => this.getCharStructureArray(char, 'tankNeed')
+
+     ));
+  }
+
+
+  getCharStructureArray(char, role: string) {
+      const returnCharArray = [];
+      char[0].map((c, index) => {
+
+        if (c.builds.length && char[0][index].fractionId === this.data.reidLeader.character.fractionId
+          && !this.data.raidGroup.some(chr => chr.docId === char[0][index].docId)) {
+            returnCharArray.push({
+              name: char[0][index].name,
+              className: char[0][index].className,
+              docId: char[0][index].docId,
+              authUserEmail: char[0][index].authUserEmail
+          });
+        }
+      });
+
+      if (this.data.raidComposition[role] < char[1].length || char[2].some(ch => ch.authUserEmail === this.useremail)) {
+        return [];
+      }
+
+      return returnCharArray;
   }
 
   private initForm(): void {
@@ -138,18 +124,12 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
     this.insightForm.get('reidDifficultId').disable();
   }
 
-  // TODO: do we need this ?
-  update() {
-
-  }
-
   ngOnDestroy() {
     this.subscriptions.forEach(sbs => sbs.unsubscribe());
   }
 
-  addCharacter(char, speck: string) {
-
-    //TODO: need update STATE
+  addCharacterToEvent(char, speck: string) {
+    // TODO: move to store effect
     let flag = false;
     this.subscriptions.push(
     this.afs.collection<Event>('event').doc(this.data.docId).valueChanges().pipe(
@@ -166,6 +146,20 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   deleteFromEvent(char) {
-    console.log('DELETE', char);
+      // TODO: move to store effect
+      let flag = false;
+      this.subscriptions.push(
+          this.afs.collection<Event>('event').doc(this.data.docId).valueChanges().pipe(
+              take(1),
+              switchMap((val: any) => {
+                  const updateRaidGroup = val.raidGroup.filter(x => x.docId !== char.docId)
+                  if (!flag) {
+                      flag = !flag;
+                      return this.afs.collection('event')
+                          .doc(this.data.docId)
+                          .update({...val, raidGroup: [...updateRaidGroup] });
+                  }
+              })
+          ).subscribe());
   }
 }

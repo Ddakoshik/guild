@@ -1,25 +1,35 @@
-<div class="raid-list">
-  <ul>
-    <li><span class="icon tank-icon mr-1"></span></li>
-    <li *ngFor="let char of tanks">
-      {{char.name}}
-      <button *ngIf="char.authUserEmail == user || event.email == user" mat-raised-button color="warn" (click)="delete(char)">x</button>
-    </li>
-  </ul>
 
-  <ul>
-    <li><span class="icon heal-icon mr-1"></span></li>
-    <li *ngFor="let char of heals">
-      {{char.name}}
-      <button *ngIf="char.authUserEmail == user || event.email == user" mat-raised-button color="warn" (click)="delete(char)">x</button>
-    </li>
-  </ul>
-
-  <ul>
-    <li><span class="icon dps-icon mr-1"></span></li>
-    <li *ngFor="let char of dps">
-      {{char.name}}
-      <button *ngIf="char.authUserEmail == user || event.email == user" mat-raised-button color="warn" (click)="delete(char)">x</button>
-    </li>
-  </ul>
+<div class="raid-list-box row">
+  <div class="col-4 character-list">
+    <div class="item" *ngFor="let char of tanks">
+      <span>{{char.name}}</span>
+      <button mat-icon-button aria-label="Remove character from event" color="warn"
+              *ngIf="isCanRemoveCharFromEvent(char)"
+              (click)="delete(char)">
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-4 character-list">
+    <div class="item" *ngFor="let char of heals">
+      <span>{{char.name}}</span>
+      <button mat-icon-button aria-label="Remove character from event" color="warn"
+              *ngIf="isCanRemoveCharFromEvent(char)"
+              (click)="delete(char)">
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-4 character-list">
+    <div class="item" *ngFor="let char of dps">
+      <span>{{char.name}}</span>
+      <button mat-icon-button aria-label="Remove character from event" color="warn"
+              *ngIf="isCanRemoveCharFromEvent(char)"
+              (click)="delete(char)">
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
+
+

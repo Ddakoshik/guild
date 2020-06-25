@@ -66,47 +66,64 @@
       <p class="p-0 quill-editor" [innerHtml]="data.description"></p>
     </div>
     <h3>Количество сбободных слотов</h3>
-    <div class="fill-role">
-      <div>
-        <span class="role">
+    <div class="fill-role row">
+      <div class="role-box col-4">
+        <div class="role-item">
+          <span class="role">
           <span class="icon tank-icon mr-1"></span>
           <span>Танки</span>
           <span class="count-count">{{(eventTanks$ | async)?.length }}/{{data.raidComposition.tankNeed}}</span>
         </span>
-        <ng-container *ngIf="tanks$ | async as tanksAs">
-          <button mat-button [matMenuTriggerFor]="tank" *ngIf="tanksAs.length > 0 && (data.raidComposition.tankNeed - data.raidComposition.tankHave) > 0"> + </button>
-          <mat-menu #tank="matMenu">
-            <button mat-menu-item *ngFor="let tank of tanksAs" (click)="addCharacter(tank, 'tank')">{{tank.name}}({{tank.className}})</button>
-          </mat-menu>
-        </ng-container>
+          <ng-container *ngIf="tanks$ | async as tanksAs">
+            <button mat-icon-button color="primary" aria-label="Join to event" class="add-button" [matMenuTriggerFor]="tankMenu"
+                    *ngIf="!!tanksAs.length && ((data.raidComposition.tankNeed - (eventTanks$ | async)?.length) > 0)">
+              <mat-icon>add_box</mat-icon>
+            </button>
+
+            <mat-menu #tankMenu="matMenu">
+              <button mat-menu-item *ngFor="let tank of tanksAs" (click)="addCharacterToEvent(tank, 'tank')">{{tank.name}}({{tank.className}})</button>
+            </mat-menu>
+          </ng-container>
+        </div>
       </div>
 
-      <div>
-        <span class="role">
+
+      <div class="role-box col-4">
+        <div class="role-item">
+           <span class="role">
           <span class="icon heal-icon mr-1"></span>
           <span>Хилы</span>
           <span class="count-count">{{(eventHeals$ | async)?.length }}/{{data.raidComposition.healNeed}}</span>
         </span>
-        <ng-container *ngIf="heals$ | async as heals">
-          <button mat-button [matMenuTriggerFor]="heal" *ngIf="heals.length > 0 && (data.raidComposition.healNeed - data.raidComposition.healHave) > 0"> + </button>
-          <mat-menu #heal="matMenu">
-            <button mat-menu-item *ngFor="let char of heals" (click)="addCharacter(char, 'heal')">{{char.name}}({{char.className}})</button>
-          </mat-menu>
-        </ng-container>
+          <ng-container *ngIf="heals$ | async as heals">
+            <button mat-icon-button color="primary" aria-label="Join to event" class="add-button" [matMenuTriggerFor]="healMenu"
+                    *ngIf="!!heals.length && ((data.raidComposition.healNeed - (eventHeals$ | async)?.length) > 0)">
+              <mat-icon>add_box</mat-icon>
+            </button>
+            <mat-menu #healMenu="matMenu">
+              <button mat-menu-item *ngFor="let char of heals" (click)="addCharacterToEvent(char, 'heal')">{{char.name}}({{char.className}})</button>
+            </mat-menu>
+          </ng-container>
+        </div>
       </div>
 
-      <div>
-        <span class="role">
+      <div class="role-box col-4">
+        <div class="role-item">
+          <span class="role">
           <span class="icon dps-icon mr-1"></span>
           <span>ДПС</span>
           <span class="count-count">{{(eventDps$ | async)?.length }}/{{data.raidComposition.dpsNeed}}</span>
         </span>
-        <ng-container *ngIf="dps$ | async as dpsAs">
-          <button mat-button [matMenuTriggerFor]="dps" *ngIf="dpsAs.length > 0 &&(data.raidComposition.dpsNeed - data.raidComposition.dpsHave) > 0"> + </button>
-          <mat-menu #dps="matMenu">
-            <button mat-menu-item *ngFor="let char of dpsAs" (click)="addCharacter(char, 'dps')">{{char.name}}({{char.className}})</button>
-          </mat-menu>
-        </ng-container>
+          <ng-container *ngIf="dps$ | async as dpsAs">
+            <button mat-icon-button color="primary" aria-label="Join to event" class="add-button" [matMenuTriggerFor]="dpsMenu"
+                    *ngIf="!!dpsAs.length && ((data.raidComposition.dpsNeed - (eventDps$ | async)?.length) > 0)">
+              <mat-icon>add_box</mat-icon>
+            </button>
+            <mat-menu #dpsMenu="matMenu">
+              <button mat-menu-item *ngFor="let char of dpsAs" (click)="addCharacterToEvent(char, 'dps')">{{char.name}}({{char.className}})</button>
+            </mat-menu>
+          </ng-container>
+        </div>
       </div>
 
     </div>
@@ -117,7 +134,3 @@
       (deletedChar)="deleteFromEvent($event)"></app-raid-group-list>
   </form>
 </div>
-<!--<div mat-dialog-actions>-->
-  <!--<button mat-raised-button type="button" class="btn" mat-dialog-close>Cancel</button>-->
-  <!--<button mat-raised-button color="primary" type="button" class="btn" (click)="submit()" cdkFocusInitial>Записатся</button>-->
-<!--</div>-->
