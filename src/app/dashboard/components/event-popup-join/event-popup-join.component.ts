@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
-import { Observable, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { raidLocationsConstnt, reidDifficultyArrayConst } from '../../../shared/models/constants';
 import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
@@ -34,10 +34,11 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   dps$: Observable<any>;
   heals$: Observable<any>;
 
-  eventTanks$: Observable<any[]>;
-  eventHeals$: Observable<any[]>;
-  eventDps$: Observable<any[]>;
-  raidGroup$: Observable<any[]>;
+  eventTanks$: Observable<any>;
+  eventHeals$: Observable<any>;
+  eventDps$: Observable<any>;
+  raidGroup$: Observable<any>;
+  useremail: string;
 
   private eventCollection: AngularFirestoreCollection<EventModel>;
 
@@ -49,44 +50,55 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-     this.user$ = this.store$.pipe(select(selectUserEmail));
 
-     this.store$.dispatch(getCharacters());
-     this.eventCollection = this.afs.collection<EventModel>('event');
+    this.store$.dispatch(getCharacters());
+    this.user$ = this.store$.pipe(select(selectUserEmail));
+    this.eventCollection = this.afs.collection<EventModel>('event');
+    this.subscriptions.push(
+      this.store$.pipe(select(selectUserEmail)).subscribe(user => this.useremail = user)
+    );
 
-     this.heals$ = this.store$.pipe(select(selectHealCharts)).pipe(map(
-        char => this.getCharStructureArray(char)
+    this.eventHeals$ = this.store$.pipe(select(selectEventbyIdHeal, this.data.docId)).pipe();
+    this.eventTanks$ = this.store$.pipe(select(selectEventbyIdTank, this.data.docId)).pipe();
+    this.eventDps$   = this.store$.pipe(select(selectEventbyIdDps, this.data.docId)).pipe();
+    this.raidGroup$  = this.store$.pipe(select(selectEventbyId, this.data.docId)).pipe(
+      map((Event: EventModel) => Event.raidGroup)
+    );
+
+     this.heals$ = combineLatest(this.store$.pipe(select(selectHealCharts)), this.eventHeals$, this.raidGroup$).pipe(map(
+        char => this.getCharStructureArray(char, 'healNeed')
      ));
 
-     this.dps$ = this.store$.pipe(select(selectDPSCharts)).pipe(map(
-        char => this.getCharStructureArray(char)
+     this.dps$ = combineLatest(this.store$.pipe(select(selectDPSCharts)), this.eventDps$, this.raidGroup$).pipe(map(
+        char => this.getCharStructureArray(char, 'dpsNeed')
      ));
 
-     this.tanks$ = this.store$.pipe(select(selectTankCharts)).pipe(map(
-         char => this.getCharStructureArray(char)
+     this.tanks$ = combineLatest(this.store$.pipe(select(selectTankCharts)), this.eventTanks$, this.raidGroup$).pipe(map(
+         char => this.getCharStructureArray(char, 'tankNeed')
+
      ));
-     this.eventHeals$ = this.store$.pipe(select(selectEventbyIdHeal, this.data.docId)).pipe();
-     this.eventTanks$ = this.store$.pipe(select(selectEventbyIdTank, this.data.docId)).pipe();
-     this.eventDps$   = this.store$.pipe(select(selectEventbyIdDps, this.data.docId)).pipe();
-     this.raidGroup$  = this.store$.pipe(select(selectEventbyId, this.data.docId)).pipe(
-       map((Event: EventModel) => Event.raidGroup)
-     );
   }
 
 
-  getCharStructureArray(char) {
+  getCharStructureArray(char, role: string) {
       const returnCharArray = [];
-      char.map((c, index) => {
-          if (c.builds.length && char[index].fractionId === this.data.reidLeader.character.fractionId
-              && !this.data.raidGroup.some(chr => chr.docId === char[index].docId)) {
-              returnCharArray.push({
-                  name: char[index].name,
-                  className: char[index].className,
-                  docId: char[index].docId,
-                  authUserEmail: char[index].authUserEmail
-              });
-          }
+      char[0].map((c, index) => {
+
+        if (c.builds.length && char[0][index].fractionId === this.data.reidLeader.character.fractionId
+          && !this.data.raidGroup.some(chr => chr.docId === char[0][index].docId)) {
+            returnCharArray.push({
+              name: char[0][index].name,
+              className: char[0][index].className,
+              docId: char[0][index].docId,
+              authUserEmail: char[0][index].authUserEmail
+          });
+        }
       });
+
+      if (this.data.raidComposition[role] < char[1].length || char[2].some(ch => ch.authUserEmail === this.useremail)) {
+        return [];
+      }
+
       return returnCharArray;
   }
 
