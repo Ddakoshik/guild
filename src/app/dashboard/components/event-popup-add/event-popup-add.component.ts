@@ -3,15 +3,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import {characterRolesConst, raidLocationsConstnt, reidDifficultyArrayConst} from '../../../shared/models/constants';
+import { characterRolesConst, raidLocationsConstnt, reidDifficultyArrayConst } from '../../../shared/models/constants';
 import { EventModel } from '../../../shared/models/event.model';
 import { selectGoogleAuthInfo, selectCharactersList } from '../../../store/selectors';
 import { getCharacters } from '../../../store/actions';
 import { map } from 'rxjs/operators';
+import { Character } from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-event-popup-add',
@@ -34,13 +34,12 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
   characterRoles = characterRolesConst;
 
 
-  charactersList$: Observable<any>;
+  charactersList$: Observable<Character[]>;
 
   role = [];
   minDate = new Date();
 
-  constructor(private afs: AngularFirestore,
-              private store$: Store<CoreState>,
+  constructor(private store$: Store<CoreState>,
               public dialogRef: MatDialogRef<EventPopupAddComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { eventData: EventModel }) { }
 

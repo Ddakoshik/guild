@@ -72,3 +72,35 @@ export const updateEventFail = createAction(
 );
 
 
+export const openAddCharacterToEventModal = createAction(
+    '[Events] Open Add Character To Event Modal',
+    props<{eventData: EventModel}>()
+);
+export const closeAddCharacterToEventModal = createAction(
+    '[Events] Close Add Character To Event Modal'
+);
+
+
+export const addCharacterToEvent = createAction(
+    '[Events Api] Add Character To Event',
+    props<{character: Character}>()
+);
+export const addCharacterToEventSuccess = createAction(
+    '[Events] Add Character To Event Success'
+);
+export const addCharacterToEventFail = createAction(
+    '[Events] Add Character To Event Fail'
+);
+
+export const deleteCharacterFromEvent = createAction(
+    '[Events Api] Delete Character From Event',
+    props<{character: Character}>()
+);
+export const deleteCharacterFromEventSuccess = createAction(
+    '[Events] Delete Character From Event Success'
+);
+export const deleteCharacterFromEventFail = createAction(
+    '[Events] Delete Character From Event Fail'
+);
+
+

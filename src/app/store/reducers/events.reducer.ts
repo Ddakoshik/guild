@@ -5,10 +5,12 @@ import {EventModel} from '../../shared/models/event.model';
 
 export interface State {
     eventsList: EventModel[];
+    selectedEvent: EventModel;
 }
 
 export const initialState = {
     eventsList: [],
+    selectedEvent: null
 };
 
 const eventsReducer = createReducer(
@@ -17,7 +19,17 @@ const eventsReducer = createReducer(
   on(actions.getEventsSuccess, (state, action) => ({
      ...state,
      eventsList: [...action.eventsList]
-  }))
+  })),
+
+  on(actions.openAddCharacterToEventModal, (state, action) => ({
+    ...state,
+    selectedEvent: {...action.eventData}
+ })),
+
+  on(actions.closeAddCharacterToEventModal, (state) => ({
+    ...state,
+    selectedEvent: initialState.selectedEvent
+ }))
 
 );
 

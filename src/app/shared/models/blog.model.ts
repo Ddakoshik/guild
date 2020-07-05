@@ -30,8 +30,9 @@ export interface Character {
     fractionId: number;
     classId: number;
     raceId: number;
-    docId?: string;
     specs: SpecCollection;
+    role?: string;
+    docId?: string;
 }
 
 export interface SpecCollection {

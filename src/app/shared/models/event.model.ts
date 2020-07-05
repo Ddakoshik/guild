@@ -1,3 +1,5 @@
+import { Character } from './blog.model';
+
 export interface PeriodicElement {
     id: number;
     reidLeader: ReidLeader;
@@ -11,6 +13,7 @@ export interface ReidLeader {
     email: string;
     nikName: string;
     name: string;
+    character?: Character;
 }
 
 export interface RaidComposition {
@@ -43,7 +46,7 @@ export interface EventModel {
     raidComposition: RaidComposition;
     raidLocationId: number;
     reidDifficultId: number;
-    character: string;
+    character: Character;
     role: string;
     totalTanks: number;
     totalHealers: number;

@@ -6,7 +6,7 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 import { raidLocationsConstnt, reidDifficultyArrayConst } from '../../../shared/models/constants';
 import { select, Store } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
-import { getCharacters } from '../../../store/actions';
+import { getCharacters, addCharacterToEvent, deleteCharacterFromEvent } from '../../../store/actions';
 import {
   selectDPSCharts,
   selectEventbyId, selectEventbyIdDps,
@@ -17,6 +17,7 @@ import {
 import { map, switchMap, take } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { EventModel } from '../../../shared/models/event.model';
+import { Character } from '../../../shared/models/blog.model';
 
 @Component({
   selector: 'app-event-popup-join',
@@ -25,7 +26,7 @@ import { EventModel } from '../../../shared/models/event.model';
 })
 export class EventPopupJoinComponent implements OnInit, OnDestroy {
   insightForm: FormGroup;
-  user$: Observable<any>;
+  userEmail$: Observable<string>;
   raidLocations = raidLocationsConstnt;
   reidDifficultyArray = reidDifficultyArrayConst;
   subscriptions: Subscription[] = [];
@@ -40,22 +41,20 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   raidGroup$: Observable<any>;
   useremail: string;
 
-  private eventCollection: AngularFirestoreCollection<EventModel>;
-
   constructor(
      private store$: Store<CoreState>,
      private afs: AngularFirestore,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: EventModel) {
+      console.log(data);
     this.initForm();
   }
 
   ngOnInit() {
 
     this.store$.dispatch(getCharacters());
-    this.user$ = this.store$.pipe(select(selectUserEmail));
-    this.eventCollection = this.afs.collection<EventModel>('event');
+    this.userEmail$ = this.store$.pipe(select(selectUserEmail));
     this.subscriptions.push(
-      this.store$.pipe(select(selectUserEmail)).subscribe(user => this.useremail = user)
+      this.userEmail$.subscribe(user => this.useremail = user)
     );
 
     this.eventHeals$ = this.store$.pipe(select(selectEventbyIdHeal, this.data.docId)).pipe();
@@ -83,7 +82,6 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
   getCharStructureArray(char, role: string) {
       const returnCharArray = [];
       char[0].map((c, index) => {
-
         if (c.builds.length && char[0][index].fractionId === this.data.reidLeader.character.fractionId
           && !this.data.raidGroup.some(chr => chr.docId === char[0][index].docId)) {
             returnCharArray.push({
@@ -128,31 +126,20 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sbs => sbs.unsubscribe());
   }
 
-  addCharacterToEvent(char, speck: string) {
-    // TODO: move to store effect
-    let flag = false;
-    this.subscriptions.push(
-    this.afs.collection<Event>('event').doc(this.data.docId).valueChanges().pipe(
-        take(1),
-        switchMap((val: any) => {
-          if (!flag) {
-            flag = !flag;
-            return this.afs.collection('event')
-                .doc(this.data.docId)
-                .update({...val, raidGroup: [...val.raidGroup, {...char, role: speck}] });
-          }
-        })
-    ).subscribe());
+  addCharacterToEvent(character: Character, speck: string) {
+    this.store$.dispatch(addCharacterToEvent({character: {...character, role: speck}}));
   }
 
-  deleteFromEvent(char) {
+  deleteFromEvent(character: Character) {
+    this.store$.dispatch(deleteCharacterFromEvent({character}));
+    
       // TODO: move to store effect
       let flag = false;
       this.subscriptions.push(
           this.afs.collection<Event>('event').doc(this.data.docId).valueChanges().pipe(
               take(1),
               switchMap((val: any) => {
-                  const updateRaidGroup = val.raidGroup.filter(x => x.docId !== char.docId)
+                  const updateRaidGroup = val.raidGroup.filter(x => x.docId !== character.docId);
                   if (!flag) {
                       flag = !flag;
                       return this.afs.collection('event')

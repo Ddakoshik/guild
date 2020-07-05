@@ -15,6 +15,11 @@ export const selectEventsList = createSelector(
     (state: fromEvents.State): EventModel[] => state.eventsList
 );
 
+export const selectSelectedEvent = createSelector(
+    selectEvents,
+    (state: fromEvents.State): EventModel => state.selectedEvent
+);
+
 export const selectEventbyId = createSelector(
   selectEvents,
   (state: fromEvents.State, docId): EventModel => state.eventsList.find(event => event.docId === docId)
