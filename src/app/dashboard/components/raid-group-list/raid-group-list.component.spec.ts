@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RaidGroupListComponent } from './raid-group-list.component';
 
@@ -6,7 +6,7 @@ describe('RaidGroupListComponent', () => {
   let component: RaidGroupListComponent;
   let fixture: ComponentFixture<RaidGroupListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RaidGroupListComponent ]
     })
@@ -23,3 +23,4 @@ describe('RaidGroupListComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

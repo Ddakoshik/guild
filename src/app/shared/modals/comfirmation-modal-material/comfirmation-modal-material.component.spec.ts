@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ComfirmationModalMaterialComponent } from './comfirmation-modal-material.component';
 
@@ -6,7 +6,7 @@ describe('ComfirmationModalMaterialComponent', () => {
   let component: ComfirmationModalMaterialComponent;
   let fixture: ComponentFixture<ComfirmationModalMaterialComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ComfirmationModalMaterialComponent ]
     })
@@ -23,3 +23,4 @@ describe('ComfirmationModalMaterialComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

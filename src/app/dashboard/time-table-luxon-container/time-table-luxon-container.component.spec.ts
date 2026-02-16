@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeTableLuxonContainerComponent } from './time-table-luxon-container.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -8,7 +8,7 @@ describe('TimeTableLuxonContainerComponent', () => {
   let component: TimeTableLuxonContainerComponent;
   let fixture: ComponentFixture<TimeTableLuxonContainerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TimeTableLuxonContainerComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -29,3 +29,4 @@ describe('TimeTableLuxonContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

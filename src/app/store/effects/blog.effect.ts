@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { getBlogs, getBlogsFail, getBlogsSuccess } from '../actions';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Blog } from '../../shared/models/blog.model';
 import { CoreState } from '../reducers';
 import { Store } from '@ngrx/store';
@@ -10,6 +10,8 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class BlogEffects {
+    private readonly actions$ = inject(Actions);
+    private readonly db = inject(AngularFirestore);
 
     getBlogs$ = createEffect(() => this.actions$.pipe(
       ofType(getBlogs),
@@ -25,9 +27,5 @@ export class BlogEffects {
       })
     ));
 
-  constructor(
-    private actions$: Actions,
-    private db: AngularFirestore,
-    private store$: Store<CoreState>
-  ) {}
 }
+

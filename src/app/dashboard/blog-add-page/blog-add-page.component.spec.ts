@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogAddPageComponent } from './blog-add-page.component';
-import { MaterialModule } from '../../shared/material.module';
+import { MaterialModule } from '../../shared/modules/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -9,7 +9,7 @@ describe('BlogAddPageComponent', () => {
   let component: BlogAddPageComponent;
   let fixture: ComponentFixture<BlogAddPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BlogAddPageComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -31,3 +31,4 @@ describe('BlogAddPageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { EventModel } from '../../../shared/models/event.model';
@@ -75,3 +75,4 @@ export class EventsContainerComponent implements OnInit {
     this.store$.dispatch(openDeleteEventConfirmationModal({eventData: element}));
   }
 }
+

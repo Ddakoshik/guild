@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserProfileComponent } from './user-profile.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -8,7 +8,7 @@ describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ UserProfileComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -29,3 +29,4 @@ describe('UserProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

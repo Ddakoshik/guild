@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventPopupJoinComponent } from './event-popup-join.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -7,7 +7,7 @@ describe('EventPopupJoinComponent', () => {
   let component: EventPopupJoinComponent;
   let fixture: ComponentFixture<EventPopupJoinComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EventPopupJoinComponent ],
       providers: [
@@ -27,3 +27,4 @@ describe('EventPopupJoinComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

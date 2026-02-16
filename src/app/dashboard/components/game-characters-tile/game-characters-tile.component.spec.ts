@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameCharactersTileComponent } from './game-characters-tile.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -7,7 +7,7 @@ describe('GameCharactersTileComponent', () => {
   let component: GameCharactersTileComponent;
   let fixture: ComponentFixture<GameCharactersTileComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GameCharactersTileComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
@@ -25,3 +25,4 @@ describe('GameCharactersTileComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
-import { MaterialModule } from '../../shared/material.module';
+import { MaterialModule } from '../../shared/modules/material.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FooterComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -27,3 +27,4 @@ describe('FooterComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

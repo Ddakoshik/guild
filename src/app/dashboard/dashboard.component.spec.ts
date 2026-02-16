@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -7,7 +7,7 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -25,3 +25,4 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

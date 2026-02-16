@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { GoogleAuthInfo } from '../../../shared/models/auth.model';
 import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../../store/reducers';
@@ -175,3 +175,4 @@ export class EventPopupAddComponent implements OnInit, OnDestroy {
   }
 
 }
+

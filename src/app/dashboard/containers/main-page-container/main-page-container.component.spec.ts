@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainPageContainerComponent } from './main-page-container.component';
 
@@ -6,7 +6,7 @@ describe('MainPageContainerComponent', () => {
   let component: MainPageContainerComponent;
   let fixture: ComponentFixture<MainPageContainerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MainPageContainerComponent ]
     })
@@ -23,3 +23,4 @@ describe('MainPageContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

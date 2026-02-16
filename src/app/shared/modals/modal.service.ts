@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel } from '../models/modal.model';
 import { ComfirmationModalMaterialComponent } from './comfirmation-modal-material/comfirmation-modal-material.component';
 

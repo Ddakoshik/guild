@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
-import { AngularFireStorage} from '@angular/fire/storage';
+import { AngularFireStorage} from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -67,3 +67,4 @@ export class UploadImgComponent implements OnInit {
 
 
 }
+

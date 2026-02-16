@@ -43,3 +43,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Temporary npm cache files
+/.npm-cache-temp
+
+# Angular CLI cache
+/.angular

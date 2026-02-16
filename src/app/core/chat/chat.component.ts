@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject, AngularFireList } from '@angular/fire/database';
-import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -62,3 +62,4 @@ export class ChatComponent implements OnInit {
 
 
 }
+

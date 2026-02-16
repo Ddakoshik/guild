@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import { MaterialModule } from '../../shared/material.module';
+import { MaterialModule } from '../../shared/modules/material.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
       imports: [
@@ -27,3 +27,4 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

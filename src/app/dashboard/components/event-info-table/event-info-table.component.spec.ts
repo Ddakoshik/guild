@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventInfoTableComponent } from './event-info-table.component';
 
@@ -6,7 +6,7 @@ describe('EventInfoTableComponent', () => {
   let component: EventInfoTableComponent;
   let fixture: ComponentFixture<EventInfoTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EventInfoTableComponent ]
     })
@@ -23,3 +23,4 @@ describe('EventInfoTableComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

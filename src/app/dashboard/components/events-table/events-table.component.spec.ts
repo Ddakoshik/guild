@@ -1,15 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventsTableComponent } from './events-table.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MaterialModule } from '../../../shared/material.module';
+import { MaterialModule } from '../../../shared/modules/material.module';
 import { LuxonModule } from 'luxon-angular';
 
 describe('EventsTableComponent', () => {
   let component: EventsTableComponent;
   let fixture: ComponentFixture<EventsTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EventsTableComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -31,3 +31,4 @@ describe('EventsTableComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

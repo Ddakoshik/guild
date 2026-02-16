@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogPageContainerComponent } from './blog-page-container.component';
 
@@ -6,7 +6,7 @@ describe('BlogPageContainerComponent', () => {
   let component: BlogPageContainerComponent;
   let fixture: ComponentFixture<BlogPageContainerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BlogPageContainerComponent ]
     })
@@ -23,3 +23,4 @@ describe('BlogPageContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

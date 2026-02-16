@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs/Observable';
-import { User } from '@firebase/auth-types';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
+import { User } from 'firebase/auth';
 @Injectable()
 export class AuthService {
 
@@ -45,7 +45,8 @@ export class AuthService {
     }
 
   logout() {
-      this._firebaseAuth.auth.signOut()
+      this._firebaseAuth.signOut()
       .then((res) => this.router.navigate(['/auth']));
     }
 }
+

@@ -1,15 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventsContainerComponent } from './events-container.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../../../shared/material.module';
+import { MaterialModule } from '../../../shared/modules/material.module';
 
 describe('EventsContainerComponent', () => {
   let component: EventsContainerComponent;
   let fixture: ComponentFixture<EventsContainerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EventsContainerComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -31,3 +31,4 @@ describe('EventsContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

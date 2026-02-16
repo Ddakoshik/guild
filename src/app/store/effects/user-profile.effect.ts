@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, tap, switchMap, withLatestFrom, catchError } from 'rxjs/operators';
 import {
@@ -28,7 +28,7 @@ import {
 } from '../actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterModalComponent } from '../../dashboard/components/character-modal/character-modal.component';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User, Character } from '../../shared/models/blog.model';
 import { CoreState } from '../reducers';
 import { Store, select } from '@ngrx/store';
@@ -41,6 +41,11 @@ import { modalConfig } from '../../shared/models/constants';
 
 @Injectable()
 export class UserProfileEffects {
+    private readonly actions$ = inject(Actions);
+    private readonly dialog = inject(MatDialog);
+    private readonly db = inject(AngularFirestore);
+    private readonly modalService = inject(ModalService);
+    private readonly store$ = inject(Store<CoreState>);
 
     openAddCharacterModal$ = createEffect(() => this.actions$.pipe(
       ofType(openAddCharacterModal),
@@ -177,19 +182,5 @@ export class UserProfileEffects {
 
       })), {dispatch: false});
 
-
-
-
-
-
-
-
-
-  constructor(
-    private actions$: Actions,
-    private dialog: MatDialog,
-    private db: AngularFirestore,
-    private modalService: ModalService,
-    private store$: Store<CoreState>
-  ) {}
 }
+

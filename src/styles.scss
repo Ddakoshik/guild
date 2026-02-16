@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "styles/variables";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 html{height: 100%;}
 body{height: 100%; box-sizing: border-box; margin: 0;}
 
@@ -41,13 +40,13 @@ p{
 }
 
 *::-webkit-scrollbar {
-  width: rem(6px);
-  height: rem(6px);
+  width: 6px;
+  height: 6px;
 }
 
 *::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, .2);
-  border-radius: rem(6px);
+  border-radius: 6px;
 
   &:hover {
     background: rgba(0, 0, 0, .3);

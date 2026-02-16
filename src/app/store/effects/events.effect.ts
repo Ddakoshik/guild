@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap, mergeMap } from 'rxjs/operators';
 import {
@@ -20,7 +20,7 @@ import {
     updateEvent,
     updateEventFail, updateEventSuccess
 } from '../actions';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CoreState } from '../reducers';
 import { Store} from '@ngrx/store';
 import { of } from 'rxjs';
@@ -33,6 +33,11 @@ import { EventPopupAddComponent } from '../../dashboard/components/event-popup-a
 
 @Injectable()
 export class EventsEffects {
+    private readonly actions$ = inject(Actions);
+    private readonly dialog = inject(MatDialog);
+    private readonly db = inject(AngularFirestore);
+    private readonly store$ = inject(Store<CoreState>);
+    private readonly modalService = inject(ModalService);
 
     openAddEventModal$ = createEffect(() => this.actions$.pipe(
         ofType(openAddEventModal),
@@ -140,11 +145,5 @@ export class EventsEffects {
 
         })), {dispatch: false});
 
-  constructor(
-    private actions$: Actions,
-    private dialog: MatDialog,
-    private db: AngularFirestore,
-    private store$: Store<CoreState>,
-    private modalService: ModalService
-  ) {}
 }
+

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject, Observable, Subscription } from 'rxjs';
 import { Blog, ImgFile } from '../../shared/models/blog.model';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { CoreState } from '../../store/reducers';
@@ -83,3 +83,4 @@ export class BlogAddPageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sbs => sbs.unsubscribe());
   }
 }
+

@@ -11,8 +11,7 @@ import { effects } from './effects';
     CommonModule,
     StoreModule.forFeature('core', reducers),
     EffectsModule.forFeature(effects)
-  ],
-  providers: [effects]
+  ]
 })
 export class CoreStoreModule {}
 

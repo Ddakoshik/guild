@@ -15,7 +15,7 @@ import {
   selectTankCharts, selectUserEmail
 } from '../../../store/selectors';
 import { map, switchMap, take } from 'rxjs/operators';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { EventModel } from '../../../shared/models/event.model';
 
 @Component({
@@ -163,3 +163,4 @@ export class EventPopupJoinComponent implements OnInit, OnDestroy {
           ).subscribe());
   }
 }
+

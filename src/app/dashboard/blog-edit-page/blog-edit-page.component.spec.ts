@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogEditPageComponent } from './blog-edit-page.component';
 
@@ -6,7 +6,7 @@ describe('BlogEditPageComponent', () => {
   let component: BlogEditPageComponent;
   let fixture: ComponentFixture<BlogEditPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BlogEditPageComponent ]
     })
@@ -23,3 +23,4 @@ describe('BlogEditPageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

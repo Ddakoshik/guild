@@ -9,24 +9,23 @@ import { QuillModule } from 'ngx-quill';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { CoreStoreModule } from './store/core-store.module';
 import { LuxonModule } from 'luxon-angular';
 
 // angular - Firebase
 import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 // pipes
 import { PipesModule } from './shared/pipes';
 
 // NGRX
 import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '../../node_modules/@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // components
@@ -49,7 +48,6 @@ import { BlogAddPageComponent } from './dashboard/blog-add-page/blog-add-page.co
 import { TimeTableLuxonContainerComponent } from './dashboard/time-table-luxon-container/time-table-luxon-container.component';
 import { CoreModule } from './core/core.module';
 
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UserProfileContainerComponent } from './dashboard/containers/user-profile-container/user-profile-container.component';
 import { UserProfileComponent } from './dashboard/components/user-profile/user-profile.component';
 import { EventsContainerComponent } from './dashboard/containers/events-container/events-container.component';
@@ -114,11 +112,9 @@ import { RaidGroupListComponent } from './dashboard/components/raid-group-list/r
     AngularFireStorageModule,
     AngularFirestoreModule,
     HttpClientModule,
-    QuillModule,
+    QuillModule.forRoot(),
     PipesModule,
     SharedModule.forRoot(),
-    ModalModule.forRoot(),
-    BsDatepickerModule.forRoot(),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
@@ -131,14 +127,7 @@ import { RaidGroupListComponent } from './dashboard/components/raid-group-list/r
     })
 
   ],
-  providers: [
-    { provide: FirestoreSettingsToken, useValue: {} }
-  ],
-  entryComponents: [
-    EventPopupAddComponent,
-    EventPopupJoinComponent,
-    CharacterModalComponent
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

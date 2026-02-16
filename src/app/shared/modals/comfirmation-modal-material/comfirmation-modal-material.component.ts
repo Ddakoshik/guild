@@ -1,4 +1,4 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { ConfirmDialogModel } from '../../models/modal.model';
 

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CharacterRoleOrderComponent } from './character-role-order.component';
 
@@ -6,7 +6,7 @@ describe('CharacterRoleOrderComponent', () => {
   let component: CharacterRoleOrderComponent;
   let fixture: ComponentFixture<CharacterRoleOrderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CharacterRoleOrderComponent ]
     })
@@ -23,3 +23,4 @@ describe('CharacterRoleOrderComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
